@@ -17,10 +17,12 @@
     let o = 0;
     CODE.split(re).forEach((v) => v.startsWith('$') && v.endsWith('$') ? BBB.push({element: v, type: Input, value: o++ }) : BBB.push({element: v}))
     let things = [];
-        
+    console.log(BBB)
     BUTTONSX.forEach((value, o) => things.push({order: o, text: value.slice(1, -1) }))
     let BUTTONS;
     
+    console.log(things)
+
     if(SHUFLE) {
         BUTTONS = things.sort((a, b) => 0.5 - Math.random());
     } else {

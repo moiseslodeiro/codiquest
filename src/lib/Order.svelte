@@ -4,7 +4,7 @@
     import Input from '$lib/Input.svelte';
     import { onMount } from 'svelte';
 
-    const GREP_GAPS = /(\$.*?\$)/g
+    const re = /(\$.*?\$)/g
 
     export let codeBlock;
     let slicedGaps = [];
@@ -13,21 +13,18 @@
     let positions = [];
     let buttons = [];
 
-    export const shuffle = true;
-    let BUTTONSX = [];
-    export let GAPS = []
+    export let shuffle = true;
+    export let gaps = []
 
-     $: if(positionToFill < 0) {
-            positionToFill = 0;
-       }
-    
-    $: if(positionToFill > slicedGaps.length) {
+    $: if(positionToFill < 0) {
+        positionToFill = 0;
+    } else if(slicedGaps != null && positionToFill > slicedGaps.length) {
         positionToFill = slicedGaps.length;
-       }
-/*
+    }
+
     function handleMessage(event) {
-        document.getElementById('input-' + positionToFill).innerHTML = event.detail.aaa;
-        positions[positionToFill] = event.detail.bbb;
+        document.getElementById('input-' + positionToFill).innerHTML = event.detail.text;
+        positions[positionToFill] = event.detail.order;
         positionToFill++;
     }
     
@@ -35,8 +32,6 @@
         const solutions = [...new Set(positions)];
         console.log(solutions)
         console.log(solutions.length == slicedGaps.length && solutions.every((v,i,a) => !i || a[i-1] <= v))
-    
-    
     }
     
     function stepUndo() {
@@ -51,22 +46,22 @@
             positions.pop();
             document.getElementById('input-' + --positionToFill).innerHTML = ' ';
         }
-    } */
+    } 
 
     onMount(async () => {
         let _order = 0;
         let _answers = [];
-        codeBlock = document.getElementById('codeElement').innerText;
-        slicedGaps = codeBlock.match(GREP_GAPS);
+    
+        slicedGaps = codeBlock.match(re);
 
+        if(slicedGaps.length === 0) {
+            console.error('Whoops')
+        }
 
-        console.log(slicedGaps);
-
-        codeBlock.split(GREP_GAPS).forEach((match) => match.startsWith('$') && match.endsWith('$') ? GAPS.push({element: match, type: Input, value: _order++ }) : GAPS.push({element: match}))
+        codeBlock.split(re).forEach((match) => match.startsWith('$') && match.endsWith('$') ? gaps.push({element: match, type: Input, value: _order++ }) : gaps.push({element: match}))        
         slicedGaps.forEach((value, o) => _answers.push({order: o, text: value.slice(1, -1) }))
         buttons = shuffle == true ? _answers.sort((a, b) => 0.5 - Math.random()) : _answers;
-
-        GAPS = [...GAPS]
+        gaps = [...gaps]
 
     });
     
@@ -163,7 +158,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     
     <span id="codeElement">
-       <slot name="code"></slot>
+       <slot name="code">afaf</slot>
     </span>
     
     <div>
@@ -173,9 +168,9 @@
     </div>
     <div class="code">
         <pre>
-         {#each GAPS as i}
+         {#each gaps as i}
             {#if i.type}
-                <svelte:component this={ i.type } {...{ID: i.value}}/>
+                <svelte:component this={ i.type } {...{id: i.value}}/>
             {:else}
                 {i.element}
             {/if}        
@@ -184,22 +179,24 @@
         {/each}
         </pre>
     </div>
+
+    <slot name="card"></slot>
     
     <div class="botonera">
         <div class="options">
-<!--         {#each BUTTONS as button}
+         {#each buttons as button}
             <Button text={ button.text } order={ button.order } on:message={ handleMessage } />
-        {/each}  -->
+        {/each}  
         </div>
         <div class="menu">
     
     <span class="material-symbols-outlined">
     flip
     </span>
-       <!--          <button class="button green" on:click={ checkSolution }><span class="material-symbols-outlined">task_alt</span></button>
+                 <button class="button green" on:click={ checkSolution }><span class="material-symbols-outlined">task_alt</span></button>
                 <button class="button" on:click={ stepUndo }><span class="material-symbols-outlined">undo</span></button>
             <button class="button" on:click={ clear }><span class="material-symbols-outlined">restart_alt</span></button>
-         --></div>
+         </div>
      </div>
     
     

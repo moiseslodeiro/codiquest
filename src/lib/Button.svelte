@@ -16,8 +16,8 @@ const audio = new Audio();
 function handleClick() {
     //audio.play();
     dispatch('message', {
-		aaa: text,
-        bbb: order
+		text,
+        order
 	});
 }
 

@@ -1,6 +1,6 @@
 <script>
 
-export let ID = 0;
+export let id = 0;
 
 </script>
 
@@ -20,4 +20,4 @@ export let ID = 0;
 
 </style>
 
-<span class="input" id="input-{ ID }">&nbsp;</span>
+<span class="input" id="input-{ id }">&nbsp;</span>
