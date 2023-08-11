@@ -15,6 +15,7 @@
 
     export let shuffle = true;
     export let gaps = []
+    let flipped = false;
 
     $: if(positionToFill < 0) {
         positionToFill = 0;
@@ -153,34 +154,87 @@
     .green {
         background-color: lawngreen;
     }
-    
+
+
+    .flip-card {
+    background-color: transparent;
+    width: 240px;
+    height: 360px;
+    perspective: 1000px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .flipped .flip-card .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  .flip-card-front {
+    background-color: #bbb;
+    color: black;
+  }
+
+  .flip-card-back {
+    background-color: #2980b9;
+    transform: rotateY(180deg);
+  }
+
+
 </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     
     <span id="codeElement">
        <slot name="code">afaf</slot>
     </span>
-    
-    <div>
-        <slot name="text">
-            (>'3')>
-        </slot>
-    </div>
-    <div class="code">
-        <pre>
-         {#each gaps as i}
-            {#if i.type}
-                <svelte:component this={ i.type } {...{id: i.value}}/>
-            {:else}
-                {i.element}
-            {/if}        
-        {:else}
-            Loading...
-        {/each}
-        </pre>
-    </div>
 
-    <slot name="card"></slot>
+    <main class:flipped >
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="code">
+              <pre>
+               {#each gaps as i}
+                  {#if i.type}
+                      <svelte:component this={ i.type } {...{id: i.value}}/>
+                  {:else}
+                      {i.element}
+                  {/if}        
+              {:else}
+                  Loading...
+              {/each}
+              </pre>
+          </div>
+          </div>
+          <div class="flip-card-back">
+            <slot name="back"></slot>
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+<button on:click="{() => flipped = !flipped}">Clic</button>
+
+
     
     <div class="botonera">
         <div class="options">
@@ -193,6 +247,10 @@
     <span class="material-symbols-outlined">
     flip
     </span>
+
+    <button class="button" on:click={ checkSolution }><span class="material-symbols-outlined">task_alt</span></button>
+
+
                  <button class="button green" on:click={ checkSolution }><span class="material-symbols-outlined">task_alt</span></button>
                 <button class="button" on:click={ stepUndo }><span class="material-symbols-outlined">undo</span></button>
             <button class="button" on:click={ clear }><span class="material-symbols-outlined">restart_alt</span></button>

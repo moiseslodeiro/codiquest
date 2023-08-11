@@ -13,9 +13,8 @@ function $blah$() {
         TODA variable necesita un <b>nombre</b>. Los <b>nombres</b> de las variables <b>no pueden</b> contener espacios.
     </span>
 <!-- eslint-disable -->
-    <span slot="code">xxx</span>
 
-    <span slot="card">
+    <span slot="back">
         Tarjeta por detrás
     </span>
 
