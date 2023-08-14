@@ -1,4 +1,5 @@
 <script>
+import { base } from '$app/paths';
 import OrderLevel from '$lib/Order.svelte'
 
 let code = `

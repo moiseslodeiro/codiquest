@@ -12,8 +12,10 @@ export let id = 0;
         min-width: 20px;
         background-color: lightgray;
         border-radius: 5px;
-        padding: 3px 5px 3px 5px;
+        padding: 3px 8px;
+        margin: 0px 1px;
         line-height: 200%;
+        color: black
     }
 
 

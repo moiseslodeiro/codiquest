@@ -82,7 +82,21 @@
     
 <main>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <details>
+      <summary>Accordion 1</summary>
+      <p>…</p>
+    </details>
     
+    <details open>
+      <summary>Accordion 2</summary>
+      <ul>
+        <li>…</li>
+        <li>…</li>
+      </ul>
+    </details>
+
+
     <span id="codeElement">
        <slot name="code">afaf</slot>
     </span>
@@ -164,6 +178,7 @@
           font-size: medium;
           border-left: 3px solid sandybrown;
           background-color: #26212f;
+          color: white;
       }
       
       .botonera {
@@ -235,7 +250,7 @@
   
       .flip-card {
       background-color: transparent;
-      width: 240px;
+      width: 100%;
       height: 360px;
       perspective: 1000px;
       cursor: pointer;
@@ -260,7 +275,6 @@
     .flip-card-back {
       position: absolute;
       width: 100%;
-      height: 100%;
       -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
     }

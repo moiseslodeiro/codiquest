@@ -1,4 +1,5 @@
 <script>
+import { base } from '$app/paths';
 import XXX from '$lib/XXX.svelte'
 
 let code = `
