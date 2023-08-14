@@ -25,7 +25,7 @@ function handleClick() {
 
 <style>
 
-.button {
+/* .button {
     background-color: #FFFFFF;
     border: 0;
     border-radius: .5rem;
@@ -57,7 +57,7 @@ function handleClick() {
 
 .button:focus-visible {
     box-shadow: none;
-}
+} */
 
 </style>
 

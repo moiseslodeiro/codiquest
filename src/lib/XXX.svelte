@@ -3,6 +3,7 @@
     import Button from '$lib/Button.svelte';
     import Input from '$lib/Input.svelte';
     import { onMount } from 'svelte';
+    import { icons } from '$lib/icons.js';
 
     import '$lib/prism.css'
     import '$lib/prism.js'
@@ -80,85 +81,87 @@
     
 </script>
     
-<main>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<main class="container">
 
-    <details>
-      <summary>Accordion 1</summary>
-      <p>…</p>
-    </details>
-    
-    <details open>
-      <summary>Accordion 2</summary>
-      <ul>
-        <li>…</li>
-        <li>…</li>
-      </ul>
-    </details>
+  <section class="layout">
+    <div class="code box">
 
+      <pre>
+        {#each gaps as i}
+          {#if i.type}
+            <svelte:component this={ i.type } {...{id: i.value}}/>
+          {:else}
+            {@html i.element}
+          {/if}        
+        {:else}
+          Loading...
+        {/each}
+        </pre>
 
-    <span id="codeElement">
-       <slot name="code">afaf</slot>
-    </span>
-
-    <pre>
-    {@html solution }
-    </pre>
-
-    <div class:flipped >
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <div class="code">
-              <pre>
-               {#each gaps as i}
-                  {#if i.type}
-                      <svelte:component this={ i.type } {...{id: i.value}}/>
-                  {:else}
-                      {@html i.element}
-                  {/if}        
-              {:else}
-                  Loading...
-              {/each}
-            </pre>
-          </div>
-          </div>
-          <div class="flip-card-back">
-            <slot name="back"></slot>
-
-          </div>
-        </div>
-      </div>
     </div>
 
-<button on:click="{() => flipped = !flipped}">Clic</button>
+    <div class="menu">
 
+      <button class="button" on:click={ stepUndo }>{@html icons['undo'] }</button>
+      <button class="button" on:click={ clear }>{@html icons['reset'] }</button>
+      <button class="button marginLeft" on:click={ checkSolution }>{ @html icons['check'] }</button>
 
-    
-    <div class="botonera">
-        <div class="options">
-         {#each buttons as button}
-            <Button text={ button.text } order={ button.order } on:message={ handleMessage } />
-        {/each}  
-        </div>
-        <div class="menu">
-    
-    <span class="material-symbols-outlined">
-    flip
-    </span>
+    </div>
+  </section>
+  <hr>
 
-    <button class="button" on:click={ checkSolution }><span class="material-symbols-outlined">task_alt</span></button>
+ <section class="layout">
+  {#each buttons as button}
+    <Button text={ button.text } order={ button.order } on:message={ handleMessage } />
+  {/each}  
+</section>
 
-
-                 <button class="button green" on:click={ checkSolution }><span class="material-symbols-outlined">task_alt</span></button>
-                <button class="button" on:click={ stepUndo }><span class="material-symbols-outlined">undo</span></button>
-            <button class="button" on:click={ clear }><span class="material-symbols-outlined">restart_alt</span></button>
-         </div>
-     </div>
-    
 </main>
 
-     <style>
+
+<style>
+
+.layout {
+  width: 100%;
+
+  display: grid;
+  grid:
+    "code" 1fr
+    "menu" 1fr
+    / 1fr;
+  gap: 8px;
+  grid-auto-flow: row dense;
+
+  align-items: start;
+  
+  align-content: stretch;
+    justify-items: stretch;
+
+
+
+}
+
+.code { grid-area: code; }
+.menu { 
+  grid-area: menu; 
+  display: flex;
+  gap: 16px;
+  width: 100%;
+
+  justify-content: flex-start;
+  align-items: flex-start;
+
+
+
+} 
+
+.marginLeft { margin-left: auto; }
+
+
+
+
+
+.buttons { grid-area: buttons; }
     
       :global(body) {
           background-color: #F6F7FB;
@@ -167,19 +170,21 @@
           letter-spacing: 0.05rem;
       }
       
-      .code {
-          background-color: white;
-          font-family: 'Courier New', Courier, monospace;
-      }
-      
-      .code > pre {
+      .box {
+        background-color: white;
+        font-family: 'Courier New', Courier, monospace;
+        & pre {
           text-align: left;
           padding: 5px 10px 5px 15px;
           font-size: medium;
           border-left: 3px solid sandybrown;
           background-color: #26212f;
           color: white;
+        }
+
       }
+      
+
       
       .botonera {
           display: flex;
@@ -197,30 +202,8 @@
           width: calc(15%);
       }
   
-      .code:hover {
-        animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
-        transform: translate3d(0, 0, 0);
-        backface-visibility: hidden;
-        perspective: 1000px;
-      }
-      
-      @keyframes shake {
-        10%, 90% {
-          transform: translate3d(-1px, 0, 0);
-        }
-        
-        20%, 80% {
-          transform: translate3d(2px, 0, 0);
-        }
-      
-        30%, 50%, 70% {
-          transform: translate3d(-4px, 0, 0);
-        }
-      
-        40%, 60% {
-          transform: translate3d(4px, 0, 0);
-        }
-      }
+ 
+
       
       .button {
           background-color: #FFFFFF;
@@ -243,51 +226,6 @@
           margin: 3px;
       }
       
-      .green {
-          background-color: lawngreen;
-      }
-  
-  
-      .flip-card {
-      background-color: transparent;
-      width: 100%;
-      height: 360px;
-      perspective: 1000px;
-      cursor: pointer;
-      user-select: none;
-    }
-  
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    }
-  
-    .flipped .flip-card .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-  
-    .flip-card-front,
-    .flip-card-back {
-      position: absolute;
-      width: 100%;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-    }
-  
-    .flip-card-front {
-      background-color: #bbb;
-      color: black;
-    }
-  
-    .flip-card-back {
-      background-color: #2980b9;
-      transform: rotateY(180deg);
-    }
-  
+
   
   </style>
