@@ -25,14 +25,10 @@ function handleClick() {
 
 <style>
 
-/* .button {
-    background-color: #FFFFFF;
+.button {
     border: 0;
     border-radius: .5rem;
     box-sizing: border-box;
-    color: #111827;
-    font-family: 'Courier New', Courier, monospace;  font-size: .875rem;
-    font-weight: 600;
     line-height: 1.25rem;
     padding: .75rem 1rem;
     text-align: center;
@@ -43,21 +39,9 @@ function handleClick() {
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    margin: 3px;
+    margin: 5px 0px;
 }
 
-.button:hover {
-    background-color: rgb(249,250,251);
-}
-
-.button:focus {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-}
-
-.button:focus-visible {
-    box-shadow: none;
-} */
 
 </style>
 

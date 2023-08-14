@@ -108,13 +108,14 @@
 
     </div>
   </section>
+
   <hr>
 
- <section class="layout">
+  <section class="">
   {#each buttons as button}
     <Button text={ button.text } order={ button.order } on:message={ handleMessage } />
   {/each}  
-</section>
+  </section>
 
 </main>
 
@@ -127,8 +128,7 @@
   display: grid;
   grid:
     "code" 1fr
-    "menu" 1fr
-    / 1fr;
+    "menu" 0fr;
   gap: 8px;
   grid-auto-flow: row dense;
 
@@ -147,84 +147,53 @@
   display: flex;
   gap: 16px;
   width: 100%;
-
   justify-content: flex-start;
   align-items: flex-start;
-
-
-
 } 
 
 .marginLeft { margin-left: auto; }
 
-
-
-
-
-.buttons { grid-area: buttons; }
-    
-      :global(body) {
-          background-color: #F6F7FB;
-          font-family: 'Rubik', sans-serif;
-          font-weight: normal;
-          letter-spacing: 0.05rem;
-      }
+:global(body) {
+    background-color: #F6F7FB;
+    font-family: 'Rubik', sans-serif;
+    font-weight: normal;
+    letter-spacing: 0.05rem;
+}
       
-      .box {
-        background-color: white;
-        font-family: 'Courier New', Courier, monospace;
-        & pre {
-          text-align: left;
-          padding: 5px 10px 5px 15px;
-          font-size: medium;
-          border-left: 3px solid sandybrown;
-          background-color: #26212f;
-          color: white;
-        }
+.box {
+  background-color: white;
+  font-family: 'Courier New', Courier, monospace;
+  & pre {
+    text-align: left;
+    padding: 5px 10px 5px 15px;
+    font-size: medium;
+    border-left: 3px solid sandybrown;
+    background-color: #26212f;
+    color: white;
+  }
 
-      }
+}
       
-
-      
-      .botonera {
-          display: flex;
-      
-      }
-      
-      .botonera .options {
-          flex-wrap: wrap;
-           width: calc(85%);
-      }
-      
-      .botonera .menu {
-          display: flex;
-          flex-direction: column;
-          width: calc(15%);
-      }
-  
- 
-
-      
-      .button {
-          background-color: #FFFFFF;
-          border: 0;
-          border-radius: .5rem;
-          box-sizing: border-box;
-          color: #111827;
-          font-family: 'Courier New', Courier, monospace;  font-size: .875rem;
-          font-weight: 600;
-          line-height: 1.25rem;
-          padding: .75rem 1rem;
-          text-align: center;
-          text-decoration: none #D1D5DB solid;
-          text-decoration-thickness: auto;
-          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-          cursor: pointer;
-          user-select: none;
-          -webkit-user-select: none;
-          touch-action: manipulation;
-          margin: 3px;
-      }
+.button {
+    background-color: #FFFFFF;
+    border: 0;
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: #111827;
+    font-family: 'Courier New', Courier, monospace;  font-size: .875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    padding: .75rem 1rem;
+    text-align: center;
+    text-decoration: none #D1D5DB solid;
+    text-decoration-thickness: auto;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin: 3px;
+}
       
 
   
