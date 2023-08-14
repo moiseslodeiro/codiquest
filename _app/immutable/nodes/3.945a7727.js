@@ -1,1 +1,0 @@
-import{s as o,n as a}from"../chunks/scheduler.e108d1fd.js";import{S as r,i,m as c,n as l,a as m,f as p}from"../chunks/index.0719bd3d.js";function f(n){let e;return{c(){e=c("Level page!")},l(t){e=l(t,"Level page!")},m(t,s){m(t,e,s)},p:a,i:a,o:a,d(t){t&&p(e)}}}class _ extends r{constructor(e){super(),i(this,e,null,f,o,{})}}export{_ as component};
