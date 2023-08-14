@@ -16,7 +16,7 @@ const config = {
     entries: ['/'] // Adding root to the prerender entries fixes the issue
   },
   paths: {
-    base: process.env.NODE_ENV === 'production' ? '/test123' : '',
+    base: process.env.NODE_ENV === 'production' ? '/codiquest' : '',
   }
  }
 };

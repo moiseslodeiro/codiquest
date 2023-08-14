@@ -1,12 +1,12 @@
 <script>
-  import { base } from '$app/paths';
   import { page } from '$app/stores';
+  import { base } from '$app/paths';
   export let id = $page.params.id;
   let LevelComponent;
   import Load from '$lib/Load.svelte'
   //
   // Cargamos el componente de nivel dinámicamente al inicializar la página
-  async function loadLevelComponent() {
+/*   async function loadLevelComponent() {
     const getComponent = () => import(`../../../levels/js/${id}.svelte`)
     if (getComponent) {
       try {
@@ -18,9 +18,9 @@
     } else {
       LevelComponent = 1;
     }
-  }
+  } */
   //
-  loadLevelComponent();
+  //loadLevelComponent();
   </script>
   
   <nav>
@@ -37,8 +37,12 @@
   
   <h1>Nivel: {id}</h1>
   
-  {#if LevelComponent}
+<!--   {#if LevelComponent}
     <svelte:component this={ LevelComponent } />
   {:else}
     <Load />
-  {/if} 
+  {/if}  -->
+
+{#await import(`../../../levels/js/${ id }.svelte` /* @vite-ignore */) then module}
+  <svelte:component this={ module.default }/>
+{/await}
