@@ -1,6 +1,9 @@
 <script>
   import { page } from '$app/stores';
 	import { icons } from '$lib/icons.js';
+  import Load from '$lib/Load.svelte';
+  import Error from '$lib/Error.svelte';
+
   export let id = $page.params.id;
   </script>
   
@@ -27,6 +30,10 @@
   
 
 
-{#await import(`../../../levels/js/${ id }.svelte` /* @vite-ignore */) then module}
+{#await import(`../../../levels/js/${ id }.svelte` /* @vite-ignore */)}
+    <Load />
+{:then module}
   <svelte:component this={ module.default }/>
+{:catch error}
+  <Error message="{ error }" />
 {/await}

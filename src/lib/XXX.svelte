@@ -63,7 +63,6 @@
 
         codeBlock = Prism.highlight(codeBlock, Prism.languages.javascript, 'javascript');
 
-
         slicedGaps = codeBlock.match(re);
 
         if(slicedGaps.length === 0) {
@@ -72,8 +71,14 @@
 
         codeBlock.split(re).forEach((match) => match.startsWith('$') && match.endsWith('$') ? gaps.push({element: match, type: Input, value: _order++ }) : gaps.push({element: match}))        
         slicedGaps.forEach((value, o) => _answers.push({order: o, text: value.slice(1, -1) }))
-        buttons = shuffle == true ? _answers.sort((a, b) => 0.5 - Math.random()) : _answers;
+        
+        buttons = shuffle === true ? _answers.sort((a, b) => 0.5 - Math.random()) : _answers;
+        
+        console.log(_answers.sort((a, b) => 0.5 - Math.random()));
+
         gaps = [...gaps]
+        console.log(shuffle)
+        console.log(_answers)
 
         console.log(gaps)
 
@@ -83,9 +88,36 @@
     
 <main class="container">
 
-  <section class="layout">
-    <div class="code box">
+  <slot name="text"></slot>
 
+  <section class="layout">
+
+    <div  class:flipped class="card {flipped}" href="#">
+      <button class="button green" on:click="{() => flipped = !flipped}" >xx</button>
+
+      <div class="card-body">
+        <div class="code box card-front">
+          <pre>
+            {#each gaps as i}
+              {#if i.type}
+                <svelte:component this={ i.type } {...{id: i.value}}/>
+              {:else}
+                {@html i.element}
+              {/if}        
+            {:else}
+              Loading...
+            {/each}
+            </pre>
+        </div> 
+  
+        <p class="card-back">
+          <slot name="back"></slot>
+        </p>
+      </div>
+    </div>
+  
+
+<!--     <div class="code box">
       <pre>
         {#each gaps as i}
           {#if i.type}
@@ -97,8 +129,7 @@
           Loading...
         {/each}
         </pre>
-
-    </div>
+    </div> -->
 
     <div class="menu">
 
@@ -122,10 +153,77 @@
 
 <style>
 
+
+
+:root {
+	 --time: 0.707s;
+}
+ .cards {
+	 display: grid;
+}
+ .card {
+	 perspective: 40rem;
+}
+ .card-body {
+	 display: flex;
+	 transform-style: preserve-3d;
+	 transition: var(--time) transform;
+}
+ .flipped .card-body, .card:focus .card-body {
+	 transform: rotateX(-180deg);
+}
+ .card-front, .card-back {
+	 backface-visibility: hidden;
+	 min-width: 100%;
+}
+ .card-back {
+	 transform: rotateX(-180deg) translate(-100%, 0);
+}
+/* Make it Pretty */
+
+
+ .card {
+	 display: flex;
+	 transition: z-index, transform calc(var(--time) / 4);
+	 transition-delay: var(--time), 0s;
+	 text-decoration: none;
+	 color: inherit;
+	 z-index: 0;
+}
+ .fliped {
+	 transition-delay: 0s;
+	 z-index: 1;
+}
+ .card:active {
+	 transform: scale(0.975);
+}
+ .card-body {
+	 border-radius: 0.25rem;
+	 flex: 1;
+}
+ .card-front, .card-back {
+	 display: flex;
+	 align-items: center;
+	 background-color: white;
+	 box-sizing: border-box;
+	 border-radius: 0.25rem;
+}
+
+.card-back {
+  padding: 1.5rem;
+
+}
+ .card-front {
+	 font-size: 1.5rem;
+}
+
+
+/* ------------------ */
+
 .layout {
   width: 100%;
 
-  display: grid;
+  /*display: grid;*/
   grid:
     "code" 1fr
     "menu" 0fr;
@@ -136,8 +234,6 @@
   
   align-content: stretch;
     justify-items: stretch;
-
-
 
 }
 
@@ -163,15 +259,18 @@
 .box {
   background-color: white;
   font-family: 'Courier New', Courier, monospace;
-  & pre {
+}
+
+.box > pre {
+
     text-align: left;
     padding: 5px 10px 5px 15px;
     font-size: medium;
     border-left: 3px solid sandybrown;
     background-color: #26212f;
     color: white;
-  }
-
+    width: 100%
+  
 }
       
 .button {

@@ -34,15 +34,43 @@ const SENTENCES = [
     "Mis superpoderes son 'Ctrl', 'C' y 'Ctrl', 'V'",
 ]
 
-const randomSentence = SENTENCES[Math.floor(Math.random() * (SENTENCES.length + 1) )]
+const val = Math.floor(Math.random() * (SENTENCES.length + 1)) - 1;
+const randomSentence = SENTENCES[val]
 
 </script>
 
 <main>
-    <a aria-busy="true"> { randomSentence }</a>
-    <p><img src="{ base }/favicon.png" alt="Have a Coddy day!"/></p>
+    <article>
+        <div class="grid">
+            <div class="left"><img src="{ base }/loading.png" alt="Have a Coddy day!"/></div>
+            <div class="right">{ randomSentence }</div>
+        </div> 
+    </article>
 </main>
 
 <style>
+
+article {
+    box-shadow: none;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.left {
+    grid-column: 1 / 1;
+    grid-row: 1;
+ }
+
+.right { 
+    grid-column: 2 / 5;
+    grid-row: 1;
+}
+
 
 </style>
