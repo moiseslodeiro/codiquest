@@ -39,38 +39,25 @@ const randomSentence = SENTENCES[val]
 
 </script>
 
-<main>
-    <article>
-        <div class="grid">
-            <div class="left"><img src="{ base }/loading.png" alt="Have a Coddy day!"/></div>
-            <div class="right">{ randomSentence }</div>
-        </div> 
-    </article>
+
+
+
+<main class="container">
+	<div class="card">
+		<div class="card-content columns is-1 is-mobile">
+			<div class="column is-one-quarter p-0">
+        <img src="{base}/loading.png" alt="Have a Coddy day!" />
+      </div>
+			<div class="column is-align-items-self-start">
+				<blockquote>{randomSentence}</blockquote>
+			</div>
+		</div>
+
+	</div>
 </main>
 
 <style>
-
-article {
-    box-shadow: none;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 1fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-}
-
-.left {
-    grid-column: 1 / 1;
-    grid-row: 1;
- }
-
-.right { 
-    grid-column: 2 / 5;
-    grid-row: 1;
-}
-
-
+	.card {
+		box-shadow: none;
+	}
 </style>

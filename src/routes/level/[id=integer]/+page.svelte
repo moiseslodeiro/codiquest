@@ -3,31 +3,24 @@
 	import { icons } from '$lib/icons.js';
   import Load from '$lib/Load.svelte';
   import Error from '$lib/Error.svelte';
-
+  
   export let id = $page.params.id;
   </script>
   
   
-  <nav>
-    <ul>
-      <li><a href="#" class="secondary">…</a></li>
-    </ul>
-    <ul>
-      <li><strong>CodiQuest</strong></li>
-    </ul>
-    <ul>
-      <li><a href="#" class="secondary">…</a></li>
-    </ul>
-    </nav>
-  
-    <nav aria-label="breadcrumb">
-      <ul>
-        <li><a href="#">~</a></li>
-        <li><a href="#">{@html icons['js']}</a></li>
-        <li>Nivel { id }</li>
-      </ul>
-    </nav>
-  
+
+
+
+  <nav class="breadcrumb  container is-fluid" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="#">~</a></li>
+    <li><a href="#">{@html icons['js']}</a></li>
+    <li class="is-active"><a href="#" aria-current="page">Nivel { id }</a></li>
+  </ul>
+</nav>
+
+
+
 
 
 {#await import(`../../../levels/js/${ id }.svelte` /* @vite-ignore */)}

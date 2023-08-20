@@ -25,7 +25,7 @@ function handleClick() {
 
 <style>
 
-.button {
+/* .button {
     border: 0;
     border-radius: .5rem;
     box-sizing: border-box;
@@ -40,9 +40,9 @@ function handleClick() {
     -webkit-user-select: none;
     touch-action: manipulation;
     margin: 5px 0px;
-}
+} */
 
 
 </style>
 
-<button on:click={ handleClick } class="button">{ text }</button>
+<button on:click={ handleClick } class="button is-success">{ text }</button>
