@@ -20,7 +20,6 @@
 
 	export let shuffle = true;
 	export let gaps = [];
-	let flipped = false;
 
 	$: if (positionToFill < 0) {
 		positionToFill = 0;

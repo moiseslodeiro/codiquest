@@ -3,6 +3,11 @@
  */
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/kit/vite';
+import { glob } from 'glob'
+import path from 'path';
+
+
+const basePath = process.env.NODE_ENV === 'production' ? '/codiquest' : '';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -16,11 +21,31 @@ const config = {
     entries: ['/'] // Adding root to the prerender entries fixes the issue
   },
   paths: {
-    base: process.env.NODE_ENV === 'production' ? '/codiquest' : '',
+    base: basePath,
   }
  }
 };
 
-config.kit.prerender.entries.push('/level/1', '/level/2', '/about', '/js')
+console.log('Pushing dirs')
+const dirs = await glob('src/routes/**/*.svelte', { ignore: 'node_modules/**' })
+dirs.forEach(dir => {
+  const appdir = path.dirname(path.relative('src/routes/', dir));
+  if(appdir === '.' || appdir.endsWith('[id=integer]'))
+    return;
+
+  config.kit.prerender.entries.push(config.kit.paths.base + '/' + appdir);
+});
+
+console.log('Pushing levels')
+const levels = await glob('src/levels/**/*.svelte', { ignore: 'node_modules/**' })
+levels.forEach(level => {
+  const relativePath = path.relative('src/levels', level);
+  const parsedPath = path.parse(relativePath);
+  const levelRoute = `${path.join('/', parsedPath.dir, '/', 'level/', parsedPath.name)}`;
+  config.kit.prerender.entries.push(levelRoute);
+});
+
+console.log('Routes')
+console.log(config.kit.prerender)
 
 export default config;
