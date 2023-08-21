@@ -28,6 +28,14 @@
 	}
 
 	function handleMessage(event) {
+		
+		const buttons = document.querySelectorAll("#buttons button");
+			buttons.forEach(button => {
+				if (button.textContent === event.detail.text) {
+					button.disabled = true;
+				}
+		});
+		
 		document.getElementById('input-' + positionToFill).innerHTML = event.detail.text;
 		positions[positionToFill] = event.detail.order;
 		positionToFill++;
@@ -43,7 +51,16 @@
 
 	function stepUndo() {
 		if (positionToFill > 0 && positionToFill <= slicedGaps.length) {
-			document.getElementById('input-' + --positionToFill).innerHTML = ' ';
+
+			const buttons = document.querySelectorAll("#buttons button");
+			const undo = document.getElementById('input-' + --positionToFill);
+			buttons.forEach(button => {
+				if (button.textContent === undo.innerHTML) {
+					button.disabled = false;
+				}
+			});
+
+			undo.innerHTML = ' ';
 			positions.pop();
 		}
 	}
@@ -60,9 +77,7 @@
 		let _answers = [];
 
 		solution = Prism.highlight(codeBlock, Prism.languages.javascript, 'javascript');
-
 		codeBlock = Prism.highlight(codeBlock, Prism.languages.javascript, 'javascript');
-
 		slicedGaps = codeBlock.match(re);
 
 		if (slicedGaps.length === 0) {
@@ -112,12 +127,10 @@
 	<div class="menu column">
 		<button class="button is-danger" on:click={clear}>{@html icons['reset']}</button>
 		<button class="button is-warning" on:click={stepUndo}>{@html icons['undo']}</button>
-		<button class="button is- marginLeft" on:click={checkSolution}>{@html icons['check']}</button>
+		<button class="button marginLeft" on:click={checkSolution}>{@html icons['play']}</button>
 	</div>
 
-	<hr />
-
-	<section class="buttons">
+	<section class="column" id="buttons">
 		{#each buttons as button}
 			<Button text={button.text} order={button.order} on:message={handleMessage} />
 		{/each}

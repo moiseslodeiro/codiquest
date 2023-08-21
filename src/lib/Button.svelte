@@ -8,6 +8,8 @@ const dispatch = createEventDispatcher();
 export let text = "| • ◡ • |"
 export let order = 0;
 
+export let disabled = false;
+
 //import piece from './assets/piece.mp3';
 
 const audio = new Audio();
@@ -19,6 +21,8 @@ function handleClick() {
 		text,
         order
 	});
+
+    //disabled = true;
 }
 
 </script>
