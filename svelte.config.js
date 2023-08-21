@@ -21,6 +21,6 @@ const config = {
  }
 };
 
-config.kit.prerender.entries.push('/level/1', '/level/2')
+config.kit.prerender.entries.push('/level/1', '/level/2', '/about', '/js')
 
 export default config;

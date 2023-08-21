@@ -1,9 +1,6 @@
 <script>
 	import { page } from '$app/stores';
-	//import { emojis } from './emojis.js';
+	import Error from '../lib/Error.svelte';
 </script>
 
-<h1>{$page.status} {$page.error.message}</h1>
-<span style="font-size: 5em">
-    Euwwww
-</span>
+<Error message="{$page.status} {$page.error.message}" />
