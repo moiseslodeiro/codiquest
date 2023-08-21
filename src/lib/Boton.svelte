@@ -1,28 +1,44 @@
 <script>
 import { createEventDispatcher } from 'svelte';
 
+export let text = '';
+export let order = 0;
+let domNode;
+
 const dispatch = createEventDispatcher();
 
     export let isFocused = false;
   
-    export let id = 0;
 
     function handleClick() {
       isFocused = !isFocused;
 
       dispatch('message', {
-		id
+		order
 	  });
+
+    domNode.focus();
+
 
     }
   </script>
   
-  <button class:selected={isFocused} on:click={handleClick}>
-    <slot></slot>
+  <button class="button" class:is-hovered={isFocused} on:blur={!isFocused} class:is-focused={isFocused} on:click={handleClick}>
+    { text }
   </button>
-  
+  <input type="hidden" bind:this={domNode} />
+
   <style>
-    .selected {
-      background-color: yellow; /* Cambia el estilo aquí según tus necesidades */
+    button:focus:not(:active) {
+      outline: none  !important;
+    }
+
+    /* Apply styles to elements that receive focus through any means */
+    button:focus {
+      outline: none !important;
+    }
+
+    button:focus-visible {
+        outline: none !important;
     }
   </style>

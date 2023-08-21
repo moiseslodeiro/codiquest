@@ -6,8 +6,8 @@ let high Score
 `;
 
 	let answers = [
-		{text: 'Contiene una letra mayúscula', correct: false, order: 0},
-		{text: 'Contiene un espacio', correct: true, order: 1}
+		{text: 'Contiene una letra mayúscula', correct: false},
+		{text: 'Contiene un espacio', correct: true}
 	]
 
 </script>
