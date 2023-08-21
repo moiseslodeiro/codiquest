@@ -3,17 +3,16 @@
 	import Order from '$lib/Order.svelte';
 
 	let code = `
-let $city$
+const $windyCity$
 `;
 
-    let wrongButtons = ['home city', '123value']
+let wrongButtons = ['wC']
 
 </script>
 
 <Order shuffle="true" codeBlock={code} wrongButtons={wrongButtons}>
 	<span slot="text">
-		TODA variable necesita un <b>nombre</b>. Los <b>nombres</b> de las variables <b>no pueden</b> contener
-		espacios.
+		Para ayudarnos a comprender qué hay dentro de una variable, elegimos nombres descriptivos
 	</span>
 
 	<span slot="back"> XXX por detrás </span>

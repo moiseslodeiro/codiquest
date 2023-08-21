@@ -18,6 +18,8 @@
 	let positions = [];
 	let buttons = [];
 
+	export let wrongButtons = [];
+
 	export let shuffle = true;
 	export let gaps = [];
 
@@ -28,33 +30,23 @@
 	}
 
 	function handleMessage(event) {
-		
-		const buttons = document.querySelectorAll("#buttons button");
-			buttons.forEach(button => {
-				if (button.textContent === event.detail.text) {
-					button.disabled = true;
-				}
+		const buttons = document.querySelectorAll('#buttons button');
+		buttons.forEach((button) => {
+			if (button.textContent === event.detail.text) {
+				button.disabled = true;
+			}
 		});
-		
+
 		document.getElementById('input-' + positionToFill).innerHTML = event.detail.text;
 		positions[positionToFill] = event.detail.order;
 		positionToFill++;
 	}
 
-	function checkSolution() {
-		const solutions = [...new Set(positions)];
-		console.log(solutions);
-		console.log(
-			solutions.length == slicedGaps.length && solutions.every((v, i, a) => !i || a[i - 1] <= v)
-		);
-	}
-
 	function stepUndo() {
 		if (positionToFill > 0 && positionToFill <= slicedGaps.length) {
-
-			const buttons = document.querySelectorAll("#buttons button");
+			const buttons = document.querySelectorAll('#buttons button');
 			const undo = document.getElementById('input-' + --positionToFill);
-			buttons.forEach(button => {
+			buttons.forEach((button) => {
 				if (button.textContent === undo.innerHTML) {
 					button.disabled = false;
 				}
@@ -63,6 +55,16 @@
 			undo.innerHTML = ' ';
 			positions.pop();
 		}
+	}
+
+	function checkSolution() {
+		const solutions = [...new Set(positions)].filter((value) => value >= 0);
+
+		console.log(solutions);
+		console.log(
+			solutions.length === slicedGaps.length &&
+				solutions.every((value, index, array) => index === 0 || array[index - 1] <= value)
+		);
 	}
 
 	function clear() {
@@ -96,6 +98,16 @@
 			answer.text = answer.text.replace(/<\/?[^>]+(>|$)/g, '');
 		});
 
+		wrongButtons.forEach((element, index) => {
+			wrongButtons[index] = {
+				text: element,
+				order: -(index + 1)
+			};
+		});
+
+		console.log(wrongButtons);
+		_answers = _answers.concat(wrongButtons);
+
 		buttons = shuffle === true ? _answers.sort((a, b) => 0.5 - Math.random()) : _answers;
 		console.log(_answers.sort((a, b) => 0.5 - Math.random()));
 
@@ -124,13 +136,17 @@
         </pre>
 	</div>
 
-	<div class="menu column">
-		<button class="button is-danger" on:click={clear}>{@html icons['reset']}</button>
-		<button class="button is-warning" on:click={stepUndo}>{@html icons['undo']}</button>
+	<div class="column field has-addons">
+		<p class="control">
+			<button class="button is-danger" on:click={clear}>{@html icons['reset']}</button>
+		</p>
+		<p class="control">
+			<button class="button is-warning" on:click={stepUndo}>{@html icons['undo']}</button>
+		</p>
 		<button class="button marginLeft" on:click={checkSolution}>{@html icons['play']}</button>
 	</div>
 
-	<section class="column" id="buttons">
+	<section class="column buttons" id="buttons">
 		{#each buttons as button}
 			<Button text={button.text} order={button.order} on:message={handleMessage} />
 		{/each}
@@ -138,15 +154,6 @@
 </main>
 
 <style>
-	.menu {
-		grid-area: menu;
-		display: flex;
-		gap: 16px;
-		width: 100%;
-		justify-content: flex-start;
-		align-items: flex-start;
-	}
-
 	.marginLeft {
 		margin-left: auto;
 	}
@@ -166,32 +173,10 @@
 	.code > pre {
 		text-align: left;
 		padding: 5px 10px 5px 15px;
-		font-size: medium;
+		font-size: large;
 		border-left: 3px solid sandybrown;
 		background-color: #26212f;
 		color: white;
 		width: 100%;
 	}
-
-	/* 	.button {
-		background-color: #ffffff;
-		border: 0;
-		border-radius: 0.5rem;
-		box-sizing: border-box;
-		color: #111827;
-		font-family: 'Courier New', Courier, monospace;
-		font-size: 0.875rem;
-		font-weight: 600;
-		line-height: 1.25rem;
-		padding: 0.75rem 1rem;
-		text-align: center;
-		text-decoration: none #d1d5db solid;
-		text-decoration-thickness: auto;
-		box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-		cursor: pointer;
-		user-select: none;
-		-webkit-user-select: none;
-		touch-action: manipulation;
-		margin: 3px;
-	} */
 </style>

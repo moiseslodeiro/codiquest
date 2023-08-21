@@ -3,17 +3,16 @@
 	import Order from '$lib/Order.svelte';
 
 	let code = `
-let $city$
+let $homeCity$
 `;
 
-    let wrongButtons = ['home city', '123value']
+let wrongButtons = ['home city']
 
 </script>
 
 <Order shuffle="true" codeBlock={code} wrongButtons={wrongButtons}>
 	<span slot="text">
-		TODA variable necesita un <b>nombre</b>. Los <b>nombres</b> de las variables <b>no pueden</b> contener
-		espacios.
+		Para crear nombres de variables con varias palabras usamos <code>camel case</code>. Empezamos con una letra minúscula y ponemos en mayúscula las palabras adicionales
 	</span>
 
 	<span slot="back"> XXX por detrás </span>
