@@ -8,6 +8,7 @@ import path from 'path';
 
 
 const basePath = process.env.NODE_ENV === 'production' ? '/codiquest' : '';
+console.log(`[+] NODE_ENV ${process.env.NODE_ENV}`)
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -22,6 +23,10 @@ const config = {
   },
   paths: {
     base: basePath,
+  },
+  alias: {
+    '$routes': './src/routes',
+    '$levels/*': './src/levels/*',
   }
  }
 };
@@ -33,7 +38,7 @@ dirs.forEach(dir => {
   if(appdir === '.' || appdir.endsWith('[id=integer]'))
     return;
 
-  config.kit.prerender.entries.push(config.kit.paths.base + '/' + appdir);
+  config.kit.prerender.entries.push('/' + appdir);
 });
 
 console.log('Pushing levels')
@@ -44,6 +49,10 @@ levels.forEach(level => {
   const levelRoute = `${path.join('/', parsedPath.dir, '/', 'level/', parsedPath.name)}`;
   config.kit.prerender.entries.push(levelRoute);
 });
+
+if(basePath == 'production')
+  config.kit.prerender.entries.push('');
+
 
 console.log('Routes')
 console.log(config.kit.prerender)

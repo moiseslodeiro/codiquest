@@ -3,15 +3,15 @@ import { base } from '$app/paths';
 import OrderLevel from '$lib/Order.svelte'
 
 let code = `
-function $blah$() {
-    console.log('hola don pepito')
-}`;
+$let$
+const
+`;
 </script>
 
 <OrderLevel shuffle="true" codeBlock="{ code }">
     
     <span slot="text">
-        TODA variable necesita un <b>nombre</b>. Los <b>nombres</b> de las variables <b>no pueden</b> contener espacios.
+        Usamos <code>let</code> y <code>const</code> para <strong>crear</strong> nuevas variables y constantes (ya veremos la diferencia más adelante)
     </span>
 <!-- eslint-disable -->
 
