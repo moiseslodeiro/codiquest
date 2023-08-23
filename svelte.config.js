@@ -5,6 +5,7 @@ import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 import { glob } from 'glob';
 import path from 'path';
+import preprocessor from 'svelte-preprocess'
 
 const basePath = process.env.NODE_ENV === 'production' ? '/codiquest' : '';
 console.log(`[+] NODE_ENV ${process.env.NODE_ENV}`);
@@ -13,7 +14,7 @@ console.log(`[+] NODE_ENV ${process.env.NODE_ENV}`);
 const config = {
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
-	preprocess: vitePreprocess(),
+	preprocess: preprocessor(),
 
 	kit: {
 		adapter: adapter(),

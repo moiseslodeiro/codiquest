@@ -1,6 +1,7 @@
 <script>
 	import { base } from '$app/paths';
 	export let message;
+	export let icon = 'bsod'
 
 	const SENTENCES = [
 		'Los herrores son como oportunidades, siempre ay más',
@@ -21,7 +22,7 @@
 	<div class="card">
 		<div class="card-content columns is-1 is-mobile">
 			<div class="column is-one-quarter p-0">
-        <img src="{base}/glitch.png" alt="Have a Coddy day!" />
+        <img src="{base}/{icon}.png" alt="Have a Coddy day!" width="128" height="128" />
       </div>
 			<div class="column is-align-items-self-start">
 				<blockquote>{randomSentence}</blockquote>
@@ -38,5 +39,11 @@
 <style>
 	.card {
 		box-shadow: none;
+	}
+
+	img {
+  		image-rendering: pixelated;
+  		image-rendering: -moz-crisp-edges;
+  		image-rendering: crisp-edges;
 	}
 </style>

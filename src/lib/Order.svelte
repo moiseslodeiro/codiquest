@@ -31,15 +31,18 @@
 
 	function handleMessage(event) {
 		const buttons = document.querySelectorAll('#buttons button');
-		buttons.forEach((button) => {
-			if (button.textContent === event.detail.text) {
-				button.disabled = true;
-			}
-		});
 
-		document.getElementById('input-' + positionToFill).innerHTML = event.detail.text;
-		positions[positionToFill] = event.detail.order;
-		positionToFill++;
+		if (positionToFill < slicedGaps.length) {
+			buttons.forEach((button) => {
+				if (button.textContent === event.detail.text) {
+					button.disabled = true;
+				}
+			});
+
+			document.getElementById('input-' + positionToFill).innerHTML = event.detail.text;
+			positions[positionToFill] = event.detail.order;
+			positionToFill++;
+		}
 	}
 
 	function stepUndo() {
@@ -72,6 +75,11 @@
 			positions.pop();
 			document.getElementById('input-' + --positionToFill).innerHTML = ' ';
 		}
+
+		const buttons = document.querySelectorAll('#buttons button');
+		buttons.forEach((button) => {
+			button.disabled = false;
+		});
 	}
 
 	onMount(async () => {
