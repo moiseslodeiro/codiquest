@@ -38,5 +38,8 @@
 		"vite-plugin-remove-console": "^2.1.1",
 		"vitest": "^0.32.2"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"party-js": "^2.2.0"
+	}
 }

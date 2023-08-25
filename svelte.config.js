@@ -25,8 +25,10 @@ const config = {
 			base: basePath
 		},
 		alias: {
-			$routes: './src/routes',
-			'$levels/*': './src/levels/*'
+			'$routes': './src/routes',
+			'$levels/*': './src/levels/*',
+			'$js/*': './src/js/*',
+			'$assets/*': './src/js/*',
 		}
 	}
 };

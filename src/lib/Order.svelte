@@ -1,5 +1,11 @@
 <script>
-	import Button from '$lib/Button.svelte';
+
+import { page } from '$app/stores';
+
+	export let id = $page.params.id;
+
+
+import Button from '$lib/Button.svelte';
 	import Input from '$lib/Input.svelte';
 	import { onMount } from 'svelte';
 	import { icons } from '$lib/icons.js';
@@ -7,7 +13,11 @@
 	import '$lib/prism.css';
 	import '$lib/prism.js';
 
+	import party from 'party-js';
+
 	let solution = '';
+
+
 
 	const re = /(\$.*?\$)/g;
 
@@ -64,10 +74,18 @@
 		const solutions = [...new Set(positions)].filter((value) => value >= 0);
 
 		console.log(solutions);
-		console.log(
+
+		const isSolved =
 			solutions.length === slicedGaps.length &&
-				solutions.every((value, index, array) => index === 0 || array[index - 1] <= value)
-		);
+			solutions.every((value, index, array) => index === 0 || array[index - 1] <= value);
+
+		console.log(isSolved);
+
+		if (isSolved) {
+			const checkbutton = document.getElementById('checksolution');
+			party.confetti(checkbutton);
+			console.log(id)
+		}
 	}
 
 	function clear() {
@@ -122,10 +140,13 @@
 		gaps = [...gaps];
 		console.log(shuffle);
 		console.log(_answers);
-
 		console.log(gaps);
 	});
 </script>
+
+<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
+	<a href="/js/level/2">Home</a>
+</li>
 
 <main class="container is-fluid">
 	<div class="column"><slot name="text" /></div>
@@ -151,7 +172,9 @@
 		<p class="control">
 			<button class="button is-warning" on:click={stepUndo}>{@html icons['undo']}</button>
 		</p>
-		<button class="button marginLeft" on:click={checkSolution}>{@html icons['play']}</button>
+		<button id="checksolution" class="button marginLeft" on:click={checkSolution}
+			>{@html icons['play']}</button
+		>
 	</div>
 
 	<section class="column buttons" id="buttons">
