@@ -6,6 +6,7 @@ import { vitePreprocess } from '@sveltejs/kit/vite';
 import { glob } from 'glob';
 import path from 'path';
 import preprocessor from 'svelte-preprocess'
+import { writeFileSync } from 'fs';
 
 const basePath = process.env.NODE_ENV === 'production' ? '/codiquest' : '';
 console.log(`[+] NODE_ENV ${process.env.NODE_ENV}`);
@@ -15,7 +16,6 @@ const config = {
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
 	preprocess: preprocessor(),
-
 	kit: {
 		adapter: adapter(),
 		prerender: {
@@ -55,14 +55,27 @@ levels.forEach((level) => {
 
 if (basePath == 'production') config.kit.prerender.entries.push('');
 
-config.kit.prerender.entries.forEach((element, index) => {
-	if (element === '/') return;
-	config.kit.prerender.entries.push(element + '/');
-});
+// config.kit.prerender.entries.forEach((element, index) => {
+// 	if (element === '/') return;
+// 	config.kit.prerender.entries.push(element + '/');
+// });
 
 config.kit.prerender.entries = [...new Set(config.kit.prerender.entries)];
 
 console.log('Routes');
 console.log(config.kit.prerender);
+
+// ----------------------
+
+const routesFile = 'src/js/routes.js';
+const routesContent = `// Archivo autogenerado. No tocar :-) \nexport const routes = ${JSON.stringify(config.kit.prerender.entries)};\n`;
+
+try {
+  writeFileSync(routesFile, routesContent);
+} catch (err) {
+  console.error('Error al crear el archivo de rutas', err);
+}
+
+// --------------------------
 
 export default config;

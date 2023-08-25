@@ -16,7 +16,12 @@
 
 	const val = Math.floor(Math.random() * SENTENCES.length);
 	const randomSentence = SENTENCES[val];
+
+
+
 </script>
+
+
 
 <main class="container">
 	<div class="card">

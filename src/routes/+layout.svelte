@@ -4,8 +4,8 @@
     import { page } from '$app/stores';
 
 	import {fly} from 'svelte/transition'
-
-	$: console.log($page.url)
+	import { icons } from '$lib/icons.js'
+	//$: console.log($page.url)
 
 	export let data
 	import AudioPlayer, { stopAll } from '$lib/AudioPlayer.svelte'
@@ -23,15 +23,9 @@
 
 <!-- <pre>
   { JSON.stringify($page, null, 2)}
-</pre> -->
+</pre> 
+ -->
 
-<button on:click={stopAll}>
-	Stop all!
-  </button>
-  
-  {#each audioTracks as src}
-	<AudioPlayer {src} />
-  {/each}
 
 <nav class="navbar is-warning">
 	<div class="navbar-brand">
@@ -53,8 +47,19 @@
 
 	<div id="navbarBasicExample" class="navbar-menu" class:is-active={ isActive }>
 		<div class="navbar-end">
+
+<a class="navbar-item">
+	{@html icons['music']}
+</a>
+
 		  <a class="navbar-item">
-			Home
+			<button on:click={stopAll}>
+				Stop all!
+			  </button>
+			  
+			  {#each audioTracks as src}
+				<AudioPlayer {src} />
+			  {/each}
 		  </a>
 	
 		  <a class="navbar-item">

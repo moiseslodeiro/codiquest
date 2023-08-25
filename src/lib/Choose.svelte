@@ -6,6 +6,19 @@
 	import '$lib/prism.css';
 	import '$lib/prism.js';
 
+	import { page } from '$app/stores';
+	export let id = $page.params.id;
+
+	async function fetchData() {
+    const res = await fetch("7");
+    const data = await res.data;
+
+    if (res.status) {
+      return data
+    } else {
+      throw new Error(data);
+    }
+  }
 
 	function handlePingas(event, id) {
 		console.log(event);
@@ -36,7 +49,20 @@
 		<pre>
         {@html codeBlock}
         </pre>
-	</div>
+	</div>	
+
+
+
+	{#await fetchData()}
+		...
+	{:then a} 
+		{ JSON.stringify(a, '', 2) }
+		<a class="button marginLeft" href="{parseInt(id) + 1}">Siguiente nivel</a>
+		
+	{:catch error}
+		xxx { error }
+	{/await}
+
 
 
 

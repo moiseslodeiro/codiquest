@@ -1,11 +1,16 @@
 <script>
-
-import { page } from '$app/stores';
+	import { base } from '$app/paths';
+	import { page } from '$app/stores';
+	import { routes } from '$js/routes.js';
 
 	export let id = $page.params.id;
+	export let tech = $page.params.tech;
 
+	console.log('Page params', $page.params);
+	console.log('Routes', routes);
 
-import Button from '$lib/Button.svelte';
+	console.log('Has next', `/${tech}/level/${parseInt(id)+1}`, routes.includes(`/${tech}/level/${parseInt(id)+1}`))
+	import Button from '$lib/Button.svelte';
 	import Input from '$lib/Input.svelte';
 	import { onMount } from 'svelte';
 	import { icons } from '$lib/icons.js';
@@ -16,8 +21,6 @@ import Button from '$lib/Button.svelte';
 	import party from 'party-js';
 
 	let solution = '';
-
-
 
 	const re = /(\$.*?\$)/g;
 
@@ -70,21 +73,20 @@ import Button from '$lib/Button.svelte';
 		}
 	}
 
-	function checkSolution() {
+	function checkSolution(e) {
 		const solutions = [...new Set(positions)].filter((value) => value >= 0);
 
-		console.log(solutions);
+		console.log('Solutions', solutions);
 
 		const isSolved =
 			solutions.length === slicedGaps.length &&
 			solutions.every((value, index, array) => index === 0 || array[index - 1] <= value);
 
-		console.log(isSolved);
+		console.log('Is solved', isSolved);
 
 		if (isSolved) {
 			const checkbutton = document.getElementById('checksolution');
 			party.confetti(checkbutton);
-			console.log(id)
 		}
 	}
 
@@ -131,16 +133,14 @@ import Button from '$lib/Button.svelte';
 			};
 		});
 
-		console.log(wrongButtons);
 		_answers = _answers.concat(wrongButtons);
 
 		buttons = shuffle === true ? _answers.sort((a, b) => 0.5 - Math.random()) : _answers;
-		console.log(_answers.sort((a, b) => 0.5 - Math.random()));
 
 		gaps = [...gaps];
-		console.log(shuffle);
-		console.log(_answers);
-		console.log(gaps);
+		console.log('Shuff', shuffle);
+		console.log('Answers', _answers);
+		console.log('Gaps', gaps);
 	});
 </script>
 
@@ -175,6 +175,14 @@ import Button from '$lib/Button.svelte';
 		<button id="checksolution" class="button marginLeft" on:click={checkSolution}
 			>{@html icons['play']}</button
 		>
+
+		{#if routes.includes(`/${tech}/level/${parseInt(id)+1}`)}
+			<a class="button marginLeft" href={parseInt(id) + 1}>Siguiente nivel</a>
+		{:else}
+			...
+		{/if}
+
+
 	</div>
 
 	<section class="column buttons" id="buttons">

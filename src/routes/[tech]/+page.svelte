@@ -6,6 +6,7 @@
 
 	export let id = $page.params.id;
 	export let tech = $page.params.tech;
+	
 </script>
 
 <h1>{tech}</h1>
