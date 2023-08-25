@@ -12,6 +12,8 @@
 	console.log('Has next', `/${tech}/level/${parseInt(id)+1}`, routes.includes(`/${tech}/level/${parseInt(id)+1}`))
 	import Button from '$lib/Button.svelte';
 	import Input from '$lib/Input.svelte';
+	import NextLevel from '$lib/NextLevel.svelte';
+
 	import { onMount } from 'svelte';
 	import { icons } from '$lib/icons.js';
 
@@ -144,9 +146,6 @@
 	});
 </script>
 
-<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-	<a href="/js/level/2">Home</a>
-</li>
 
 <main class="container is-fluid">
 	<div class="column"><slot name="text" /></div>
@@ -176,11 +175,7 @@
 			>{@html icons['play']}</button
 		>
 
-		{#if routes.includes(`/${tech}/level/${parseInt(id)+1}`)}
-			<a class="button marginLeft" href={parseInt(id) + 1}>Siguiente nivel</a>
-		{:else}
-			...
-		{/if}
+		<NextLevel message=">>" />
 
 
 	</div>
