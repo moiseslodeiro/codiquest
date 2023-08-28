@@ -23,6 +23,8 @@
 	import party from 'party-js';
 
 	let solution = '';
+	let show = false;
+	let isSolved = false;
 
 	const re = /(\$.*?\$)/g;
 
@@ -57,6 +59,7 @@
 			document.getElementById('input-' + positionToFill).innerHTML = event.detail.text;
 			positions[positionToFill] = event.detail.order;
 			positionToFill++;
+		
 		}
 	}
 
@@ -80,16 +83,24 @@
 
 		console.log('Solutions', solutions);
 
-		const isSolved =
+		isSolved =
 			solutions.length === slicedGaps.length &&
 			solutions.every((value, index, array) => index === 0 || array[index - 1] <= value);
 
 		console.log('Is solved', isSolved);
 
 		if (isSolved) {
-			const checkbutton = document.getElementById('checksolution');
+			const checkbutton = document.getElementById('nextLevel');
 			party.confetti(checkbutton);
+			blockButtons();
 		}
+	}
+
+	function blockButtons() {
+		const buttons = document.querySelectorAll('.button');
+		buttons.forEach((button) => {
+			button.disabled = true;
+		});
 	}
 
 	function clear() {
@@ -146,7 +157,6 @@
 	});
 </script>
 
-
 <main class="container is-fluid">
 	<div class="column"><slot name="text" /></div>
 
@@ -166,21 +176,22 @@
 
 	<div class="column field has-addons">
 		<p class="control">
-			<button class="button is-danger" on:click={clear}>{@html icons['reset']}</button>
+			<button class="button is-danger" disabled={positionToFill === 0} on:click={clear}>{@html icons['reset']}</button>
 		</p>
 		<p class="control">
-			<button class="button is-warning" on:click={stepUndo}>{@html icons['undo']}</button>
+			<button class="button is-warning" disabled={positionToFill === 0} on:click={stepUndo}>{@html icons['undo']}</button>
 		</p>
-		<button id="checksolution" class="button marginLeft" on:click={checkSolution}
+		<button id="checksolution" class="button marginLeft is-link is-outlined" class:show={ isSolved } disabled={positionToFill < slicedGaps.length} on:click|once={checkSolution}
 			>{@html icons['play']}</button
 		>
 
-		<NextLevel message=">>" />
-
+		<div id="nextLevel" class="marginLeft" class:show={ !isSolved }>
+			<NextLevel  message="Siguiente nivel" />
+		</div>
 
 	</div>
 
-	<section class="column buttons" id="buttons">
+	<section class="column buttons are-medium" id="buttons">
 		{#each buttons as button}
 			<Button text={button.text} order={button.order} on:message={handleMessage} />
 		{/each}
@@ -197,6 +208,10 @@
 		font-family: 'Rubik', sans-serif;
 		font-weight: normal;
 		letter-spacing: 0.05rem;
+	}
+
+	.show {
+		display: none;
 	}
 
 	.code {

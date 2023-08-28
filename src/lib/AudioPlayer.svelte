@@ -1,16 +1,23 @@
 <script context="module">
     const players = new Set()
   
+    export let xx = false;
+
     export function stopAll() {
       players.forEach(p => p.pause())
+      players.forEach(p => xx = p.paused)
     }
+
+    export function playAll() {
+      players.forEach(p => p.play())
+      players.forEach(p => xx = p.paused) 
+    }
+
   </script>
   
   <script>
     import { onMount } from 'svelte'
-  
-    export let src
-    
+    export let src  
     let player
   
     onMount(() => {

@@ -63,9 +63,6 @@
 		xxx { error }
 	{/await}
 
-
-
-
 	<section class="column buttons" id="buttons">
 		{#each answers as button}
 			<Boton text={button.text} order={button.order} on:message={(event) => handlePingas(event, button.order)} />
