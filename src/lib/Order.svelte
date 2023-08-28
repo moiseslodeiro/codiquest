@@ -9,7 +9,11 @@
 	console.log('Page params', $page.params);
 	console.log('Routes', routes);
 
-	console.log('Has next', `/${tech}/level/${parseInt(id)+1}`, routes.includes(`/${tech}/level/${parseInt(id)+1}`))
+	console.log(
+		'Has next',
+		`/${tech}/level/${parseInt(id) + 1}`,
+		routes.includes(`/${tech}/level/${parseInt(id) + 1}`)
+	);
 	import Button from '$lib/Button.svelte';
 	import Input from '$lib/Input.svelte';
 	import NextLevel from '$lib/NextLevel.svelte';
@@ -59,7 +63,6 @@
 			document.getElementById('input-' + positionToFill).innerHTML = event.detail.text;
 			positions[positionToFill] = event.detail.order;
 			positionToFill++;
-		
 		}
 	}
 
@@ -158,11 +161,11 @@
 </script>
 
 <main class="container is-fluid">
-	<div class="column"><slot name="text" /></div>
+	<div class="column is-size-6-mobile is-size-5-tablet is-size-5-desktop"><slot name="text" /></div>
 
 	<div class="code column">
 		<pre>
-        {#each gaps as i}
+        	{#each gaps as i}
 				{#if i.type}
 					<svelte:component this={i.type} {...{ id: i.value }} />
 				{:else}
@@ -176,19 +179,26 @@
 
 	<div class="column field has-addons">
 		<p class="control">
-			<button class="button is-danger" disabled={positionToFill === 0} on:click={clear}>{@html icons['reset']}</button>
+			<button class="button is-danger" disabled={positionToFill === 0} on:click={clear}
+				>{@html icons['reset']}</button
+			>
 		</p>
 		<p class="control">
-			<button class="button is-warning" disabled={positionToFill === 0} on:click={stepUndo}>{@html icons['undo']}</button>
+			<button class="button is-warning" disabled={positionToFill === 0} on:click={stepUndo}
+				>{@html icons['undo']}</button
+			>
 		</p>
-		<button id="checksolution" class="button marginLeft is-link is-outlined" class:show={ isSolved } disabled={positionToFill < slicedGaps.length} on:click|once={checkSolution}
-			>{@html icons['play']}</button
+		<button
+			id="checksolution"
+			class="button marginLeft is-link is-outlined"
+			class:show={isSolved}
+			disabled={positionToFill < slicedGaps.length}
+			on:click|once={checkSolution}>{@html icons['play']}</button
 		>
 
-		<div id="nextLevel" class="marginLeft" class:show={ !isSolved }>
-			<NextLevel  message="Siguiente nivel" />
+		<div id="nextLevel" class="marginLeft" class:show={!isSolved}>
+			<NextLevel message="Siguiente nivel" />
 		</div>
-
 	</div>
 
 	<section class="column buttons are-medium" id="buttons">

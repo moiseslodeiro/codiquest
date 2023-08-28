@@ -3,10 +3,21 @@
 	import { icons } from '$lib/icons.js';
 	import Load from '$lib/Load.svelte';
 	import Error from '$lib/Error.svelte';
+	import { routes } from '$js/routes.js';
 
 	export let id = $page.params.id;
 	export let tech = $page.params.tech;
 	
+
+	let techRoutes = routes.filter((word) => word.includes(tech+'/level/')).reverse()
+
 </script>
 
 <h1>{tech}</h1>
+
+<ul>
+{#each techRoutes as level}
+	<li><a href="{level}">{level}</a></li>
+{/each}
+</ul>
+

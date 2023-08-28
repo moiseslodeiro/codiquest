@@ -8,8 +8,8 @@
 	export let tech = $page.params.tech;
 </script>
 
-<div class="block">
-	<nav class="breadcrumb container is-fluid" aria-label="breadcrumbs">
+<div class="container is-max-widescreen block">
+	<nav class="py-2 breadcrumb container is-fluid has-background-white-ter" aria-label="breadcrumbs">
 		<ul>
 			<li><a href="/">~</a></li>
 			<li><a href="/{tech}">{@html icons[tech]}</a></li>
@@ -25,3 +25,4 @@
 {:catch error}
 	<Error message={error} />
 {/await}
+
