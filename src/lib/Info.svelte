@@ -2,6 +2,7 @@
 
 import NextLevel from '$lib/NextLevel.svelte';
 import { icons } from '$lib/icons.js'
+import { base } from '$app/paths';
 
 </script>
 
@@ -20,6 +21,23 @@ import { icons } from '$lib/icons.js'
 	<div class="block is-full">
 	  <NextLevel />
 	</div>
+
+	<hr>
+
+	<article class="message is-link">
+		<div class="columns message-body">
+			<div class="column is-one-fifth">
+
+				<img src="{base}/favicon.png" alt="Have a Coddy day!" />
+	
+				
+			</div>
+			  <div class="column is-size-5-mobile is-size-5-tablet is-size-5-desktop"><slot name="glossary"></slot></div>
+			</div>
+	  </article>
+
+
+	
 
 </main>
 

@@ -160,7 +160,7 @@
 	});
 </script>
 
-<main class="container is-fluid">
+<main class="container is-fluid has-background-success">
 	<div class="column is-size-6-mobile is-size-5-tablet is-size-5-desktop"><slot name="text" /></div>
 
 	<div class="code column">

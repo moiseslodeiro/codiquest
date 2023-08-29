@@ -5,7 +5,8 @@
 	import Error from '$lib/Error.svelte';
 	import { routes } from '$js/routes.js';
 
-	export let id = $page.params.id;
+	import { base } from '$app/paths';
+
 	export let tech = $page.params.tech;
 	
 
@@ -17,7 +18,7 @@
 
 <ul>
 {#each techRoutes as level}
-	<li><a href="{level}">{level}</a></li>
+	<li><a href="{ base }{ level }">{level}</a></li>
 {/each}
 </ul>
 

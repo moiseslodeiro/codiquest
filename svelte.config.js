@@ -53,7 +53,7 @@ levels.forEach((level) => {
 	config.kit.prerender.entries.push('/' + parsedPath.dir + '/level');
 });
 
-if (basePath == 'production') config.kit.prerender.entries.push('');
+if (process.env.NODE_ENV == 'production') config.kit.prerender.entries.push(basePath);
 
 // config.kit.prerender.entries.forEach((element, index) => {
 // 	if (element === '/') return;

@@ -4,20 +4,23 @@
 	import Load from '$lib/Load.svelte';
 	import Error from '$lib/Error.svelte';
 
+	import { base } from '$app/paths';
+
 	export let id = $page.params.id;
 	export let tech = $page.params.tech;
 </script>
 
-<div class="container is-max-widescreen block">
-	<nav class="py-2 breadcrumb container is-fluid has-background-white-ter" aria-label="breadcrumbs">
-		<ul>
-			<li><a href="/">~</a></li>
-			<li><a href="/{tech}">{@html icons[tech]}</a></li>
-			<li class="is-active"><a href="/{tech}/level/{id}" aria-current="page">Nivel {id}</a></li>
-		</ul>
+<nav class="navbar pt-2 breadcrumb has-background-white-ter" aria-label="breadcrumbs">
+	<div class="container is-max-widescreen block has-background-white-ter">
+			<ul>
+				<li><a href="/"><b>~</b></a></li>
+				<li><a href="/{tech}">{@html icons[tech]}</a></li>
+				<li class="is-active"><a href="/{tech}/level/{id}" aria-current="page">Nivel {id}</a></li>
+			</ul>
+		</div>
 	</nav>
-</div>
 
+<div class="container is-max-widescreen">
 {#await import(`../../../../levels/${tech}/${id}.svelte` /* @vite-ignore */)}
 	<Load />
 {:then module}
@@ -25,4 +28,4 @@
 {:catch error}
 	<Error message={error} />
 {/await}
-
+</div>
