@@ -13,7 +13,7 @@
 		isFocused = !isFocused;
 
 		dispatch('message', {
-			order
+			order, isFocused
 		});
 
 		domNode.focus();

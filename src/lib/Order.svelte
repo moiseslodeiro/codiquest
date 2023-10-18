@@ -195,7 +195,7 @@
 			class="button marginLeft is-link is-outlined is-size-5-mobile is-size-5-tablet is-size-5-desktop"
 			class:show={isSolved}
 			disabled={positionToFill < slicedGaps.length}
-			on:click|once={checkSolution}>{@html icons['play']}</button
+			on:click={checkSolution}>{@html icons['play']}</button
 		>
 
 		<div id="nextLevel" class="marginLeft" class:show={!isSolved}>
