@@ -27,8 +27,8 @@
 	import party from 'party-js';
 
 	let solution = '';
-	let show = false;
 	let isSolved = false;
+	let isFailed = false;
 
 	const re = /(\$.*?\$)/g;
 
@@ -96,6 +96,8 @@
 			const checkbutton = document.getElementById('nextLevel');
 			party.confetti(checkbutton);
 			blockButtons();
+		} else { 
+			isFailed = true;
 		}
 	}
 
@@ -160,10 +162,10 @@
 	});
 </script>
 
-<main class="container is-fluid has-background-success">
+<main class="container is-fluid">
 	<div class="column is-size-6-mobile is-size-5-tablet is-size-5-desktop"><slot name="text" /></div>
 
-	<div class="code column">
+	<div class="code column" class:failure={ isFailed }>
 		<pre>
         	{#each gaps as i}
 				{#if i.type}
@@ -177,20 +179,20 @@
         </pre>
 	</div>
 
-	<div class="column field has-addons">
+	<div class="column field has-addons px-0">
 		<p class="control">
-			<button class="button is-danger" disabled={positionToFill === 0} on:click={clear}
+			<button class="button is-danger is-size-5-mobile is-size-5-tablet is-size-5-desktop" disabled={positionToFill === 0} on:click={clear}
 				>{@html icons['reset']}</button
 			>
 		</p>
 		<p class="control">
-			<button class="button is-warning" disabled={positionToFill === 0} on:click={stepUndo}
+			<button class="button is-warning is-size-5-mobile is-size-5-tablet is-size-5-desktop" disabled={positionToFill === 0} on:click={stepUndo}
 				>{@html icons['undo']}</button
 			>
 		</p>
 		<button
 			id="checksolution"
-			class="button marginLeft is-link is-outlined"
+			class="button marginLeft is-link is-outlined is-size-5-mobile is-size-5-tablet is-size-5-desktop"
 			class:show={isSolved}
 			disabled={positionToFill < slicedGaps.length}
 			on:click|once={checkSolution}>{@html icons['play']}</button
@@ -209,6 +211,12 @@
 </main>
 
 <style>
+
+	.failure {
+		border: 2px solid;
+		border-color: coral;
+	}
+
 	.marginLeft {
 		margin-left: auto;
 	}
