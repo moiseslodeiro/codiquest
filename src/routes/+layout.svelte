@@ -9,7 +9,9 @@
 
 	export let data;
 	import AudioPlayer, { stopAll, playAll, xx} from '$lib/AudioPlayer.svelte';
-	let audioTracks = ['https://sveltejs.github.io/assets/music/strauss.mp3'];
+	import aaa from '$assets/aaa.mp3'
+
+	let audioTracks = [aaa];
 
 	let isActive = false;
 

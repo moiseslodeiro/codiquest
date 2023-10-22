@@ -8,9 +8,9 @@ const dispatch = createEventDispatcher();
 export let text = "| • ◡ • |"
 export let order = 0;
 
-export let disabled = false;
+//export let disabled = false;
 
-//import piece from './assets/piece.mp3';
+//import piece from '$assets/piece.mp3';
 
 const audio = new Audio();
 //audio.src = piece;

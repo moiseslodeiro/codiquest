@@ -28,7 +28,7 @@ const config = {
 			'$routes': './src/routes',
 			'$levels/*': './src/levels/*',
 			'$js/*': './src/js/*',
-			'$assets/*': './src/js/*',
+			'$assets/*': './src/assets/*',
 		}
 	}
 };
