@@ -14,6 +14,8 @@
 	export let answers = [];
 	export let shuffle = false;
 
+	let isFailed = false;
+
 	let isSolved = false;
 	let responsesNumber = -1;
 
@@ -26,9 +28,6 @@
 	}
 
 	function handleButtonEvent(event, id) {
-		//console.log(id)
-		// console.log(event);
-		//console.log(event.detail);
 
 		answers = answers.map((a) => {
 			if (a.order == id) {
@@ -38,7 +37,6 @@
 		});
 
 		responsesNumber = answers.filter((answer) => answer.checked === true).length;
-		//console.table(answers);
 	}
 
 	let correctAnswersNumber = -1;
@@ -51,6 +49,7 @@
 	}
 
 	function checkSolution(e) {
+
 		isSolved =
 			answers.filter((a) => a.correct == a.checked && a.correct == true).length ==
 			correctAnswersNumber;
@@ -58,12 +57,14 @@
 		if (isSolved) {
 			const checkbutton = document.getElementById('nextLevel');
 			party.confetti(checkbutton);
-			//blockButtons();
+			blockButtons();
 		} else {
 			console.log('Revisate eso mano');
 			console.log(answers.filter((a) => a.correct == a.checked && a.correct == true).length);
 			console.log(correctAnswersNumber);
 			console.table(answers);
+			isFailed = true;
+			setTimeout(() => { isFailed = false }, 1000)
 		}
 
 		/* const solutions = [...new Set(positions)].filter((value) => value >= 0);
@@ -101,27 +102,27 @@
 </script>
 
 <main class="container is-fluid">
-	<div class="column"><slot name="text" /></div>
+	<div class="column px-0"><slot name="text" /></div>
 
-	<div class="code column" id="code">
+	<div class="code column px-0" class:failure={ isFailed } id="code">
 		<pre>
         {@html codeBlock}
         </pre>
 	</div>
 
-	<!-- 	<a class="button marginLeft" href={parseInt(id) + 1}>Siguiente nivel</a>
- -->
+ <div class="column field has-addons px-0">
 
 	<button
 		id="checksolution"
 		class="button marginLeft is-link is-outlined is-size-5-mobile is-size-5-tablet is-size-5-desktop"
 		class:show={isSolved}
-		disabled={correctAnswersNumber > responsesNumber}
+		disabled={correctAnswersNumber != responsesNumber}
 		on:click={checkSolution}>{@html icons['play']}</button
 	>
 
 	<div id="nextLevel" class="marginLeft" class:show={!isSolved}>
 		<NextLevel message="Siguiente nivel" />
+	</div>
 	</div>
 
 	<section class="column buttons" id="buttons">
@@ -153,5 +154,28 @@
 
 	.show {
 		display: none;
+	}
+
+	.marginLeft {
+		margin-left: auto;
+	}
+
+	.failure {
+		animation: shake 0.5s;
+		animation-iteration-count: 1;
+	}
+
+	@keyframes shake {
+		0% { transform: translate(1px, 1px) rotate(0deg); }
+		10% { transform: translate(-1px, -2px) rotate(-1deg); }
+		20% { transform: translate(-3px, 0px) rotate(1deg); }
+		30% { transform: translate(3px, 2px) rotate(0deg); }
+		40% { transform: translate(1px, -1px) rotate(1deg); }
+		50% { transform: translate(-1px, 2px) rotate(-1deg); }
+		60% { transform: translate(-3px, 1px) rotate(0deg); }
+		70% { transform: translate(3px, 1px) rotate(-1deg); }
+		80% { transform: translate(-1px, -1px) rotate(1deg); }
+		90% { transform: translate(1px, 2px) rotate(0deg); }
+		100% { transform: translate(1px, -2px) rotate(-1deg); }
 	}
 </style>

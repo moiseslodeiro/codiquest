@@ -98,6 +98,8 @@
 			blockButtons();
 		} else { 
 			isFailed = true;
+			console.log(`isFailed value ${isFailed}`)
+			setTimeout(() => { isFailed = false }, 1000);
 		}
 	}
 
@@ -163,11 +165,11 @@
 </script>
 
 <main class="container is-fluid">
-	<div class="column is-size-6-mobile is-size-5-tablet is-size-5-desktop"><slot name="text" /></div>
+	<div class="column is-size-6-mobile is-size-5-tablet is-size-5-desktop px-0"><slot name="text" /></div>
 
-	<div class="code column" class:failure={ isFailed }>
+	<div class="code column px-0 py-0" class:failure={ isFailed }>
 		<pre>
-        	{#each gaps as i}
+			{#each gaps as i}
 				{#if i.type}
 					<svelte:component this={i.type} {...{ id: i.value }} />
 				{:else}
@@ -203,7 +205,7 @@
 		</div>
 	</div>
 
-	<section class="column buttons are-medium" id="buttons">
+	<section class="column buttons are-medium px-0" id="buttons">
 		{#each buttons as button}
 			<Button text={button.text} order={button.order} on:message={handleMessage} />
 		{/each}
@@ -213,8 +215,22 @@
 <style>
 
 	.failure {
-		border: 2px solid;
-		border-color: coral;
+		animation: shake 0.5s;
+		animation-iteration-count: 1;
+	}
+
+	@keyframes shake {
+		0% { transform: translate(1px, 1px) rotate(0deg); }
+		10% { transform: translate(-1px, -2px) rotate(-1deg); }
+		20% { transform: translate(-3px, 0px) rotate(1deg); }
+		30% { transform: translate(3px, 2px) rotate(0deg); }
+		40% { transform: translate(1px, -1px) rotate(1deg); }
+		50% { transform: translate(-1px, 2px) rotate(-1deg); }
+		60% { transform: translate(-3px, 1px) rotate(0deg); }
+		70% { transform: translate(3px, 1px) rotate(-1deg); }
+		80% { transform: translate(-1px, -1px) rotate(1deg); }
+		90% { transform: translate(1px, 2px) rotate(0deg); }
+		100% { transform: translate(1px, -2px) rotate(-1deg); }
 	}
 
 	.marginLeft {
