@@ -21,8 +21,8 @@
 </script>
 
 <button
-	class="button"
-	class:is-hovered={isFocused}
+	class="button is-primary"
+	class:is-light={isFocused}
 	on:blur={!isFocused}
 	class:is-focused={isFocused}
 	on:click={handleClick}
