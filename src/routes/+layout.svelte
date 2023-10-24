@@ -5,7 +5,6 @@
 
 	import { fly } from 'svelte/transition';
 	import { icons } from '$lib/icons.js';
-	//$: console.log($page.url)
 
 	export let data;
 	import AudioPlayer, { stopAll, playAll, xx} from '$lib/AudioPlayer.svelte';
@@ -23,17 +22,10 @@
 
 </script>
 
-<!--  <pre>
-  { JSON.stringify($page, null, 2)}
-</pre> 
-  -->
-
-
- 
 <nav class="navbar is-warning">
 	<div class="container is-max-widescreen">
 	<div class="navbar-brand">
-		<a class="navbar-item" href="#">
+		<a class="navbar-item" href="{base}/">
 			<img
 				src="{base}/favicon.png"
 				alt="Bulma: a modern CSS framework based on Flexbox"

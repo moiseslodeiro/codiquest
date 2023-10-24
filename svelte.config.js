@@ -4,7 +4,7 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 import { glob } from 'glob';
-import path from 'path';
+import path, { parse } from 'path';
 import preprocessor from 'svelte-preprocess'
 import { writeFileSync } from 'fs';
 
@@ -45,12 +45,21 @@ dirs.forEach((dir) => {
 console.log('Pushing levels');
 const levels = await glob('src/levels/**/*.svelte', { ignore: 'node_modules/**' });
 levels.forEach((level) => {
+
 	const relativePath = path.relative('src/levels', level);
 	const parsedPath = path.parse(relativePath);
-	const levelRoute = `${path.join('/', parsedPath.dir, '/', 'level/', parsedPath.name)}`;
-	config.kit.prerender.entries.push(levelRoute);
-	config.kit.prerender.entries.push('/' + parsedPath.dir);
-	config.kit.prerender.entries.push('/' + parsedPath.dir + '/level');
+
+	console.log(Number(parseInt(parsedPath.name)))
+
+	if(parseInt(parsedPath.name) !== 'index') {
+		const levelRoute = `${path.join('/', parsedPath.dir, '/', 'level/', parsedPath.name)}`;
+		config.kit.prerender.entries.push(levelRoute);
+		config.kit.prerender.entries.push('/' + parsedPath.dir);
+		config.kit.prerender.entries.push('/' + parsedPath.dir + '/level');
+	} else {
+		console.log(`Nombre ${parsedPath.name}`)
+	}
+
 });
 
 if (process.env.NODE_ENV == 'production') config.kit.prerender.entries.push(basePath);

@@ -114,10 +114,10 @@
 
 	<button
 		id="checksolution"
-		class="button marginLeft is-info is-active is-size-5-mobile is-size-5-tablet is-size-5-desktop"
+		class="button marginLeft is-link is-active is-size-5-mobile is-size-5-tablet is-size-5-desktop"
 		class:show={isSolved}
 		disabled={correctAnswersNumber != responsesNumber}
-		on:click={checkSolution}>{@html icons['play']}</button
+		on:click={checkSolution}>{@html icons['check']}</button
 	>
 
 	<div id="nextLevel" class="marginLeft" class:show={!isSolved}>
