@@ -1,20 +1,16 @@
 <script>
-    import OrderLevel from '$lib/Order.svelte'
+	import OrderLevel from '$lib/Order.svelte';
+
+	let code = `
+// En Javascript usamos...
+const
+$let$
+`;
 </script>
 
-<OrderLevel shuffle="true">
-    
-    <span slot="text">
-        Toda variable necesita un <b>nombre</b>. Los <b>nombres</b> de las variables <b>no pueden</b> contener espacios.
-    </span>
-
-    <span slot="code">
-    let miVariable = 5;
-    $const$ MI_CONSTANTE = $5$;
-    </span>
-
-    <span slot="card">
-        Tarjeta por detrás
-    </span>
-
+<OrderLevel shuffle="true" codeBlock={code}>
+	<span slot="text">
+		Usamos <code>let</code> y <code>const</code> para <strong>crear</strong> nuevas variables y constantes
+		(ya veremos la diferencia más adelante)
+	</span>
 </OrderLevel>
