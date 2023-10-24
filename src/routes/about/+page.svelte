@@ -32,7 +32,7 @@
 			CodiQuest, es una plataforma de creación de contenido estático que parte de la idea de crear
 			una aplicación para la creación de cuestionarios que ayuden a otras personas a asimilar
 			conceptos de tecnología y programación. Nace en 2023 a partir de un pet project desarrollado
-			principalmente en Svelte con Javascript Vanilla.
+			principalmente en Svelte con Javascript Vanilla. De momento la aplicación no almacena datos del usuario ni cookies ni nada parecido (de hecho, si vuelves atrás en un nivel, ¡podrás volverlo a resolver! 😃)
 		</div>
 	</div>
 

@@ -5,7 +5,7 @@ import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 import { glob } from 'glob';
 import path, { parse } from 'path';
-import preprocessor from 'svelte-preprocess'
+import preprocessor from 'svelte-preprocess';
 import { writeFileSync } from 'fs';
 
 const basePath = process.env.NODE_ENV === 'production' ? '/codiquest' : '';
@@ -25,10 +25,10 @@ const config = {
 			base: basePath
 		},
 		alias: {
-			'$routes': './src/routes',
+			$routes: './src/routes',
 			'$levels/*': './src/levels/*',
 			'$js/*': './src/js/*',
-			'$assets/*': './src/assets/*',
+			'$assets/*': './src/assets/*'
 		}
 	}
 };
@@ -40,7 +40,7 @@ dirs.forEach((dir) => {
 	const appdir = path.dirname(path.relative('src/routes/', dir));
 	if (appdir === '.' || appdir.includes('[id=integer]') || appdir.includes('[tech]')) return;
 
-	console.log(`[+] Adding ${ appdir } to entries`);
+	console.log(`[+] Adding ${appdir} to entries`);
 
 	config.kit.prerender.entries.push('/' + appdir);
 });
@@ -49,52 +49,45 @@ console.log();
 console.log('Pushing levels');
 const levels = await glob('src/levels/**/*.svelte', { ignore: 'node_modules/**' });
 levels.forEach((level) => {
-
 	const relativePath = path.relative('src/levels', level);
 	const parsedPath = path.parse(relativePath);
 
-	if(parsedPath.name === 'Index')
-		return
+	if (parsedPath.name === 'Index') return;
 
 	const levelRoute = `${path.join('/', parsedPath.dir, '/', 'level/', parsedPath.name)}`;
-	
+
 	config.kit.prerender.entries.push(levelRoute);
-	console.log(`[+] Adding ${ levelRoute } to entries`);
+	console.log(`[+] Adding ${levelRoute} to entries`);
 
 	config.kit.prerender.entries.push('/' + parsedPath.dir);
-	console.log(`[+] Adding /${ parsedPath.dir } to entries`);
+	console.log(`[+] Adding /${parsedPath.dir} to entries`);
 
-	console.log(`[+] Adding /${ parsedPath.dir }/level to entries`);
+	console.log(`[+] Adding /${parsedPath.dir}/level to entries`);
 	config.kit.prerender.entries.push('/' + parsedPath.dir + '/level');
-
-
 });
 
 if (process.env.NODE_ENV == 'production') {
-	console.log(`[+] Adding ${ basePath } to entries`);
+	console.log(`[+] Adding ${basePath} to entries`);
 	config.kit.prerender.entries.push(basePath);
 }
 
-/* config.kit.prerender.entries.forEach((element, index) => {
-	if (element === '/') return;
-	config.kit.prerender.entries.push(element + '/');
-});
- */
 config.kit.prerender.entries = [...new Set(config.kit.prerender.entries)];
 
-console.log()
+console.log();
 console.log('[+] Routes');
 console.log(config.kit.prerender);
 
 // ----------------------
 
 const routesFile = 'src/js/routes.js';
-const routesContent = `// Archivo autogenerado. No tocar :-) \nexport const routes = ${JSON.stringify(config.kit.prerender.entries)};\n`;
+const routesContent = `// Archivo autogenerado. No tocar :-) \nexport const routes = ${JSON.stringify(
+	config.kit.prerender.entries
+)};\n`;
 
 try {
-  writeFileSync(routesFile, routesContent);
+	writeFileSync(routesFile, routesContent);
 } catch (err) {
-  console.error('Error al crear el archivo de rutas', err);
+	console.error('Error al crear el archivo de rutas', err);
 }
 
 // --------------------------
