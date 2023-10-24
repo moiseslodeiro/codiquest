@@ -14,12 +14,12 @@
 	console.log(techRoutes);
 </script>
 
-<div class="container is-max-widescreen my-4 px-2 has-background-white">
-	<nav class="navbar breadcrumb" aria-label="breadcrumbs">
+<div class="container is-max-widescreen mt-4 px-2 has-background-white">
+	<nav class="navbar breadcrumb mb-0" aria-label="breadcrumbs">
 		<div class="container is-max-widescreen block px-2">
 			<ul>
 				<li><a href="{base}/"><b>~</b></a></li>
-				<li><a href="#">{@html icons[tech]}&nbsp;{tech}</a></li>
+				<li><a href="#">{@html icons[tech]}</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -32,15 +32,17 @@
 
 	<hr />
 
-	<h2>Lista de niveles</h2>
+	<div class="container is-fluid">
+		<h2 class="has-text-weight-semibold">Lista de niveles</h2>
 
-	<div class="columns my-1">
-		{#each techRoutes as level}
-			<div class="column">
-				<a href="{base}{level}" class="button is-medium is-primary is-outlined is-fullwidth"
-					>{level.split('/')[3]}</a
-				>
-			</div>
-		{/each}
+		<div class="columns my-1 px-2">
+			{#each techRoutes as level}
+				<div class="column">
+					<a href="{base}{level}" class="button is-medium is-primary is-outlined is-fullwidth"
+						>{level.split('/')[3]}</a
+					>
+				</div>
+			{/each}
+		</div>
 	</div>
 </div>

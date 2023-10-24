@@ -42,7 +42,7 @@
 	<div class="card">
 		<div class="card-content columns is-1 is-mobile">
 			<div class="column is-one-quarter p-0">
-				<img src="{base}/loading.png" alt="Have a Coddy day!" />
+				<img src="{base}/loading.png" alt="Have a Codi day!" />
 			</div>
 			<div class="column is-align-items-self-start">
 				<blockquote>{randomSentence}</blockquote>

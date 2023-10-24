@@ -24,8 +24,8 @@
 
 	<article class="message is-link" style="display: {glossary == false ? 'none' : 'block'}">
 		<div class="columns message-body">
-			<div class="column is-one-fifth">
-				<img src="{base}/favicon.png" alt="Have a Coddy day!" />
+			<div class="column is-narrow">
+				<img class="image is-64x64" src="{base}/favicon.png" alt="Have a Codi day!" />
 			</div>
 			<div class="column is-size-5-mobile is-size-5-tablet is-size-5-desktop">
 				<slot name="glossary" />

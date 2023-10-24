@@ -7,8 +7,8 @@
 	import { icons } from '$lib/icons.js';
 
 	export let data;
-	import AudioPlayer, { stopAll, playAll, xx} from '$lib/AudioPlayer.svelte';
-	import aaa from '$assets/aaa.mp3'
+	import AudioPlayer, { stopAll, playAll, xx } from '$lib/AudioPlayer.svelte';
+	import aaa from '$assets/aaa.mp3';
 
 	let audioTracks = [aaa];
 
@@ -18,68 +18,43 @@
 		isActive = !isActive;
 	}
 
-	$: console.log(xx)
-
+	$: console.log(xx);
 </script>
 
 <nav class="navbar is-warning">
 	<div class="container is-max-widescreen">
-	<div class="navbar-brand">
-		<a class="navbar-item" href="{base}/">
-			<img
-				src="{base}/favicon.png"
-				alt="Bulma: a modern CSS framework based on Flexbox"
-				width="32"
-				height="32"
-			/>
-		</a>
+		<div class="navbar-brand">
+			<a class="navbar-item" href="{base}/">
+				<img
+					src="{base}/favicon.png"
+					alt="¡Hola! Soy Codi :-)"
+					width="32"
+					height="32"
+				/>
+			</a>
 
-		<div
-			class="navbar-burger"
-			class:is-active={isActive}
-			data-target="navbarExampleTransparentExample"
-			on:click={toggleActive}
-		>
-			<span />
-			<span />
-			<span />
+			<div
+				class="navbar-burger"
+				class:is-active={isActive}
+				data-target="navbarExampleTransparentExample"
+				on:click={toggleActive}
+			>
+				<span />
+				<span />
+				<span />
+			</div>
 		</div>
-	</div>
 
-	<div id="navbarBasicExample" class="navbar-menu" class:is-active={isActive}>
-		<div class="navbar-end">
-			<a class="navbar-item" on:click={playAll} class:show={xx}>
-				{@html icons['musicoff']}
-			</a>
+		<div id="navbarBasicExample" class="navbar-menu" class:is-active={isActive}>
+			<div class="navbar-end">
 
-			<a class="navbar-item" on:click={stopAll} class:show={!xx}>
-				{@html icons['music']}
-			</a>
+				<a class="navbar-item" href="{ base }/"> Inicio </a>
+				<a class="navbar-item" href="{ base }/about"> Acerca de </a>
 
-			<a class="navbar-item">
-				<button on:click={stopAll}> Stop all! </button>
 
-				{#each audioTracks as src}
-					<AudioPlayer {src} />
-				{/each}
-			</a>
-
-			<a class="navbar-item"> Documentation </a>
-
-			<div class="navbar-item has-dropdown is-hoverable">
-				<a class="navbar-link"> More </a>
-
-				<div class="navbar-dropdown">
-					<a class="navbar-item"> About </a>
-					<a class="navbar-item"> Jobs </a>
-					<a class="navbar-item"> Contact </a>
-					<hr class="navbar-divider" />
-					<a class="navbar-item"> Report an issue </a>
-				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </nav>
 
 <main class="">
@@ -91,7 +66,6 @@
 </main>
 
 <slot name="footer" />
-
 
 <style>
 	.show {

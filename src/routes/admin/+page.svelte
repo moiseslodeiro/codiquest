@@ -3,13 +3,26 @@
 </script>
 
 <div class="container is-max-desktop my-4 px-2 has-background-white">
+
+	<nav class="navbar breadcrumb mb-0" aria-label="breadcrumbs">
+		<div class="container is-max-widescreen block px-2">
+			<ul>
+				<li><a href="{base}/"><b>~</b></a></li>
+				<li><a href="#">Secret zone</a></li>
+			</ul>
+		</div>
+	</nav>
+
 	<div>
 		<h1 class="is-size-4">I never gonna <code>git</code> you up!</h1>
 	</div>
 
 	<div class="columns mt-2">
-		<div class="column is-half">
-			<img src="{base}/nev.jpg" />
+		<div class="column is-3">
+			<figure class="image is-narrow">
+
+			<img src="{base}/nev.webp" />
+			</figure>
 		</div>
 		<div class="column">
 			<article class="message is-link">

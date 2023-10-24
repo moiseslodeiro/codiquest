@@ -10,7 +10,7 @@
 
 <div class="card">
 	<div class="card-image">
-		<figure class="image is-2by2">
+		<figure class="image is128x128">
 			<a href="{linksTo}" alt="Módulo {tech}"><img src="{base}/{image}" {alt} /></a>
 		</figure>
 	</div>
@@ -24,7 +24,7 @@
 
 
 	<div class="card-content mt-0 pt-0">
-		<div class="content">
+		<div class="content is-size-5-mobile is-size-5-tablet is-size-5-desktop">
 			<slot name="text" />
 		</div>
 	</div>
