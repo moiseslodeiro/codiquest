@@ -34,14 +34,18 @@ const config = {
 };
 
 console.log('Pushing dirs');
+console.log();
 const dirs = await glob('src/routes/**/*.svelte', { ignore: 'node_modules/**' });
 dirs.forEach((dir) => {
 	const appdir = path.dirname(path.relative('src/routes/', dir));
 	if (appdir === '.' || appdir.includes('[id=integer]') || appdir.includes('[tech]')) return;
 
+	console.log(`[+] Adding ${ appdir } to entries`);
+
 	config.kit.prerender.entries.push('/' + appdir);
 });
 
+console.log();
 console.log('Pushing levels');
 const levels = await glob('src/levels/**/*.svelte', { ignore: 'node_modules/**' });
 levels.forEach((level) => {
@@ -49,29 +53,37 @@ levels.forEach((level) => {
 	const relativePath = path.relative('src/levels', level);
 	const parsedPath = path.parse(relativePath);
 
-	console.log(Number(parseInt(parsedPath.name)))
+	if(parsedPath.name === 'Index')
+		return
 
-	if(parseInt(parsedPath.name) !== 'index') {
-		const levelRoute = `${path.join('/', parsedPath.dir, '/', 'level/', parsedPath.name)}`;
-		config.kit.prerender.entries.push(levelRoute);
-		config.kit.prerender.entries.push('/' + parsedPath.dir);
-		config.kit.prerender.entries.push('/' + parsedPath.dir + '/level');
-	} else {
-		console.log(`Nombre ${parsedPath.name}`)
-	}
+	const levelRoute = `${path.join('/', parsedPath.dir, '/', 'level/', parsedPath.name)}`;
+	
+	config.kit.prerender.entries.push(levelRoute);
+	console.log(`[+] Adding ${ levelRoute } to entries`);
+
+	config.kit.prerender.entries.push('/' + parsedPath.dir);
+	console.log(`[+] Adding /${ parsedPath.dir } to entries`);
+
+	console.log(`[+] Adding /${ parsedPath.dir }/level to entries`);
+	config.kit.prerender.entries.push('/' + parsedPath.dir + '/level');
+
 
 });
 
-if (process.env.NODE_ENV == 'production') config.kit.prerender.entries.push(basePath);
+if (process.env.NODE_ENV == 'production') {
+	console.log(`[+] Adding ${ basePath } to entries`);
+	config.kit.prerender.entries.push(basePath);
+}
 
-// config.kit.prerender.entries.forEach((element, index) => {
-// 	if (element === '/') return;
-// 	config.kit.prerender.entries.push(element + '/');
-// });
-
+/* config.kit.prerender.entries.forEach((element, index) => {
+	if (element === '/') return;
+	config.kit.prerender.entries.push(element + '/');
+});
+ */
 config.kit.prerender.entries = [...new Set(config.kit.prerender.entries)];
 
-console.log('Routes');
+console.log()
+console.log('[+] Routes');
 console.log(config.kit.prerender);
 
 // ----------------------

@@ -2,15 +2,34 @@
 	import { base } from '$app/paths';
 </script>
 
-<div class="columns is-centered">
-	<div class="column is-2">
-		<img src="{base}/never.gif" />
+<div class="container is-max-desktop my-4 px-2 has-background-white">
+	<div>
+		<h1 class="is-size-4">I never gonna <code>git</code> you up!</h1>
+	</div>
+
+	<div class="columns mt-2">
+		<div class="column is-half">
+			<img src="{base}/nev.jpg" />
+		</div>
+		<div class="column">
+			<article class="message is-link">
+				<div class="message-body">
+					Si has llegado hasta aquí, ya sea porque eres una persona curiosa, un juanquer o un amante
+					de los admins (😏) te diré que... ¡has sido <b>rickrollead@</b> y es hora de seguir la
+					cadena! Ayúdame a seguir repartiendo bits y bytes de conocimiento a todos tus conocidos
+					haciendo clic en el siguiente botón: <br /><br />
+					<a
+						href="https://twitter.com/intent/tweet?button_hashtag=codiquest&ref_src=twsrc%5Etfw"
+						class="twitter-hashtag-button"
+						data-size="large"
+						data-text="@Codiquest me ha #rickrolleado ! Never gonna git me up 💻"
+						data-url="https://codiquest.com"
+						data-related="Codiquest"
+						data-lang="es"
+						data-show-count="true">Tweet #codiquest</a
+					><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+				</div>
+			</article>
+		</div>
 	</div>
 </div>
-
-<style>
-	img {
-		filter: grayscale(0.76) saturate(1.9) hue-rotate(52deg) sepia(0.23) brightness(0.9)
-			contrast(1.3);
-	}
-</style>

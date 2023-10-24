@@ -101,7 +101,7 @@
 	});
 </script>
 
-<main class="container is-fluid">
+<main class="container is-fluid has-background-white">
 	<div class="column px-0"><slot name="text" /></div>
 
 	<div class="code column px-0" class:failure={ isFailed } id="code">

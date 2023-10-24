@@ -10,10 +10,10 @@
 	export let tech = $page.params.tech;
 </script>
 
-<nav class="navbar pt-2 breadcrumb has-background-white-ter" aria-label="breadcrumbs">
-	<div class="container is-max-widescreen block has-background-white-ter">
+<nav class="navbar pt-2 breadcrumb " aria-label="breadcrumbs">
+	<div class="container is-max-widescreen block px-2">
 		<ul>
-			<li><a href={base}><b>~</b></a></li>
+			<li><a href="{base}/"><b>~</b></a></li>
 			<li><a href="{base}/{tech}">{@html icons[tech]}</a></li>
 			<li class="is-active">
 				<a href="{base}/{tech}/level/{id}" aria-current="page">Nivel {id}</a>
@@ -22,7 +22,7 @@
 	</div>
 </nav>
 
-<div class="container is-max-widescreen">
+<div class="container is-max-widescreen ">
 	{#await import(`../../../../levels/${tech}/${id}.svelte` /* @vite-ignore */)}
 		<Load />
 	{:then module}

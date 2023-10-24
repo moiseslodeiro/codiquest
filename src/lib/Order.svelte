@@ -164,7 +164,7 @@
 	});
 </script>
 
-<main class="container is-fluid">
+<main class="container is-fluid has-background-white">
 	<div class="column is-size-6-mobile is-size-5-tablet is-size-5-desktop px-0"><slot name="text" /></div>
 
 	<div class="code column px-0 py-0" class:failure={ isFailed }>
@@ -235,13 +235,6 @@
 
 	.marginLeft {
 		margin-left: auto;
-	}
-
-	:global(body) {
-		background-color: #f6f7fb;
-		font-family: 'Rubik', sans-serif;
-		font-weight: normal;
-		letter-spacing: 0.05rem;
 	}
 
 	.show {

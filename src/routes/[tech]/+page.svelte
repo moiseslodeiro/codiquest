@@ -14,19 +14,15 @@
 	console.log(techRoutes);
 </script>
 
-<div style="border-color: red">{ base }asf</div>
-
-<div class="container is-max-widescreen my-4 px-2">
-		
-	<nav class="navbar breadcrumb " aria-label="breadcrumbs">
-		<div class="container is-max-widescreen block">
+<div class="container is-max-widescreen my-4 px-2 has-background-white">
+	<nav class="navbar breadcrumb" aria-label="breadcrumbs">
+		<div class="container is-max-widescreen block px-2">
 			<ul>
 				<li><a href="{base}/"><b>~</b></a></li>
-				<li><a href="#">{@html icons[tech]}&nbsp;{tech.toUpperCase()}</a></li>
+				<li><a href="#">{@html icons[tech]}&nbsp;{tech}</a></li>
 			</ul>
 		</div>
 	</nav>
-
 
 	{#await import(`../../levels/${tech}/Index.svelte` /* @vite-ignore */)}
 		<progress class="progress is-small is-primary" max="100" />
