@@ -7,10 +7,7 @@
 	import { icons } from '$lib/icons.js';
 
 	export let data;
-	import AudioPlayer, { stopAll, playAll, xx } from '$lib/AudioPlayer.svelte';
-	import aaa from '$assets/aaa.mp3';
 
-	let audioTracks = [aaa];
 
 	let isActive = false;
 
