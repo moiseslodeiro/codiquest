@@ -9,11 +9,11 @@
 	import '$lib/prism.js';
 	import party from 'party-js';
 
-	export let id = $page.params.id;
 	export let codeBlock = '';
 	export let answers = [];
 	export let shuffle = false;
-
+	
+	let id = $page.params.id;
 	let isFailed = false;
 
 	let isSolved = false;
@@ -21,14 +21,13 @@
 
 	$: {
 		if (correctAnswersNumber == responsesNumber) {
-			console.log('activamos el boton de comprbar soluciones');
+			console.log('Activamos el boton de comprbar soluciones');
 		} else {
-			console.log('desactivamos el boton de comprobar soluciones');
+			console.log('Desactivamos el boton de comprobar soluciones');
 		}
 	}
 
 	function handleButtonEvent(event, id) {
-
 		answers = answers.map((a) => {
 			if (a.order == id) {
 				return { ...a, checked: event.detail.isFocused };
@@ -49,7 +48,6 @@
 	}
 
 	function checkSolution(e) {
-
 		isSolved =
 			answers.filter((a) => a.correct == a.checked && a.correct == true).length ==
 			correctAnswersNumber;
@@ -64,26 +62,10 @@
 			console.log(correctAnswersNumber);
 			console.table(answers);
 			isFailed = true;
-			setTimeout(() => { isFailed = false }, 1000)
+			setTimeout(() => {
+				isFailed = false;
+			}, 1000);
 		}
-
-		/* const solutions = [...new Set(positions)].filter((value) => value >= 0);
-
-		console.log('Solutions', solutions);
-
-		isSolved =
-			solutions.length === slicedGaps.length &&
-			solutions.every((value, index, array) => index === 0 || array[index - 1] <= value);
-
-		console.log('Is solved', isSolved);
-
-		if (isSolved) {
-			const checkbutton = document.getElementById('nextLevel');
-			party.confetti(checkbutton);
-			blockButtons();
-		} else { 
-			isFailed = true;
-		} */
 	}
 
 	onMount(async () => {
@@ -104,25 +86,24 @@
 <main class="container is-fluid has-background-white">
 	<div class="column px-0"><slot name="text" /></div>
 
-	<div class="code column px-0" class:failure={ isFailed } id="code">
+	<div class="code column px-0" class:failure={isFailed} id="code">
 		<pre>
         {@html codeBlock}
         </pre>
 	</div>
 
- <div class="column field has-addons px-0">
+	<div class="column field has-addons px-0">
+		<button
+			id="checksolution"
+			class="button marginLeft is-link is-active is-size-5-mobile is-size-5-tablet is-size-5-desktop"
+			class:show={isSolved}
+			disabled={correctAnswersNumber != responsesNumber}
+			on:click={checkSolution}>{@html icons['tick']}</button
+		>
 
-	<button
-		id="checksolution"
-		class="button marginLeft is-link is-active is-size-5-mobile is-size-5-tablet is-size-5-desktop"
-		class:show={isSolved}
-		disabled={correctAnswersNumber != responsesNumber}
-		on:click={checkSolution}>{@html icons['check']}</button
-	>
-
-	<div id="nextLevel" class="marginLeft" class:show={!isSolved}>
-		<NextLevel message="Siguiente nivel" />
-	</div>
+		<div id="nextLevel" class="marginLeft" class:show={!isSolved}>
+			<NextLevel message="Siguiente nivel" />
+		</div>
 	</div>
 
 	<section class="column buttons px-0" id="buttons">
@@ -166,16 +147,38 @@
 	}
 
 	@keyframes shake {
-		0% { transform: translate(1px, 1px) rotate(0deg); }
-		10% { transform: translate(-1px, -2px) rotate(-1deg); }
-		20% { transform: translate(-3px, 0px) rotate(1deg); }
-		30% { transform: translate(3px, 2px) rotate(0deg); }
-		40% { transform: translate(1px, -1px) rotate(1deg); }
-		50% { transform: translate(-1px, 2px) rotate(-1deg); }
-		60% { transform: translate(-3px, 1px) rotate(0deg); }
-		70% { transform: translate(3px, 1px) rotate(-1deg); }
-		80% { transform: translate(-1px, -1px) rotate(1deg); }
-		90% { transform: translate(1px, 2px) rotate(0deg); }
-		100% { transform: translate(1px, -2px) rotate(-1deg); }
+		0% {
+			transform: translate(1px, 1px) rotate(0deg);
+		}
+		10% {
+			transform: translate(-1px, -2px) rotate(-1deg);
+		}
+		20% {
+			transform: translate(-3px, 0px) rotate(1deg);
+		}
+		30% {
+			transform: translate(3px, 2px) rotate(0deg);
+		}
+		40% {
+			transform: translate(1px, -1px) rotate(1deg);
+		}
+		50% {
+			transform: translate(-1px, 2px) rotate(-1deg);
+		}
+		60% {
+			transform: translate(-3px, 1px) rotate(0deg);
+		}
+		70% {
+			transform: translate(3px, 1px) rotate(-1deg);
+		}
+		80% {
+			transform: translate(-1px, -1px) rotate(1deg);
+		}
+		90% {
+			transform: translate(1px, 2px) rotate(0deg);
+		}
+		100% {
+			transform: translate(1px, -2px) rotate(-1deg);
+		}
 	}
 </style>

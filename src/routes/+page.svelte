@@ -14,7 +14,7 @@
 		<div class="container is-max-widescreen block px-2">
 			<ul>
 				<li><a href="{base}/"><b>~</b></a></li>
-				<li><a href="#">Inicio</a></li>
+				<li><a href="{base}/">Inicio</a></li>
 			</ul>
 		</div>
 	</nav>

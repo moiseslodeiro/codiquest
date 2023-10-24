@@ -8,26 +8,18 @@
 
 	export let data;
 
-
 	let isActive = false;
 
 	function toggleActive() {
 		isActive = !isActive;
 	}
-
-	$: console.log(xx);
 </script>
 
 <nav class="navbar is-warning">
 	<div class="container is-max-widescreen">
 		<div class="navbar-brand">
 			<a class="navbar-item" href="{base}/">
-				<img
-					src="{base}/favicon.png"
-					alt="¡Hola! Soy Codi :-)"
-					width="32"
-					height="32"
-				/>
+				<img src="{base}/favicon.png" alt="¡Hola! Soy Codi :-)" width="32" height="32" />
 			</a>
 
 			<div
@@ -35,6 +27,10 @@
 				class:is-active={isActive}
 				data-target="navbarExampleTransparentExample"
 				on:click={toggleActive}
+				on:keydown={toggleActive}
+				role="button"
+				aria-pressed="false"
+				tabindex="0"
 			>
 				<span />
 				<span />
@@ -44,11 +40,8 @@
 
 		<div id="navbarBasicExample" class="navbar-menu" class:is-active={isActive}>
 			<div class="navbar-end">
-
-				<a class="navbar-item" href="{ base }/"> Inicio </a>
-				<a class="navbar-item" href="{ base }/about"> Acerca de </a>
-
-
+				<a class="navbar-item" href="{base}/"> Inicio </a>
+				<a class="navbar-item" href="{base}/about"> Acerca de </a>
 			</div>
 		</div>
 	</div>
@@ -64,8 +57,4 @@
 
 <slot name="footer" />
 
-<style>
-	.show {
-		display: none;
-	}
-</style>
+

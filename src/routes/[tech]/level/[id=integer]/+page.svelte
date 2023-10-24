@@ -11,18 +11,17 @@
 </script>
 
 <div class="container is-max-widescreen mt-4 px-2 has-background-white">
-
-<nav class="navbar breadcrumb mb-0" aria-label="breadcrumbs">
-	<div class="container is-max-widescreen block px-2">
-		<ul>
-			<li><a href="{base}/"><b>~</b></a></li>
-			<li><a href="{base}/{tech}">{@html icons[tech]}</a></li>
-			<li class="is-active">
-				<a href="{base}/{tech}/level/{id}" aria-current="page">Nivel {id}</a>
-			</li>
-		</ul>
-	</div>
-</nav>
+	<nav class="navbar breadcrumb mb-0" aria-label="breadcrumbs">
+		<div class="container is-max-widescreen block px-2">
+			<ul>
+				<li><a href="{base}/"><b>~</b></a></li>
+				<li><a href="{base}/{tech}">{@html icons[tech]}</a></li>
+				<li class="is-active">
+					<a href="{base}/{tech}/level/{id}" aria-current="page">Nivel {id}</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 
 	{#await import(`../../../../levels/${tech}/${id}.svelte` /* @vite-ignore */)}
 		<Load />

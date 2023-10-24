@@ -3,7 +3,6 @@
 	import Error from '../lib/Error.svelte';
 </script>
 
-
-asfasf
+No puedorl
 
 <Error message="{$page.status} {$page.error.message}" />

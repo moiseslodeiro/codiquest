@@ -1,8 +1,6 @@
 <script>
 	import { page } from '$app/stores';
 	import { icons } from '$lib/icons.js';
-	import Load from '$lib/Load.svelte';
-	import Error from '$lib/Error.svelte';
 	import { routes } from '$js/routes.js';
 	import { base } from '$app/paths';
 	export let tech = $page.params.tech;
@@ -19,7 +17,7 @@
 		<div class="container is-max-widescreen block px-2">
 			<ul>
 				<li><a href="{base}/"><b>~</b></a></li>
-				<li><a href="#">{@html icons[tech]}</a></li>
+				<li><a href="{base}/{tech}">{@html icons[tech]}</a></li>
 			</ul>
 		</div>
 	</nav>

@@ -7,7 +7,7 @@
 		<div class="container is-max-widescreen block px-2">
 			<ul>
 				<li><a href="{base}/"><b>~</b></a></li>
-				<li><a href="#">Acerca de</a></li>
+				<li><a href="{base}/about">Acerca de</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -32,7 +32,9 @@
 			CodiQuest, es una plataforma de creación de contenido estático que parte de la idea de crear
 			una aplicación para la creación de cuestionarios que ayuden a otras personas a asimilar
 			conceptos de tecnología y programación. Nace en 2023 a partir de un pet project desarrollado
-			principalmente en Svelte con Javascript Vanilla. De momento la aplicación no almacena datos del usuario ni cookies ni nada parecido (de hecho, si vuelves atrás en un nivel, ¡podrás volverlo a resolver! 😃)
+			principalmente en Svelte con Javascript Vanilla. De momento la aplicación no almacena datos
+			del usuario ni cookies ni nada parecido (de hecho, si vuelves atrás en un nivel, ¡podrás
+			volverlo a resolver! 😃)
 		</div>
 	</div>
 
@@ -45,11 +47,14 @@
 		ves en persona 🍻.
 	</div>
 
-
 	<h1 class="is-size-4 has-text-weight-semibold px-1">Contacto</h1>
 
 	<div class="block is-size-5-mobile is-size-5-tablet is-size-5-desktop mt-1">
-		Si tienes dudas, sugerencias, quejas o tienes la imperiosa necesidad de hacerme un bizum, puedes contactar conmigo (aparte de por <a href="https://twitter.com/MoisesLodeiro">𝕏</a> y <a href="https://www.linkedin.com/in/moiseslodeiro/">LinkedIn</a>), puedes hacerlo a través del correo electrónico <a href="mailto:codiquest@gmail.com">codiquest@gmail.com</a> o seguir este proyecto por <a href="https://twitter.com/CodiQuest">Twitter</a> 
+		Si tienes dudas, sugerencias, quejas o tienes la imperiosa necesidad de hacerme un bizum, puedes
+		contactar conmigo (aparte de por <a href="https://twitter.com/MoisesLodeiro">𝕏</a> y
+		<a href="https://www.linkedin.com/in/moiseslodeiro/">LinkedIn</a>), puedes hacerlo a través del
+		correo electrónico <a href="mailto:codiquest@gmail.com">codiquest@gmail.com</a> o seguir este
+		proyecto por <a href="https://twitter.com/CodiQuest">Twitter</a>
 	</div>
 
 	<h1 class="is-size-4 has-text-weight-semibold px-1">Librerías y recursos</h1>

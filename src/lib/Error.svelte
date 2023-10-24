@@ -16,18 +16,13 @@
 
 	const val = Math.floor(Math.random() * SENTENCES.length);
 	const randomSentence = SENTENCES[val];
-
-
-
 </script>
-
-
 
 <main class="container">
 	<div class="card">
 		<div class="card-content columns is-1 is-mobile">
 			<div class="column is-narrow p-0">
-				<img src="{base}/{icon}.png" alt="Have a Coddy day!" width="128" height="128" />
+				<img src="{base}/{icon}.png" alt="Have a Codi day!" width="128" height="128" />
 			</div>
 			<div class="column is-align-items-self-start">
 				<blockquote>{randomSentence}</blockquote>

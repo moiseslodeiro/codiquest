@@ -13,8 +13,8 @@
 		"format": "prettier --plugin-search-dir . --write .",
 		"test:integration": "playwright test",
 		"test:unit": "vitest",
-		"gh-pages:gh": "npm run build && npx gh-pages -d build -t true",
-		"gh-pages:prod": "NODE_ENV=publish npm run build && npx gh-pages -d build -t true"
+		"publish:gh": "npm run build && npx gh-pages -d build -t true",
+		"publish:prod": "NODE_ENV=publish npm run build && npx gh-pages -d build -t true"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",

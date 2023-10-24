@@ -6,14 +6,12 @@
 let $homeCity$
 `;
 
-let wrongButtons = ['home city']
-
+	let wrongButtons = ['home city'];
 </script>
 
-<Order shuffle="true" codeBlock={code} wrongButtons={wrongButtons}>
+<Order shuffle="true" codeBlock={code} {wrongButtons}>
 	<span slot="text">
-		Para crear nombres de variables con varias palabras usamos <code>camel case</code>. Empezamos con una letra minúscula y ponemos en mayúscula las palabras adicionales
+		Para crear nombres de variables con varias palabras usamos <code>camel case</code>. Empezamos
+		con una letra minúscula y ponemos en mayúscula las palabras adicionales
 	</span>
-
-	<span slot="back"> XXX por detrás </span>
 </Order>

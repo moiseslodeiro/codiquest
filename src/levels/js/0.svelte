@@ -20,6 +20,12 @@
 	</span>
 
 	<span slot="glossary">
-		En un dispositivo digital (ordenadores, móviles, etc.), las variables son asignadas a <code>direcciones específicas</code> en la memoria <code>RAM</code> durante la <b>ejecución</b> de un programa. El programa puede acceder y manipular los datos almacenados en esas ubicaciones. Por ejemplo, una variable llamada <code>age</code> podría estar asociada a una dirección de memoria que almacena el valor numérico <code>43</code>.
+		En un dispositivo digital (ordenadores, móviles, etc.), las variables son asignadas a <code
+			>direcciones específicas</code
+		>
+		en la memoria <code>RAM</code> durante la <b>ejecución</b> de un programa. El programa puede
+		acceder y manipular los datos almacenados en esas ubicaciones. Por ejemplo, una variable llamada
+		<code>age</code>
+		podría estar asociada a una dirección de memoria que almacena el valor numérico <code>43</code>.
 	</span>
 </Info>

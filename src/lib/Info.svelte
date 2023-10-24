@@ -44,20 +44,3 @@
 		</button>
 	</div>
 </main>
-
-<style>
-	.code {
-		background-color: #f6f7fb;
-		font-family: 'Courier New', Courier, monospace;
-	}
-
-	.code > pre {
-		text-align: left;
-		padding: 5px 10px 5px 15px;
-		font-size: large;
-		border-left: 3px solid sandybrown;
-		background-color: #26212f;
-		color: white;
-		width: 100%;
-	}
-</style>

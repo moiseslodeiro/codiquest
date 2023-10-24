@@ -3,12 +3,11 @@
 </script>
 
 <div class="container is-max-desktop my-4 px-2 has-background-white">
-
 	<nav class="navbar breadcrumb mb-0" aria-label="breadcrumbs">
 		<div class="container is-max-widescreen block px-2">
 			<ul>
 				<li><a href="{base}/"><b>~</b></a></li>
-				<li><a href="#">Secret zone</a></li>
+				<li><a href="{base}/admin">Secret zone</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -20,8 +19,7 @@
 	<div class="columns mt-2">
 		<div class="column is-3">
 			<figure class="image is-narrow">
-
-			<img src="{base}/nev.webp" />
+				<img src="{base}/nev.webp" alt="Never gonna git you up!" />
 			</figure>
 		</div>
 		<div class="column">

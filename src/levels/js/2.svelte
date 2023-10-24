@@ -6,15 +6,12 @@
 let $city$
 `;
 
-    let wrongButtons = ['home city', '123value']
-
+	let wrongButtons = ['home city', '123value'];
 </script>
 
-<Order shuffle="true" codeBlock={code} wrongButtons={wrongButtons}>
+<Order shuffle="true" codeBlock={code} {wrongButtons}>
 	<span slot="text">
 		TODA variable necesita un <b>nombre</b>. Los <b>nombres</b> de las variables <b>no pueden</b> contener
 		espacios.
 	</span>
-
-	<span slot="back"> XXX por detrás </span>
 </Order>

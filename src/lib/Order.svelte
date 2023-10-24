@@ -1,5 +1,4 @@
 <script>
-	import { base } from '$app/paths';
 	import { page } from '$app/stores';
 	import { routes } from '$js/routes.js';
 
@@ -96,10 +95,12 @@
 			const checkbutton = document.getElementById('nextLevel');
 			party.confetti(checkbutton);
 			blockButtons();
-		} else { 
+		} else {
 			isFailed = true;
-			console.log(`isFailed value ${isFailed}`)
-			setTimeout(() => { isFailed = false }, 1000);
+			console.log(`isFailed value ${isFailed}`);
+			setTimeout(() => {
+				isFailed = false;
+			}, 1000);
 		}
 	}
 
@@ -165,9 +166,11 @@
 </script>
 
 <main class="container is-fluid has-background-white">
-	<div class="column is-size-6-mobile is-size-5-tablet is-size-5-desktop px-0"><slot name="text" /></div>
+	<div class="column is-size-6-mobile is-size-5-tablet is-size-5-desktop px-0">
+		<slot name="text" />
+	</div>
 
-	<div class="code column px-0 py-0" class:failure={ isFailed }>
+	<div class="code column px-0 py-0" class:failure={isFailed}>
 		<pre>
 			{#each gaps as i}
 				{#if i.type}
@@ -183,13 +186,17 @@
 
 	<div class="column field has-addons px-0">
 		<p class="control">
-			<button class="button is-danger is-size-5-mobile is-size-5-tablet is-size-5-desktop" disabled={positionToFill === 0} on:click={clear}
-				>{@html icons['reset']}</button
+			<button
+				class="button is-danger is-size-5-mobile is-size-5-tablet is-size-5-desktop"
+				disabled={positionToFill === 0}
+				on:click={clear}>{@html icons['reset']}</button
 			>
 		</p>
 		<p class="control">
-			<button class="button is-warning is-size-5-mobile is-size-5-tablet is-size-5-desktop" disabled={positionToFill === 0} on:click={stepUndo}
-				>{@html icons['undo']}</button
+			<button
+				class="button is-warning is-size-5-mobile is-size-5-tablet is-size-5-desktop"
+				disabled={positionToFill === 0}
+				on:click={stepUndo}>{@html icons['undo']}</button
 			>
 		</p>
 		<button
@@ -197,7 +204,7 @@
 			class="button marginLeft is-link is-active is-size-5-mobile is-size-5-tablet is-size-5-desktop"
 			class:show={isSolved}
 			disabled={positionToFill < slicedGaps.length}
-			on:click={checkSolution}>{@html icons['check']}</button
+			on:click={checkSolution}>{@html icons['tick']}</button
 		>
 
 		<div id="nextLevel" class="marginLeft" class:show={!isSolved}>
@@ -213,24 +220,45 @@
 </main>
 
 <style>
-
 	.failure {
 		animation: shake 0.5s;
 		animation-iteration-count: 1;
 	}
 
 	@keyframes shake {
-		0% { transform: translate(1px, 1px) rotate(0deg); }
-		10% { transform: translate(-1px, -2px) rotate(-1deg); }
-		20% { transform: translate(-3px, 0px) rotate(1deg); }
-		30% { transform: translate(3px, 2px) rotate(0deg); }
-		40% { transform: translate(1px, -1px) rotate(1deg); }
-		50% { transform: translate(-1px, 2px) rotate(-1deg); }
-		60% { transform: translate(-3px, 1px) rotate(0deg); }
-		70% { transform: translate(3px, 1px) rotate(-1deg); }
-		80% { transform: translate(-1px, -1px) rotate(1deg); }
-		90% { transform: translate(1px, 2px) rotate(0deg); }
-		100% { transform: translate(1px, -2px) rotate(-1deg); }
+		0% {
+			transform: translate(1px, 1px) rotate(0deg);
+		}
+		10% {
+			transform: translate(-1px, -2px) rotate(-1deg);
+		}
+		20% {
+			transform: translate(-3px, 0px) rotate(1deg);
+		}
+		30% {
+			transform: translate(3px, 2px) rotate(0deg);
+		}
+		40% {
+			transform: translate(1px, -1px) rotate(1deg);
+		}
+		50% {
+			transform: translate(-1px, 2px) rotate(-1deg);
+		}
+		60% {
+			transform: translate(-3px, 1px) rotate(0deg);
+		}
+		70% {
+			transform: translate(3px, 1px) rotate(-1deg);
+		}
+		80% {
+			transform: translate(-1px, -1px) rotate(1deg);
+		}
+		90% {
+			transform: translate(1px, 2px) rotate(0deg);
+		}
+		100% {
+			transform: translate(1px, -2px) rotate(-1deg);
+		}
 	}
 
 	.marginLeft {
