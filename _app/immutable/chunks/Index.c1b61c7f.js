@@ -1,1 +1,0 @@
-import{s as i,l as n,m as c,i as o,w as e,d as p}from"./scheduler.7f939d22.js";import{S as l,i as m}from"./index.b344778f.js";function d(s){let t;return{c(){t=n("Descripción para Javascript")},l(a){t=c(a,"Descripción para Javascript")},m(a,r){o(a,t,r)},p:e,i:e,o:e,d(a){a&&p(t)}}}class x extends l{constructor(t){super(),m(this,t,null,d,i,{})}}export{x as default};

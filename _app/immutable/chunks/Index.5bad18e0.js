@@ -1,0 +1,7 @@
+import{s as n,f as r,g as l,v as c,j as d,i as m,D as a,d as u}from"./scheduler.278578d3.js";import{S as v,i as p}from"./index.19cc91ee.js";function b(i){let e,t=`<div class="container is-fluid"><div class="block is-size-5-mobile is-size-5-tablet is-size-5-desktop"><strong>¿Qué es Javascript?</strong> Es ese motor que le da vida a un esqueleto 💀, es esa magia ✨
+			que hace que se muevan las flores 🌺 al amanecer,
+			<em>un dolor de cabeza y una fuente infinita de memes</em>. Aparte de todo eso, es un
+			<b>lenguaje de programación</b> (ojo, no confundir con Java) que sirve, entre otras cosas, para
+			desarrollar páginas web (tanto en front como en back), animar elementos y crear más frameworks
+			para web.</div> <div class="block is-size-5-mobile is-size-5-tablet is-size-5-desktop">A lo largo de estos niveles veremos algunos conceptos básicos de desarrollo y programación
+			(con <strong>Javascript</strong>) hasta conceptos medianamente complejos.</div> <div class="block is-size-5-mobile is-size-5-tablet is-size-5-desktop"><b>¿Empezamos?</b> Dale un vistazo a la <em>lista de niveles</em> y haz clic en <code>0</code></div></div>`;return{c(){e=r("main"),e.innerHTML=t,this.h()},l(s){e=l(s,"MAIN",{class:!0,"data-svelte-h":!0}),c(e)!=="svelte-1nz50j8"&&(e.innerHTML=t),this.h()},h(){d(e,"class","container is-max-widescreen")},m(s,o){m(s,e,o)},p:a,i:a,o:a,d(s){s&&u(e)}}}class z extends v{constructor(e){super(),p(this,e,null,b,n,{})}}export{z as default};
