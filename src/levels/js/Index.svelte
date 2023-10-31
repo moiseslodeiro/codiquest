@@ -19,7 +19,7 @@
 		</div>
 
 		<div class="block is-size-5-mobile is-size-5-tablet is-size-5-desktop">
-			<b>¿Empezamos?</b> Dale un vistazo a la <em>lista de niveles</em> y haz clic en <code>0</code>
+			<b>¿Empezamos?</b> Dale un vistazo a la <em>lista de niveles</em> y haz click en <code>0</code>
 		</div>
 	</div>
 </main>

@@ -59,7 +59,7 @@
 
 	<h1 class="is-size-4 has-text-weight-semibold px-1">Librerías y recursos</h1>
 
-	<p class="buttons">
+	<p class="buttons is-size-5-mobile is-size-5-tablet is-size-5-desktop mt-3">
 		<button class="button">
 			<span class="icon">
 				<svg width="512" height="512" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
