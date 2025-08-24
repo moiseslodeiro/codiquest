@@ -76,7 +76,12 @@ jobs:
           fi
 
       - name: Set BASE_PATH
-        run: echo "BASE_PATH=/${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
+        run: |
+          if [ -f "static/CNAME" ]; then
+            echo "BASE_PATH=" >> $GITHUB_ENV
+          else
+            echo "BASE_PATH=/${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
+          fi
 
       - name: Build project
         run: npm run build
