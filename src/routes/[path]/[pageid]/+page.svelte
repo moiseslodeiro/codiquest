@@ -116,10 +116,9 @@
     <NextLevelButton isSolved="true" />
   {/if}
 {:catch error}
-  <Error title="Error cargando módulo" message={error.message} />
+  <Error icon="codi/glitch" title="Error cargando módulo" message={error.message} />
   <Alert
     type="info"
-    icon="codi/glitch"
     message="Tip: ¿Has comprobado que exista la página a cargar en el levels y en la carpeta?"
   />
 {/await}
