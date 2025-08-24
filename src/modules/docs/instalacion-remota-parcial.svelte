@@ -18,6 +18,7 @@
 </ol>
 <p>Esta opción, aunque pueda parecer más óptima, puede tener algunos inconvenientes, como que no sería posible editar (en primera instancia) el contenido de los componentes o el de los módulos (ficheros <code>.js</code>) a tu antojo.</p>
 <h2>Pasos</h2>
+<h3>Opción A - Do it yourself</h3>
 <ul>
 <li>Crea tu propio repositorio en GitHub.</li>
 <li>Crea una carpeta <code>static</code>.</li>
@@ -132,7 +133,11 @@ jobs:
           publish_dir: ./codiquest/build
           publish_branch: gh-pages
           force_orphan: true
-</File><p>Solo ten en cuenta poner:</p>
+</File><h3>Opción B - La fácil</h3>
+<p>Hay un repositorio creado a modo de demo para este mismo propósido. Sólo debes clonarlo y empezar a jugar 🫶</p>
+<p><a href="https://github.com/moiseslodeiro/quests/tree/partial-quest" class="link link-primary github" target="_blank" rel="noopener noreferrer">https://github.com/moiseslodeiro/quests/tree/partial-quest</a></p>
+<h2>Consideraciones</h2>
+<p>Sólo ten en cuenta poner:</p>
 <ul>
 <li>Los recursos (imágenes, etc.) en la carpeta <strong>static</strong>.</li>
 <li>Módulos y cuestionarios, siguiendo el patrón de <code>*.module.md</code> y <code>*.question.md</code> en <code>src/raw/</code>.<ul>

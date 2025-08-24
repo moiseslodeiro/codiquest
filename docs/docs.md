@@ -596,6 +596,8 @@ Esta opción, aunque pueda parecer más óptima, puede tener algunos inconvenien
 
 ## Pasos
 
+### Opción A - Do it yourself
+
 - Crea tu propio repositorio en GitHub.
 - Crea una carpeta `static`.
 - Crea una carpeta `src`.
@@ -709,7 +711,15 @@ jobs:
           force_orphan: true
 ````
 
-Solo ten en cuenta poner:
+### Opción B - La fácil
+
+Hay un repositorio creado a modo de demo para este mismo propósido. Sólo debes clonarlo y empezar a jugar 🫶
+
+https://github.com/moiseslodeiro/quests/tree/partial-quest
+
+## Consideraciones
+
+Sólo ten en cuenta poner:
 
 - Los recursos (imágenes, etc.) en la carpeta **static**.
 - Módulos y cuestionarios, siguiendo el patrón de `*.module.md` y `*.question.md` en `src/raw/`.
