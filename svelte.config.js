@@ -6,7 +6,7 @@ import fs from 'fs';
 import { glob } from 'glob';
 
 // Configuration
-const basePath = process.env.NODE_ENV === 'production' ? '/codiquest' : '';
+const basePath = process.env.BASE_PATH || '';
 console.log(`[i] NODE_ENV ${process.env.NODE_ENV}`);
 
 // Do no touch :-)
