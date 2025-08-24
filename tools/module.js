@@ -8,6 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const args = process.argv.slice(2);
+console.log(process.argv)
 
 if (args.length === 0) {
   console.log(`
@@ -32,6 +33,7 @@ if (!fs.existsSync(fullPath)) {
   process.exit(1);
 }
 
+// Functions
 function parseBrowserBlocks(content) {
   return content.replace(
     /````[ \t]*Browser[^\n]*\n([\s\S]*?)````/g,
@@ -56,9 +58,6 @@ function maskHashesInFileBlocks(content) {
     }
   );
 }
-
-let markdown = fs.readFileSync(fullPath, 'utf-8');
-markdown = maskHashesInFileBlocks(markdown);
 
 function slugify(text, maxLength = 50) {
   return text
@@ -90,7 +89,6 @@ function parseImagesToModal(content) {
     return `<ModalImage src="${src}" alignment="${align}" width="${size}" alt="${alt}" modal="${size !== ''}" />`;
   });
 }
-
 
 function isTestBlock(content) {
   let insideCodeBlock = false;
@@ -172,6 +170,61 @@ ${after}
 `.trim();
 }
 
+function extractResourcesSection(markdown) {
+  const lines = markdown.split('\n');
+  const resources = [];
+  let insideResources = false;
+
+  for (let line of lines) {
+    if (/^##\s+(Recursos|Resources)/i.test(line)) {
+      insideResources = true;
+      continue;
+    }
+
+    if (insideResources) {
+      if (/^#{1,6}\s+/.test(line)) break;
+      const match = line.match(/^- \[(.+?)\]\((.+?)\)/);
+      if (match) {
+        resources.push({
+          title: match[1],
+          url: match[2]
+        });
+      }
+    }
+  }
+
+  return resources;
+}
+
+function removeResourcesSection(markdown) {
+  const lines = markdown.split('\n');
+  const newLines = [];
+  let insideResources = false;
+
+  for (let line of lines) {
+    if (/^##\s+(Recursos|Resources)/i.test(line)) {
+      insideResources = true;
+      continue;
+    }
+
+    if (insideResources) {
+      if (/^#{1,6}\s+/.test(line)) {
+        insideResources = false;
+        newLines.push(line);
+      }
+      continue;
+    }
+
+    newLines.push(line);
+  }
+
+  return newLines.join('\n');
+}
+
+// Defs
+let markdown = fs.readFileSync(fullPath, 'utf-8');
+markdown = maskHashesInFileBlocks(markdown);
+
 const renderer = new marked.Renderer();
 
 renderer.code = (code, language = '') => {
@@ -217,11 +270,8 @@ renderer.link = (href, title, text) => {
       .replace(/"/g, '&quot;');
 
   const safeHref = ((href.startsWith('/')) ? '{base}' : '') + escapeHtml(href);
-
-
   const safeTitle = title ? ` title="${escapeHtml(title)}"` : '';
   const safeText = escapeHtml(text);
-
   const url = new URL(href, 'https://codiquest.com'); // fallback url
   const hostname = url.hostname;
 
@@ -310,56 +360,7 @@ marked.use({
   ]
 });
 
-function extractResourcesSection(markdown) {
-  const lines = markdown.split('\n');
-  const resources = [];
-  let insideResources = false;
 
-  for (let line of lines) {
-    if (/^##\s+(Recursos|Resources)/i.test(line)) {
-      insideResources = true;
-      continue;
-    }
-
-    if (insideResources) {
-      if (/^#{1,6}\s+/.test(line)) break;
-      const match = line.match(/^- \[(.+?)\]\((.+?)\)/);
-      if (match) {
-        resources.push({
-          title: match[1],
-          url: match[2]
-        });
-      }
-    }
-  }
-
-  return resources;
-}
-
-function removeResourcesSection(markdown) {
-  const lines = markdown.split('\n');
-  const newLines = [];
-  let insideResources = false;
-
-  for (let line of lines) {
-    if (/^##\s+(Recursos|Resources)/i.test(line)) {
-      insideResources = true;
-      continue;
-    }
-
-    if (insideResources) {
-      if (/^#{1,6}\s+/.test(line)) {
-        insideResources = false;
-        newLines.push(line);
-      }
-      continue;
-    }
-
-    newLines.push(line);
-  }
-
-  return newLines.join('\n');
-}
 
 const lines = markdown.split('\n');
 const sections = [];
@@ -562,7 +563,7 @@ if (!fs.existsSync(mainModulePath)) {
 export const moduleInfo = {
   title: '${moduleName[0].toUpperCase() + moduleName.slice(1)}',
   shortDescription: 'Welcome to my ${moduleName} module!',
-  public: ${args[2] === 'public' ? 'true' : 'false'},
+  public: ${(args[2] === 'public' || process.env.PUBLIC === 'true') ? 'true' : 'false'},
   linksTo: '${moduleName}',
   image: 'codibg.webp',
   tags: ["${moduleName}"],
