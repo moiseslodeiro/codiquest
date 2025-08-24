@@ -12,7 +12,7 @@
 2. Instala las dependencias con `npm install` (se recomienda Node 22 o superior)
 3. Ejecuta `npm run dev` para lanzar el entorno de desarrollo y abre la web que por defecto estará en `http://localhost:5173/`
 
-Consulta la guía de [instalación en local](docs/docs.md) para más detalles y el apartado `Guías de uso` de esta misma página
+Consulta la guía de [instalación en local](https://demo.codiquest.com/docs/instalacion-en-local) para más detalles y el apartado `Guías de uso` de esta misma página
 
 ## 👋 Demo
 
