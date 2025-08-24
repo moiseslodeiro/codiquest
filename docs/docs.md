@@ -613,6 +613,23 @@ on:
     paths:
       - 'src/raw/**'
   workflow_dispatch:
+    inputs:
+      debug:
+        description: 'Enable debug mode'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+        required: false
+        default: 'false'
+      delete_docs:
+        description: 'Delete docs module'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+        required: false
+        default: 'true'
 
 permissions:
   contents: write
@@ -636,10 +653,22 @@ jobs:
         with:
           node-version: '22'
 
+      - name: List local resources
+        if: ${{ github.event.inputs.debug == 'true' }}
+        run: |
+          ls -lR src
+          ls -lR static
+
       - name: Copy resources to Codiquest
         run: |
           cp -r src/* codiquest/src/
           cp -r static/* codiquest/static/
+
+      - name: Check resources on Codiquest
+        if: ${{ github.event.inputs.debug == 'true' }}
+        run: |
+          ls -lR codiquest/src/raw/
+          ls -lR codiquest/static
 
       - name: Installing dependencies
         run: npm install
@@ -648,9 +677,23 @@ jobs:
       - name: Parsing modules
         run: npm run module:all
         working-directory: './codiquest'
+        env:
+          PUBLIC: 'true'
 
       - name: Parsing tests
         run: npm run convert:all
+        working-directory: './codiquest'
+
+      - name: Check modules before build
+        if: ${{ github.event.inputs.debug == 'true' }}
+        run: |
+          ls -lR ./codiquest/src/modules
+
+      - name: Clean docs module
+        if: ${{ github.event.inputs.delete_docs == 'true' }}
+        run: |
+          npm run clean:doc
+          rm -rf src/modules/docs.js
         working-directory: './codiquest'
 
       - name: Create build folder
@@ -661,7 +704,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          publish_dir: ./codiquest/build
           publish_branch: gh-pages
           force_orphan: true
 ````
@@ -670,10 +713,7 @@ Solo ten en cuenta poner:
 
 - Los recursos (imágenes, etc.) en la carpeta **static**.
 - Módulos y cuestionarios, siguiendo el patrón de `*.module.md` y `*.question.md` en `src/raw/`.
-  - Incluye todo aquello que quieras sobreescribir; por ejemplo, el fichero `routes/+layout.svelte`, etc.
-
-> [!NOTE]
-> No te voy a engañar: he creado el *workflow*, pero no lo he probado aún. Si lo haces y funciona, manda una estrellita ⭐; y si no, crea una *pull request* al repositorio con los cambios que hagan falta. UwU
+  - Incluye todo aquello que quieras sobreescribir; por ejemplo, el fichero `routes/+layout.svelte`, etc. respecto al [repositorio original](https://github.com/moiseslodeiro/codiquest)
 
 # ¿Algo más?
 
