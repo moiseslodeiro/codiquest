@@ -78,6 +78,7 @@ jobs:
       - name: Build project
         run: |
           echo "BASE_PATH=/${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
+          env
           npm run build
 
       - name: Deploy to gh-pages branch
