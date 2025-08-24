@@ -119,6 +119,7 @@
   <Error title="Error cargando módulo" message={error.message} />
   <Alert
     type="info"
+    icon="codi/glitch"
     message="Tip: ¿Has comprobado que exista la página a cargar en el levels y en la carpeta?"
   />
 {/await}
