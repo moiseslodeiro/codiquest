@@ -49,7 +49,7 @@
 					</Card>
 				{/if}
 			{:catch error}
-				<Error icon="cody/bsod" title="Módulo no encontrado" message="500: {error}" type="error" />
+				<Error icon="codi/bsod" title="Módulo no encontrado" message="500: {error}" type="error" />
 			{/await}
 		{/each}
 	</div>
