@@ -7,4 +7,4 @@
 	}
 </script>
 
-<img src="{base}/img/cody/uwu.webp" alt="No deberías ver esto" />
+<img src="{base}/img/codi/uwu.webp" alt="No deberías ver esto" />
