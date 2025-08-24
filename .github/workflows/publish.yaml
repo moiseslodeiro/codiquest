@@ -1,0 +1,87 @@
+name: Process Module Files and Publish
+
+on:
+  push:
+    branches:
+      - publish
+    paths:
+      - 'src/raw/**/*.module.md'
+      - 'src/raw/**/*.questions.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  process-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v46
+        with:
+          separator: ','
+
+      - name: Process module files
+        if: github.event_name == 'workflow_dispatch' || contains(steps.changed-files.outputs.all_changed_files, '.module.md')
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "Processing all module files for manual trigger, skipping empty files."
+            find src/raw -name "*.module.md" -size +0 -print0 | xargs -0 -I {} node tools/module.js {}
+          else
+            for file in ${{ steps.changed-files.outputs.all_changed_files}}; do
+              if [[ "$file" == *".module.md" ]]; then
+                if [[ -s "$file" ]]; then
+                  echo "Processing module file: $file"
+                  node tools/module.js "$file"
+                else
+                  echo "Skipping empty module file: $file"
+                fi
+              fi
+            done
+          fi
+
+      - name: Process question files
+        if: github.event_name == 'workflow_dispatch' || contains(steps.changed-files.outputs.all_changed_files, '.questions.md')
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "Processing all question files for manual trigger, skipping empty files."
+            find src/raw -name "*.questions.md" -size +0 -print0 | xargs -0 -I {} node tools/convert.js {}
+          else
+            for file in ${{ steps.changed-files.outputs.all_changed_files}}; do
+              if [[ "$file" == *".questions.md" ]]; then
+                if [[ -s "$file" ]]; then
+                  echo "Processing question file: $file"
+                  node tools/convert.js "$file"
+                else
+                  echo "Skipping empty question file: $file"
+                fi
+              fi
+            done
+          fi
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          publish_branch: gh-pages
+          force_orphan: true

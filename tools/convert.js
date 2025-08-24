@@ -1,0 +1,155 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+function parseInputFile(inputFilePath) {
+  const fileContent = fs.readFileSync(inputFilePath, 'utf-8');
+  const questions = [];
+
+  const questionSections = fileContent.split('---\n').filter((section) => section.trim() !== '');
+
+  questionSections.forEach((section, index) => {
+    const lines = section.split('\n').filter((line) => line.trim() !== '');
+
+    if (index === 0) {
+      let _moduleInfo = {
+        title: lines[0].trim(),
+        shortDescription: '',
+        image: '',
+        icon: 'list.svg',
+        public: false,
+        linksTo: ''
+      };
+      questions.push({ info: JSON.stringify(_moduleInfo), icon: '', levels: [] });
+    } else {
+      const questionText = lines[0].trim();
+
+      const codeBlockMatch = section.match(/```(\w+)\n([\s\S]*?)```/);
+      if (codeBlockMatch) {
+        const codeLang = codeBlockMatch[1].trim();
+        const codeContent = codeBlockMatch[2].trim();
+
+        questions[questions.length - 1].levels.push({
+          type: 'FillCode',
+          content: {
+            title: 'Descripción',
+            text: questionText.startsWith('```') ? '' : questionText,
+            codeBlock: codeContent,
+            codeLang,
+            shuffle: true,
+          }
+        });
+      } else {
+        const answers = [];
+        for (let i = 1; i < lines.length; i++) {
+          const answerMatch = lines[i].match(/\[(x|\s|)\]\s*(.*)/);
+          if (answerMatch) {
+            const correct = answerMatch[1] === 'x';
+            const answerText = answerMatch[2].trim();
+            answers.push({ text: answerText, correct });
+          }
+        }
+
+        questions[questions.length - 1].levels.push({
+          type: 'Choose',
+          content: {
+            checkboxes: true,
+            shuffle: true,
+            text: questionText,
+            answers
+          }
+        });
+      }
+    }
+  });
+
+  return questions;
+}
+
+function generateOutputFile(outputFilePath, questions) {
+  let outputContent =
+    `// | •⩊• | < codiquest importer!
+import Choose from '$lib/templates/Choose.svelte';
+import FillCode from '$lib/templates/FillCode.svelte';
+
+export const moduleInfo = '${questions[0].info
+      }';\nexport const levels = [{}];\nexport const questions = ${JSON.stringify(
+        questions[0].levels,
+        null,
+        2
+      )
+        .replaceAll(/"type": "Choose"/g, 'type: Choose')
+        .replaceAll(/"type": "FillCode"/g, 'type: FillCode')
+        .replaceAll(/"text":/g, 'text:')
+        .replaceAll(/"title":/g, 'title:')
+        .replaceAll(/"codeBlock":/g, 'codeBlock:')
+        .replaceAll(/"codeLang":/g, 'codeLang:')
+        .replaceAll(/"correct":/g, 'correct:')};\n`
+      .replace(/moduleInfo = '{(.*?)}';/, 'moduleInfo = { $1 };')
+      .replaceAll('"answers":', 'answers:')
+      .replaceAll('"checkboxes":', 'checkboxes:')
+      .replaceAll('"shuffle":', 'shuffle:')
+      .replaceAll('"content":', 'content:');
+
+  fs.writeFileSync(outputFilePath, outputContent, 'utf-8');
+}
+
+if (process.argv.length <= 2 || process.argv.length > 4) {
+  console.error('Use: node convert.js <input.md>');
+  process.exit(1);
+}
+
+const inputFilePath = process.argv[2];
+const args = process.argv.slice(2);
+const inputPath = args[0];
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const fullPath = path.join(__dirname, '..', inputPath);
+
+const moduleName = args[1] || path.basename(fullPath, '.md');
+const moduleBaseDir = path.join(__dirname, '..', 'src', 'modules');
+const moduleFolder = path.join(moduleBaseDir, moduleName);
+fs.mkdirSync(moduleFolder, { recursive: true });
+
+const parsedQuestions = parseInputFile(inputFilePath);
+generateOutputFile(moduleFolder + '/questions.auto.js', parsedQuestions);
+
+const mainModulePath = path.join(moduleBaseDir, `${moduleName}.js`);
+if (!fs.existsSync(mainModulePath)) {
+  const moduleJsContent = `
+// Created using Codiquest Markdown Parser. You can edit this file safely (it won't be overwritten by the parser)
+// Drink water, stay active and keep coding! | •⩊• |
+
+export const moduleInfo = {
+  title: '${moduleName[0].toUpperCase() + moduleName.slice(1)}',
+  shortDescription: 'Welcome to my ${moduleName} module!',
+  public: ${args[2] === 'public' ? 'true' : 'false'},
+  linksTo: '${moduleName}',
+  image: 'codibg.webp',
+  tags: ["${moduleName}"],
+  isNew: true
+};
+
+import { levels } from './${moduleName}/levels.auto.js';
+import { questions } from './${moduleName}/questions.auto.js';
+
+export { levels, questions };
+
+// Uncomment the following lines to automatically add all questions to the levels array
+// questions.forEach((_, i) => levels.push({ question: i, title: \`Pregunta \${i + 1}\` }));`;
+
+  fs.writeFileSync(mainModulePath, moduleJsContent, 'utf-8');
+}
+
+const levelsPath = path.join(moduleFolder, 'levels.auto.js');
+const levelsContent =
+  `// This file has been automatically generated by Codiquest parser. Do not edit it by hand or your changes will be lost\n\n` +
+  `export const levels = ${JSON.stringify([], null, 2)};\n`;
+
+if (!fs.existsSync(levelsPath)) {
+  fs.writeFileSync(levelsPath, levelsContent, 'utf-8');
+} else {
+  console.info(`[+] File ` + levelsPath + ` already exists, skipping creation. If you want to recreate it, delete the file first or use convert.js script to parse the module questions`);
+}

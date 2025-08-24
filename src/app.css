@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind typography;
+
+:root {
+    --rounded-box: 0.2rem;
+}
+
+a.link.external::after,
+a.link.youtube::after,
+a.link.medium::after,
+a.link.devto::after,
+a.link.wikipedia::after {
+  content: '';
+  display: inline-block;
+  margin-left: 0.25rem;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.7;
+}
+
+a.link.external::after {
+  background-image: url('/icons/external-link.svg');
+}
+
+a.link.internal::after {
+  background-image: url('/icons/external-link.svg');
+}
+
+a.link.github::after {
+  background-image: url('/icons/github.svg');
+}
+
+a.link.manz::after {
+  background-image: url('/icons/manz.svg');
+}
+
+a.link.yt::after {
+  background-image: url('/icons/youtube.svg');
+}
+
+a.link.medium::after {
+  background-image: url('/icons/medium.svg');
+}
+
+a.link.devto::after {
+  background-image: url('/icons/devto.svg');
+}
+
+a.link.wikipedia::after {
+  background-image: url('/icons/wikipedia.svg');
+}
+
+a.link::after {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+  margin-left: 0.25rem;
+}
