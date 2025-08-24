@@ -78,7 +78,7 @@ jobs:
       - name: Build project
         run: npm run build
         env:
-          NODE_ENV: production
+          BASE_PATH: ${{ github.repository }}
 
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
