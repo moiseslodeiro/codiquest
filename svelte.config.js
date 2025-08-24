@@ -6,7 +6,6 @@ import fs from 'fs';
 import { glob } from 'glob';
 
 // Configuration
-const basePath = process.env.NODE_ENV === 'production' ? '/codiquest' : '';
 console.log(`[i] NODE_ENV ${process.env.NODE_ENV}`);
 
 // Do no touch :-)
@@ -15,9 +14,6 @@ const config = {
     adapter: adapter({ strict: false }),
     prerender: {
       entries: ['/']
-    },
-    paths: {
-      base: basePath
     }
   },
   preprocess: preprocessor()
