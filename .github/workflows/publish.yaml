@@ -76,9 +76,9 @@ jobs:
           fi
 
       - name: Build project
-        run: npm run build
-        env:
-          BASE_PATH: /${{ github.repository }}
+        run: |
+          echo "BASE_PATH=/${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
+          npm run build
 
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
