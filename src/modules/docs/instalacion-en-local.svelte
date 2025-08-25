@@ -91,7 +91,7 @@ codi@local:~/Workspaces/codiquest$ npm run dev
 
 (...)
 </Code><p>Finalmente, si accedemos a la URL que nos indica (por defecto, <code>http://localhost:5173</code>), deberíamos ver algo así:</p>
-<ModalImage src="img/install/03.png" alignment="center" width="w-1/2" alt="Previsualización de la instalación de Codiquest" modal="true" />
+<ModalImage src="img/install/03.png" alignment="center" width="w-1/2" alt="Previsualización de la instalación de Codiquest" modal="false" />
 
 <h2>Compilando</h2>
 <p>Una de las características de Codiquest es que, realmente, todo se ejecuta en el <em>frontend</em> (es decir, en tu navegador), por lo que no hace falta disponer de un <em>backend</em> para almacenar la información, ya que esta es estática.</p>

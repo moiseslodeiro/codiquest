@@ -9,7 +9,7 @@
   import File from '$lib/components/File.svelte';
   import Browser from '$lib/components/Browser.svelte';
   import { base } from '$app/paths';
-</script><Page><ModalImage src="img/codi/wink.webp" alignment="left" width="" alt="Codi Teacher" modal="false" />
+</script><Page><ModalImage src="img/codi/wink.webp" alignment="left" width="w-1/5" alt="Codi Teacher" modal="false" />
 
 <p><strong>¡Wow!</strong> ¡Ese módulo pinta muy bien!</p>
 <p> Ahora, es el momento de dar un paso adelante y de echarle un vistazo a los <a href="{base}/components/" class="link link-primary internal">componentes</a> de Codiquest. Seguiremos con el ejemplo de <code>dummy</code>, pero explicando de una forma práctica cómo sacarle partido a nuestro módulo.</p>

@@ -118,12 +118,15 @@ a.link::after &#123;
 <p>Para editar la cabecera y el pie de página, debemos ir al fichero <code>+layout.svelte</code>, que está en <code>src/routes/+layout.svelte</code>. Dentro de este fichero, edita solo las siguientes líneas (salvo que sepas lo que haces, claro 😅).</p>
 <h3>Cabecera</h3>
 <p>En la cabecera (parte superior de la página), podemos encontrar un pequeño logotipo de Codiquest, así como un nombre descriptivo y el enlace a la sección &quot;Acerca de&quot;. Puedes editarlo libremente.</p>
-<File icon="html" route="src,routes" name="app.html" codeLang="html">
+<File icon="html" route="src,routes" name="+layout.svelte" codeLang="html">
 &lt;script&gt;
   import &#123; base &#125; from '$app/paths';
   import &#123; fly &#125; from 'svelte/transition';
-  import '../app.css'; // Tailwind CSS
-  export let data; // Url management, must be exported
+  import '../app.css';
+  export let data;
+
+  // Partials
+  import HeaderMessage from '$lib/partials/HeaderMessage.svelte';
 &lt;/script&gt;
 
 &lt;nav class="navbar bg-base-100" data-theme="synthwave"&gt;
@@ -132,10 +135,12 @@ a.link::after &#123;
       &lt;a class="btn btn-ghost text-xl" href="{base}/"&gt;
         &lt;img src="{base}/favicon.png" alt="¡Hola! Soy Codi :-)" width="32" height="32" /&gt;
         &lt;span class="max-md:hidden"&gt;CodiQuest&lt;/span&gt;
+        &lt;div class="badge badge-secondary"&gt;Alpha&lt;/div&gt;
       &lt;/a&gt;
     &lt;/div&gt;
     &lt;div class="flex-none z-10"&gt;
       &lt;ul class="menu menu-horizontal px-1"&gt;
+        &lt;li&gt;&lt;a href="{base}/docs"&gt;Documentación&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href="{base}/about"&gt;Acerca de&lt;/a&gt;&lt;/li&gt;
       &lt;/ul&gt;
     &lt;/div&gt;
@@ -178,22 +183,32 @@ out:fly=&#123;&#123; duration: 300 &#125;&#125;
 <p><Message icon="codi" iconSize="10" label="Plsss" colorClass="bg-stone-50 border-pink-800 text-lime-950">Por favor, no elimines ni modifiques este pie de página. Ayuda a dar visibilidad y a apoyar el proyecto CodiQuest. 🫶</Message></p>
 <File icon="html" route="src" name="app.html" codeLang="html">
 &lt;footer class="footer items-center p-4 bg-neutral text-neutral-content sticky top-[100vh] mt-5"&gt;
-  &lt;aside class="items-center grid-flow-col"&gt;
-    &lt;img src="{base}/img/codi/favicon.webp" alt="It's a me! Codi!" class="h-4 w-4" /&gt;
-    &lt;p&gt;Basado en &lt;a href="https://github.com/moiseslodeiro/codiquest" target="_blank"&gt;CodiQuest&lt;/a&gt; - &lt;a href="{base}/LICENSE" target="_blank"&gt;Licencia MIT&lt;/a&gt;&lt;/p&gt;
-  &lt;/aside&gt;
-  &lt;nav class="grid-flow-col float-right gap-4 md:justify-self-end"&gt;
-    &lt;a target="_blank" aria-label="Visítanos en X!" href="https://twitter.com/codiquest"
-      &gt;&lt;svg alt="Twitter/X" class="h-4 w-4" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"&gt;
+  &lt;div class="flex items-center justify-between w-full container md:mx-auto max-w-5xl"&gt;
+    &lt;div class="flex items-center"&gt;
+      &lt;img src="/img/codi/favicon.webp" alt="It's a me! Codi!" class="h-4 w-4" /&gt;
+      &lt;p class="ml-2"&gt;
+        Basado en &lt;a
+          href="https://github.com/moiseslodeiro/codiquest"
+          target="_blank"
+          data-svelte-h="svelte-1nqafas"&gt;CodiQuest&lt;/a
+        &gt;
+        - &lt;a href="/LICENSE" target="_blank" data-svelte-h="svelte-7quxjq"&gt;Licencia MIT&lt;/a&gt;
+      &lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;a target="_blank" aria-label="Visítanos en X!" href="https://twitter.com/codiquest"&gt;
+      &lt;svg alt="Twitter/X" class="h-4 w-4" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"&gt;
         &lt;path
           fill="currentColor"
           d="M9.294 6.928L14.357 1h-1.2L8.762 6.147L5.25 1H1.2l5.31 7.784L1.2 15h1.2l4.642-5.436L10.751 15h4.05zM7.651 8.852l-.538-.775L2.832 1.91h1.843l3.454 4.977l.538.775l4.491 6.47h-1.843z"
-        /&gt;
+        &gt;&lt;/path&gt;
       &lt;/svg&gt;
     &lt;/a&gt;
-  &lt;/nav&gt;
+  &lt;/div&gt;
 &lt;/footer&gt;
-</File><h2>Quitando el módulo Documentación</h2>
+</File><h2>Partials</h2>
+<p>Existe una carpeta dentro de <code>src/lib/</code> llamada <code>partials</code> con los componentes parciales (normalmente estáticos) que representa algún bloque de texto. En este caso podemos editar el contenido para, por ejemplo, editar el contenido de la cabecera en la página principal (<code>MainMessage.svelte</code>), poner un mensaje debajo de la cabecera (<code>HeaderMessage.svelte</code>), etc.</p>
+<h2>Quitando el módulo Documentación</h2>
 <p>Ahora mismo, al clonar el repositorio, por defecto, aparecerá la sección <code>Documentación</code> en nuestra página.</p>
 <p>Quitarla es muy sencillo, basta con:</p>
 <ol>

@@ -86,7 +86,8 @@ function parseImagesToModal(content) {
     const params = new URLSearchParams(query);
     const size = params.get("s") || params.get("size") || "";
     const align = params.get("align") || "";
-    return `<ModalImage src="${src}" alignment="${align}" width="${size}" alt="${alt}" modal="${size !== ''}" />`;
+    const modal = params.get("modal") || "false";
+    return `<ModalImage src="${src}" alignment="${align}" width="${size}" alt="${alt}" modal="${modal}" />`;
   });
 }
 

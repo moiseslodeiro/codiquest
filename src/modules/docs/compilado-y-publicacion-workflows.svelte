@@ -31,7 +31,7 @@
 <h2>Ejecución del workflow</h2>
 <h3>De forma manual</h3>
 <p>Cuando estés haciendo cambios y subas los <code>commits</code> a tu rama:</p>
-<ModalImage src="img/install/09.png" alignment="" width="5/6" alt="Localización pestaña de Actions" modal="true" />
+<ModalImage src="img/install/09.png" alignment="" width="5/6" alt="Localización pestaña de Actions" modal="false" />
 
 <hr>
 <ol>
