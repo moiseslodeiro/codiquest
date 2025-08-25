@@ -22,7 +22,7 @@
 ];</script><Page {resources}><p>¡Nos adentramos en la recta final! 🥳 Vamos a ver qué consideraciones debemos tener para poder publicar nuestra página en GitHub Pages.</p>
 <h2>Habilitando Github Pages</h2>
 <p>En primer lugar, hay que acudir al apartado <code>Settings &gt; Pages</code> <strong>dentro de tu repositorio</strong> y, una vez dentro, seleccionar desde qué rama quieres hacer el despliegue del contenido estático creado en la carpeta <code>build</code>. Recuerda que, por defecto, la rama que hemos creado ha sido <code>gh-pages</code>, aunque puedes seleccionar cualquiera.</p>
-<ModalImage src="img/install/10.png" alignment="" width="5/6" alt="Localización pestaña de Actions" modal="true" />
+<ModalImage src="img/install/10.png" alignment="" width="5/6" alt="Localización pestaña de Actions" modal="false" />
 
 <p>Cuando selecciones la rama destino, podrás darle al botón <code>Save</code> y tu página quedará publicada en <code>https://tunombredeusuario.github.io/turepositorio</code>. 🤟. ¿Y esto es todo? En parte, sí. Pero sigamos con las consideraciones y la personalización del dominio, si es el caso. 🤗</p>
 <h2>Consideraciones</h2>

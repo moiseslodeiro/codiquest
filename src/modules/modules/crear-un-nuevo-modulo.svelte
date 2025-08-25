@@ -29,7 +29,7 @@ export const questions = []
 </Code><blockquote>
 <Message type="TIP">Puedes cambiar la descripción y el título si quieres. Para el ejemplo, hemos quitado el módulo de Documentación.</Message></blockquote>
 <p>Aunque sea básico, si ya tenías en ejecución tu entorno de desarrollo y pruebas con <code>npm run dev</code>, deberías ver tu nuevo módulo en la pantalla principal, e incluso podrás entrar en él, aunque lo encontrarás vacío. ¿No es maravilloso?</p>
-<ModalImage src="img/install/01.png" alignment="center" width="w-2/3" alt="Visualización de nuestro módulo dummy en Codiquest" modal="true" />
+<ModalImage src="img/install/01.png" alignment="center" width="w-2/3" alt="Visualización de nuestro módulo dummy en Codiquest" modal="false" />
 
 <hr>
 <h3>Valores de <code>moduleInfo</code></h3>

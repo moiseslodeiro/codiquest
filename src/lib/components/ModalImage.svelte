@@ -36,7 +36,7 @@
     on:click={openModal}
     aria-label="Abrir imagen ampliada"
     data-testid="image-button"
-    class="rounded mx-2 p-2 mb-4 border-2 bg-transparent cursor-pointer {width} {alignmentClass}"
+    class="rounded mx-2 p-2 mb-4 border-2 bg-transparent cursor-pointer w-full sm:{width} {alignmentClass}"
   >
     <img src={resolveSrc(src)} {alt} class="rounded w-full object-cover" loading="lazy" />
   </button>

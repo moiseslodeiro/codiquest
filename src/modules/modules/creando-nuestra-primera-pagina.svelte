@@ -31,7 +31,7 @@ export const levels = [
 </Code><p>Si recargamos y accedemos a nuestro módulo, podremos ver una breve descripción a modo de cabecera del módulo y, además, un Nivel 1 que, si entramos, veremos el texto &quot;Esta es mi primera página&quot;. ¡Genial! ¿No? Pero igual es un poco engorroso estar definiendo todo el contenido HTML dentro del fichero JavaScript en lugar de tenerlo modularizado. Pero ¡no te preocupes!, ahora veremos cómo mejorarlo.</p>
 <blockquote>
 <Message type="NOTE">Recuerda: La etiqueta `html` está pensada para *pequeños* mensajes (pequeñísimos) o por si no quieres disponer de un fichero `index.svelte` para la página principal por un motivo u otro.</Message></blockquote>
-<ModalImage src="img/install/02.png" alignment="center" width="w-1/3" alt="Visualización del contenido del módulo" modal="true" />
+<ModalImage src="img/install/02.png" alignment="center" width="w-1/3" alt="Visualización del contenido del módulo" modal="false" />
 
 <h3>Clave tipo <code>page</code></h3>
 <p>Dado que tener todo el contenido dentro del tipo <code>html</code> puede ser muy engorroso, hagamos uso del tipo <code>page</code> para poder referenciar páginas dentro de Codiquest. Para crear nuestra primera página de manera modular, vamos a crear una <strong>carpeta <code>dummy</code> dentro de <code>src/modules</code></strong>. El nombre de la carpeta <strong>debe</strong> coincidir con el del fichero de JavaScript (en este caso, <strong>dummy</strong>).</p>

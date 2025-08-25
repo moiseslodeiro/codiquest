@@ -29,7 +29,7 @@
   {/await}
 
   <div role="tablist" class="tabs tabs-bordered mt-5 mx-0">
-    <Tab checked="true" title="Contenido del módulo">
+    <Tab checked="true" title="Contenido">
       <table class="table table-auto table-zebra">
         <thead>
           <tr>
