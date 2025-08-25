@@ -6,7 +6,6 @@ import fs from 'fs';
 import { glob } from 'glob';
 
 // Configuration
-const basePath = process.env.BASE_PATH || '';
 console.log(`[i] NODE_ENV ${process.env.NODE_ENV}`);
 
 // Do no touch :-)
@@ -15,9 +14,6 @@ const config = {
     adapter: adapter({ strict: false }),
     prerender: {
       entries: ['/']
-    },
-    paths: {
-      base: basePath
     }
   },
   preprocess: preprocessor()
@@ -40,83 +36,113 @@ dirs.forEach((dir) => {
 
 // ------------------------------------------------------------------
 // Techs and levels
-const modules = await glob('src/modules/*.js');
-for (const module of modules) {
-  const moduleName = path.parse(module).name;
+
+// Find all .auto.js files
+const autoFiles = await glob('src/modules/**/*.auto.js', { ignore: 'node_modules/**' });
+
+// Group them by module directory
+const moduleData = {};
+for (const file of autoFiles) {
+  const relativePath = path.relative('src/modules', file);
+  const moduleName = relativePath.split(path.sep)[0];
+
+  if (!moduleData[moduleName]) {
+    moduleData[moduleName] = {};
+  }
+
+  if (file.endsWith('levels.auto.js')) {
+    moduleData[moduleName].levelsFile = file;
+  } else if (file.endsWith('questions.auto.js')) {
+    moduleData[moduleName].questionsFile = file;
+  }
+}
+
+// Process each module
+for (const moduleName in moduleData) {
   config.kit.prerender.entries.push('/' + moduleName);
   config.kit.prerender.entries.push('/' + moduleName + '/test');
   config.kit.prerender.entries.push('/' + moduleName + '/test/random');
 
-  try {
-    const data = fs.readFileSync('./src/modules/' + moduleName + '.js', {
-      encoding: 'utf8',
-      flag: 'r'
-    });
+  const { levelsFile, questionsFile } = moduleData[moduleName];
 
-    // Extraer levels
-    const levelsRegex = /export const levels = (\[.*?\]);/s;
-    const matchLevels = data.match(levelsRegex);
+  // Process levels
+  if (levelsFile) {
+    try {
+      const data = fs.readFileSync(levelsFile, { encoding: 'utf8', flag: 'r' });
+      const levelsRegex = /export const levels = (\[.*?\]);/s;
+      const matchLevels = data.match(levelsRegex);
 
-    if (matchLevels && matchLevels[1]) {
-      const fixedJson = matchLevels[1]
-        .replace(/type: (?:Choose|FillCode|Info)\s*,\n/g, '')
-        .replace(/component:\s*\w+,\n/g, '');
+      if (matchLevels && matchLevels[1]) {
+        const fixedJson = matchLevels[1]
+          .replace(/type: (?:Choose|FillCode|Info)\s*,\n/g, '')
+          .replace(/component:\s*\w+,\n/g, '');
 
-      let levelsArray;
-      try {
-        levelsArray = Function(`return ${fixedJson}`)();
-      } catch (err) {
-        console.error(`[!] Error parsing levels for ${moduleName}`, err);
-        config.kit.prerender.entries.push(`/${moduleName}/0`);
-        continue;
-      }
-
-      for (let i = 0; i < levelsArray.length; i++) {
-        config.kit.prerender.entries.push(`/${moduleName}/${i}`);
-      }
-
-      // Añadir subpages
-      levelsArray.forEach((level) => {
-        const { page, subpage, module: externalModule } = level;
-
-        if (page && subpage && externalModule) {
-          const entry = `/${externalModule}/${page}/${subpage}`;
-          config.kit.prerender.entries.push(entry);
-        } else if (page && subpage) {
-          const entry = `/${moduleName}/${page}/${subpage}`;
-          config.kit.prerender.entries.push(entry);
+        let levelsArray;
+        try {
+          levelsArray = Function(`return ${fixedJson}`)();
+        } catch (err) {
+          console.error(`[!] Error parsing levels for ${moduleName}`, err);
+          config.kit.prerender.entries.push(`/${moduleName}/0`);
+          continue;
         }
-      });
 
-    } else {
-      config.kit.prerender.entries.push('/' + moduleName + '/0');
-    }
-
-    // Extraer preguntas
-    const questionsRegex = /export const questions = (\[.*?\]);/s;
-    const matchQuestions = data.match(questionsRegex);
-    if (matchQuestions && matchQuestions[1]) {
-      const fixedQuestions = matchQuestions[1].replace(/type: (?:Choose|Fill|FillCode|Info)\s*,\n/g, '');
-      let questionsArray;
-      try {
-        questionsArray = Function(`return ${fixedQuestions}`)();
-        for (let i = 1; i <= questionsArray.length; i++) {
-          config.kit.prerender.entries.push(`/${moduleName}/test/random/${i}`);
+        for (let i = 0; i < levelsArray.length; i++) {
           config.kit.prerender.entries.push(`/${moduleName}/${i}`);
         }
-      } catch (err) {
-        console.error(`[!] Error parsing questions for ${moduleName}`, err);
-        config.kit.prerender.entries.push(`/${moduleName}/test/random/0`);
+
+        // Añadir subpages
+        levelsArray.forEach((level) => {
+          const { page, subpage, module: externalModule } = level;
+
+          if (page && subpage && externalModule) {
+            const entry = `/${externalModule}/${page}/${subpage}`;
+            config.kit.prerender.entries.push(entry);
+          } else if (page && subpage) {
+            const entry = `/${moduleName}/${page}/${subpage}`;
+            config.kit.prerender.entries.push(entry);
+          } else if (page) {
+            const entry = `/${moduleName}/${page}`;
+            config.kit.prerender.entries.push(entry);
+          }
+        });
+
+      } else {
+        config.kit.prerender.entries.push('/' + moduleName + '/0');
       }
-    } else {
+    } catch (error) {
+      config.kit.prerender.entries.push('/' + moduleName + '/0');
+    }
+  }
+
+  // Process questions
+  if (questionsFile) {
+    try {
+      const data = fs.readFileSync(questionsFile, { encoding: 'utf8', flag: 'r' });
+      const questionsRegex = /export const questions = (\[.*?\]);/s;
+      const matchQuestions = data.match(questionsRegex);
+      if (matchQuestions && matchQuestions[1]) {
+        const fixedQuestions = matchQuestions[1].replace(/type: (?:Choose|Fill|FillCode|Info)\s*,\n/g, '');
+        let questionsArray;
+        try {
+          questionsArray = Function(`return ${fixedQuestions}`)();
+          for (let i = 1; i <= questionsArray.length; i++) {
+            config.kit.prerender.entries.push(`/${moduleName}/test/random/${i}`);
+            config.kit.prerender.entries.push(`/${moduleName}/${i}`);
+          }
+        } catch (err) {
+          console.error(`[!] Error parsing questions for ${moduleName}`, err);
+          config.kit.prerender.entries.push(`/${moduleName}/test/random/0`);
+        }
+      } else {
+        config.kit.prerender.entries.push('/' + moduleName + '/test/random/0');
+      }
+    } catch (error) {
       config.kit.prerender.entries.push('/' + moduleName + '/test/random/0');
     }
-  } catch (error) {
-    config.kit.prerender.entries.push('/' + moduleName + '/0');
-    config.kit.prerender.entries.push('/' + moduleName + '/test/random/0');
   }
 }
 
 // Unificar y exportar
 config.kit.prerender.entries = [...new Set(config.kit.prerender.entries)];
+console.log('[i] Prerender entries:', config.kit.prerender.entries);
 export default config;
