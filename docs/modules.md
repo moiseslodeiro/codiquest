@@ -250,7 +250,7 @@ Si bien se puede meter todo el contenido directamente en un fichero `.md` y util
 
 # ¿Qué sigue?
 
-![Codi Teacher](/static/img/codi/wink.webp?align=left)
+![Codi Teacher](/static/img/codi/wink.webp?align=left&size=w-1/5)
 
 **¡Wow!** ¡Ese módulo pinta muy bien!
 
