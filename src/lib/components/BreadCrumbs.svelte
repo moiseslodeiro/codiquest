@@ -18,6 +18,7 @@
       techIcon = 'undefined';
     }
 
+    if (tech === undefined) return;
     techTitle = tech
       .split('_')
       .map((word) => word.toLowerCase())

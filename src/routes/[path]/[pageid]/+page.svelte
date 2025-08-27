@@ -31,9 +31,12 @@
     const directPath = `../../../modules/${tech}/${levelParam}.svelte`;
     try {
       const loader = allModules[directPath];
+
       if (loader) {
         componentToRender = (await loader()).default;
-        title = levelParam;
+        const mainModule = await import(`../../../modules/${tech}.js` /* @vite-ignore */);
+
+        title = mainModule.levels.find((e) => e.page === levelParam)['title'] || levelParam;
         return { module: null, levelIndex: null, componentToRender, title };
       }
     } catch (e) {
