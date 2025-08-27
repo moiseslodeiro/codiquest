@@ -60,7 +60,7 @@ To address all issues (including breaking changes), run:
 
 Run `npm audit` for details.
 </Code><blockquote>
-<Message type="IMPORTANT">Sí, aparecen 11 vulnerabilidades (3 de bajo impacto y 8 moderadas), pero no afectan a los despliegues de producción, solo a los entornos de desarrollo, por lo que no deberías preocuparte. Más información en el apartado auditoría de seguridad del README.md.</Message></blockquote>
+<Message type="IMPORTANT">Sí, pueden aparecer en torno a 11~12 vulnerabilidades (3 de bajo impacto y 8~9 moderadas), pero no afectan a los despliegues de producción, solo a los entornos de desarrollo, por lo que no deberías preocuparte. Más información en el apartado auditoría de seguridad del README.md.</Message></blockquote>
 <h2>Ejecutando Codiquest en local</h2>
 <p>Ya debería estar todo listo, ¿verdad? Solo nos queda ejecutar el siguiente comando dentro de nuestra carpeta <code>codiquest</code> para ver nuestra plataforma de aprendizaje y enseñanza favorita (a partir de ahora). 😍</p>
 <Code codeLang="bash">
