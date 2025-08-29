@@ -142,7 +142,7 @@ function parseTestBlock(content, index) {
 function isFillCodeBlock(content) {
   const match = content.match(/```(\w*)\n([\s\S]+?)\n```/m);
   if (!match) return false;
-  return /\$[^$\n]+\$/m.test(match[2]);
+  return /\$[^$\n\s]+\$/m.test(match[2]);
 }
 
 function parseFillCodeBlock(content, title, index) {
