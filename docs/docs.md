@@ -573,6 +573,20 @@ Configurar las DNS te permitirá redirigir el tráfico de tu dominio a `GitHub P
     - Configura un registro de tipo A: tudominio.com → 185.199.108.153 (y otros IPs de GitHub -revisa las IPs en el enlace de Github en la pestaña de recursos-).
     - O configura un registro de tipo ALIAS/ANAME: Si tu registrador lo soporta (Cloudflare, etc.).
 
+A modo de ejemplo, mira la siguiente imagen de cómo se configuran las *DNS* para el *subdominio* `demo.codiquest.com`.
+
+![Configuración de un registro CNAME para demo.codiquest.com](img/install/dns.png?size=5/6)
+
+> [!NOTE]
+> Este paso hay que hacerlo donde tengas registrado el dominio
+
+Una vez tengas *apuntado* el dominio en tu registro de DNS a tu url en *Github Pages*, deberías ver un tick de confirmación en la propia página de GitHub Pages.
+
+![Comprobación DNS en Github Pages](img/install/dns2.png?size=5/6)
+
+> [!TIP]
+> No te olvides de habilitar el enforce HTTPS
+
 #### Fichero CNAME
 
 El fichero `CNAME` (en la carpeta `static`) le indica a GitHub Pages qué dominio personalizado usar (p. ej., `www.tudominio.com`). Aunque GitHub lo crea automáticamente al añadir el dominio en `Settings > Pages`, puedes generarlo tú mismo (editando el fichero que ya existe en el repositorio).
