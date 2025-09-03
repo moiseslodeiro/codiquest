@@ -62,6 +62,16 @@ npx gh-pages -d build -f -t -r git@github.com:TU_USUARIO/TU_REPO_PUBLICO.git
 </ul>
 </li>
 </ul>
+<p>A modo de ejemplo, mira la siguiente imagen de cómo se configuran las <em>DNS</em> para el <em>subdominio</em> <code>demo.codiquest.com</code>.</p>
+<ModalImage src="img/install/dns.png" alignment="" width="5/6" alt="Configuración de un registro CNAME para demo.codiquest.com" modal="false" />
+
+<blockquote>
+<Message type="NOTE">Este paso hay que hacerlo donde tengas registrado el dominio</Message></blockquote>
+<p>Una vez tengas <em>apuntado</em> el dominio en tu registro de DNS a tu url en <em>Github Pages</em>, deberías ver un tick de confirmación en la propia página de GitHub Pages.</p>
+<ModalImage src="img/install/dns2.png" alignment="" width="5/6" alt="Comprobación DNS en Github Pages" modal="false" />
+
+<blockquote>
+<Message type="TIP">No te olvides de habilitar el enforce HTTPS</Message></blockquote>
 <h4>Fichero CNAME</h4>
 <p>El fichero <code>CNAME</code> (en la carpeta <code>static</code>) le indica a GitHub Pages qué dominio personalizado usar (p. ej., <code>www.tudominio.com</code>). Aunque GitHub lo crea automáticamente al añadir el dominio en <code>Settings &gt; Pages</code>, puedes generarlo tú mismo (editando el fichero que ya existe en el repositorio).</p>
 <blockquote>

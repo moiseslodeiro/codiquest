@@ -115,6 +115,7 @@ function isTestBlock(content) {
 function parseTestBlock(content, index) {
   const lines = content.trim().split('\n').filter(Boolean);
   const [text, ...answerLines] = lines;
+  const resources = extractResourcesSection(content);
   const answers = answerLines.map(line => {
     const match = line.match(/^\[(x| )\] (.+)/i);
     if (!match) return null;
@@ -127,6 +128,7 @@ function parseTestBlock(content, index) {
 <!-- File created automatically by Codiquest Converter, do not modify because changes may be lost -->
 <script>
   import Choose from '$lib/templates/Choose.svelte';
+  const resources = ${JSON.stringify(resources, null, 2)};
   const quiz_${index} = {
     checkboxes: true,
     shuffle: true,
@@ -136,7 +138,7 @@ function parseTestBlock(content, index) {
     ]
   };
 </script>
-<Choose {...quiz_${index}} />`.trim();
+<Choose {...quiz_${index}} {resources}/>`.trim();
 }
 
 function isFillCodeBlock(content) {
@@ -160,15 +162,73 @@ function parseFillCodeBlock(content, title, index) {
   import FillCode from '$lib/templates/FillCode.svelte';
   import Message from '$lib/components/Message.svelte';
 
-  let title = ${JSON.stringify(title)};
-  let codeLang = ${JSON.stringify(codeLang)};
-  let shuffle = true;
-  let codeBlock = \`${codeBlock.replace(/`/g, '\\`')}\`;
+  const title = ${JSON.stringify(title)};
+  const codeLang = ${JSON.stringify(codeLang)};
+  const shuffle = true;
+  const codeBlock = \`${codeBlock.replace(/`/g, '\\`')}\`;
+  const before = \`${before}\`;
+  const after = \`${after}\`;
 </script>
 
 ${before}
-<FillCode {title} {codeLang} {codeBlock} {shuffle} />
+<FillCode {codeLang} {codeBlock} {shuffle} {after} />
+<style>
+ul,
+ol {
+  padding-left: 1.5rem;
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+
+ul > li,
+ol > li {
+  #list-style-position: inside;
+}
+
+ol > li {
+  list-style-type: decimal-leading-zero;
+}
+
+ul {
+  list-style-type: disc;
+  margin-bottom: 10px;
+}
+
+ul ul {
+  padding-left: 1.25rem;
+  list-style-type: circle;
+}
+
+ul ul ul {
+  padding-left: 1.25rem;
+  list-style-type: square;
+}
+
+ul ul ul ul {
+  padding-left: 1.25rem;
+  list-style-type: disc;
+}
+
+hr {
+  margin: 10px 0 10px 0;
+  clear: both;
+}
+
+code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  background-color: #f5f5f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+p {
+  line-height: 1.625;
+  margin-bottom: 0.5rem;
+}
+
 ${after}
+</style>
 `.trim();
 }
 
