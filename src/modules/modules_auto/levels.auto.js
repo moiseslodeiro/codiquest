@@ -6,42 +6,52 @@ export const levels = [
   },
   {
     "page": "repaso-rapido-de-markdown",
-    "title": "Repaso rápido de Markdown"
+    "title": "Repaso rápido de Markdown",
+    "labels": []
   },
   {
     "page": "creando-un-modulo-automatizado",
-    "title": "Creando un módulo automatizado"
+    "title": "Creando un módulo automatizado",
+    "labels": []
   },
   {
     "page": "recursos",
-    "title": "Recursos"
+    "title": "Recursos",
+    "labels": []
   },
   {
     "page": "bloques-extendidos",
-    "title": "Bloques extendidos"
+    "title": "Bloques extendidos",
+    "labels": []
   },
   {
     "page": "bloques-extendidos-notificaciones",
-    "title": "Bloques extendidos - Notificaciones"
+    "title": "Bloques extendidos - Notificaciones",
+    "labels": []
   },
   {
     "page": "bloques-extendidos-code",
-    "title": "Bloques extendidos - Code"
+    "title": "Bloques extendidos - Code",
+    "labels": []
   },
   {
     "page": "bloques-extendidos-file",
-    "title": "Bloques extendidos - File"
+    "title": "Bloques extendidos - File",
+    "labels": []
   },
   {
     "page": "automatizacion-de-preguntas",
-    "title": "Automatización de preguntas"
+    "title": "Automatización de preguntas",
+    "labels": []
   },
   {
     "page": "recap",
-    "title": "Recap"
+    "title": "Recap",
+    "labels": []
   },
   {
     "page": "que-sigue",
-    "title": "¿Qué sigue?"
+    "title": "¿Qué sigue?",
+    "labels": []
   }
 ];

@@ -117,6 +117,13 @@ Para hacer uso del elemento `Code`, podemos importarlo directamente desde la car
 
 # Componentes
 (...)
+</File><h2>Labels automáticas</h2>
+<p>Cuando los títulos contienen <code>::</code> (al final), seguidos de etiquetas separadas por comas, como <code>:: a,b,c</code>, los niveles correspondientes de los módulos se generan automáticamente asignando esas palabras como <strong>labels</strong> o <strong>etiquetas</strong>.</p>
+<p>Esto permite crear niveles con etiquetas vinculadas directamente desde el título, facilitando la organización y búsqueda del contenido de forma automática a partir de esta sintaxis simple e intuitiva.</p>
+<File icon="markdown" route="src,raw,test" name="test.md" codeLang="markdown">
+# Componentes :: A,B,C
+
+En este bloque trataremos los temas A, B y C. No aparecen directamente en el título pero se puede usar el buscador para buscar por las labels A, B o C
 </File>
 </Page>
 <style>
