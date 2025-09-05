@@ -1,0 +1,1 @@
+import{levels as n}from"./levels.auto.d1f458d7.js";const o=[],e={title:"Components",shortDescription:"Welcome to my components module!",public:!1,linksTo:"components",image:"codibg.webp",tags:["components"],isNew:!0};export{n as levels,e as moduleInfo,o as questions};

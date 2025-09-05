@@ -1,0 +1,1 @@
+import{levels as i}from"./levels.auto.e9626ec9.js";const e=[],o={title:"Questions",shortDescription:"Welcome to my questions module!",public:!1,linksTo:"questions",image:"codibg.webp",tags:["questions"],isNew:!0};export{i as levels,o as moduleInfo,e as questions};
