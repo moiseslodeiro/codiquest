@@ -19,7 +19,7 @@
   &lt;p&gt;Aquí vemos cómo quedaría Codiquest recién instalado 🤭&lt;/p&gt;
   &lt;ModalImage src="img/install/01.png" alt="Mi descripcion" modal="true" /&gt;
 &lt;/Page&gt;
-</File><Browser>Aquí vemos cómo quedaría Codiquest recién instalado 🤭<br><ModalImage src="img/install/03.png" alignment="center" width="w-1/2" alt="Mi descripcion" modal="true" /><br></Browser>
+</File><Browser>Aquí vemos cómo quedaría Codiquest recién instalado 🤭<br><ModalImage src="img/install/03.png" alignment="center" width="w-1/2" alt="Mi descripcion" modal="false" /><br></Browser>
 <blockquote>
 <Message type="CAUTION">El componente no está optimizado, por lo que las imágenes se cargarán a su tamaño original. Evita usar imágenes muy grandes.</Message></blockquote>
 <h2>Atributos</h2>

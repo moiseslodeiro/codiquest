@@ -422,8 +422,6 @@ marked.use({
   ]
 });
 
-
-
 const lines = markdown.split('\n');
 const sections = [];
 let current = null;
@@ -432,12 +430,19 @@ for (const line of lines) {
   const match = line.match(/^# (.+)/);
   if (match) {
     if (current) sections.push(current);
+
+    // Guarda el título completo
     const title = match[1].trim();
-    current = { title, slug: slugify(title), content: '' };
+
+    // El slug debe crearse a partir del título limpio, sin etiquetas
+    const slug = slugify(title.split('::')[0].trim());
+
+    current = { title, slug, content: '' };
   } else if (current) {
     current.content += line + '\n';
   }
 }
+
 if (current) sections.push(current);
 
 const [introSection, ...contentSections] = sections;
@@ -601,8 +606,21 @@ fs.writeFileSync(prerenderPagePath, prerenderPageContent, 'utf-8');
 const levelsArray = sections.map((section, i) => {
   const isIndex = i === 0;
   const page = isIndex ? 'index' : section.slug;
-  const title = isIndex ? null : section.title;
-  return title ? { page, title } : { page };
+  let title = null;
+  let labels = null;
+
+  if (!isIndex) {
+    if (section.title.includes('::')) {
+      const parts = section.title.split('::');
+      title = parts[0].trim();
+      labels = parts[1].split(',').map(label => label.trim())
+    } else {
+      title = section.title.trim();
+      labels = [];
+    }
+  }
+
+  return title ? { page, title, labels } : { page };
 });
 
 const levelsJsPath = path.join(moduleFolder, 'levels.auto.js');
