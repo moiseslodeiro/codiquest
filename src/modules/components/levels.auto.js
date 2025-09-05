@@ -6,50 +6,66 @@ export const levels = [
   },
   {
     "page": "componentes-code",
-    "title": "Componentes - Code"
+    "title": "Componentes - Code",
+    "labels": [
+      "Code",
+      "Prisma",
+      "X"
+    ]
   },
   {
     "page": "componentes-alert",
-    "title": "Componentes - Alert"
+    "title": "Componentes - Alert",
+    "labels": []
   },
   {
     "page": "componentes-files",
-    "title": "Componentes - Files"
+    "title": "Componentes - Files",
+    "labels": []
   },
   {
     "page": "componentes-message",
-    "title": "Componentes - Message"
+    "title": "Componentes - Message",
+    "labels": []
   },
   {
     "page": "componentes-browser",
-    "title": "Componentes - Browser"
+    "title": "Componentes - Browser",
+    "labels": []
   },
   {
     "page": "componentes-modalimage",
-    "title": "Componentes - ModalImage"
+    "title": "Componentes - ModalImage",
+    "labels": []
   },
   {
     "page": "otros-componentes",
-    "title": "Otros componentes"
+    "title": "Otros componentes",
+    "labels": []
   },
   {
     "page": "templates",
-    "title": "Templates"
+    "title": "Templates",
+    "labels": []
   },
   {
     "page": "template-page",
-    "title": "Template - Page"
+    "title": "Template - Page",
+    "labels": []
   },
   {
     "page": "template-fillcode",
-    "title": "Template - FillCode"
+    "title": "Template - FillCode",
+    "labels": []
   },
   {
     "page": "template-choose",
-    "title": "Template - Choose"
+    "title": "Template - Choose",
+    "labels": []
   },
   {
     "page": "que-sigue",
-    "title": "¿Qué sigue?"
+    "title": "¿Qué sigue?",
+    "labels": []
   }
 ];

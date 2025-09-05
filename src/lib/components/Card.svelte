@@ -26,7 +26,7 @@
     ? 'shadow-xl'
     : ''}"
 >
-  <figure class="max-h-40">
+  <figure class="max-h-32 overflow-hidden">
     <img src="{base}/img/{image}" onerror="this.src='{base}/img/codibg.webp'" alt={title} />
   </figure>
   <div class="card-body px-0 py-2">

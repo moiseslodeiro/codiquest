@@ -176,9 +176,7 @@
         message="Parece que la respuesta no es correcta, ¡vuelve a intentarlo!"
         visible={isFailed}
       />
-
       <hr class="my-3" />
-
       <div class="column field has-addons px-0 overflow-x-hidden">
         <CheckButton
           {enableCheckButton}
@@ -201,8 +199,10 @@
         </div>
       {/if}
     </Tab>
-    <Tab title="Recursos" icon="list">
-      <IconList list={resources} />
-    </Tab>
+    {#if resources.length > 0}
+      <Tab title="Recursos" icon="list">
+        <IconList list={resources} />
+      </Tab>
+    {/if}
   </div>
 {/if}
