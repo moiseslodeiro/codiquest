@@ -32,7 +32,7 @@ dirs.forEach((dir) => {
   if (
     appdir === '.' ||
     isDynamicRoute(appdir) ||
-    (process.env.NODE_ENV === 'production' && appdir === 'mocks')
+    (process.env.NODE_ENV === 'production')
   )
     return;
 
@@ -51,6 +51,8 @@ for (const file of autoFiles) {
   const relativePath = path.relative('src/modules', file);
   const moduleName = relativePath.split(path.sep)[0];
 
+  console.log(`[i] Found file for module ${moduleName}: ${file}`);
+
   if (!moduleData[moduleName]) {
     moduleData[moduleName] = {};
   }
@@ -62,6 +64,16 @@ for (const file of autoFiles) {
   }
 }
 
+// Find all manual modules (without .auto.js files)
+const moduleDirs = await glob('src/modules/*', { onlyDirectories: true });
+for (const dir of moduleDirs) {
+  const name = path.basename(dir);
+  // Si el módulo ya está en moduleData, está contemplado, sino es manual
+  if (!moduleData[name]) {
+    moduleData[name] = {}; // Añadir módulo manual
+  }
+}
+
 // Process each module
 for (const moduleName in moduleData) {
   if (isDynamicRoute(moduleName)) continue;
@@ -69,6 +81,20 @@ for (const moduleName in moduleData) {
   config.kit.prerender.entries.push('/' + moduleName);
   config.kit.prerender.entries.push('/' + moduleName + '/test');
   config.kit.prerender.entries.push('/' + moduleName + '/test/random');
+
+  const subRoutes = await glob(`src/modules/${moduleName}/**/*.{svelte,+page.js}`, { nodir: true });
+  subRoutes.forEach(file => {
+    const routePath = file
+      .replace('src/modules', '')    // Quitar prefijo base
+      .replace(/\/index\.svelte$/, '') // Omitir index.svelte al final
+      .replace(/\.svelte$/, '')
+      .replace(/\/\+page\.js$/, '')
+      .replace(/\\/g, '/'); // Normalizar slashes para Windows
+
+    if (!isDynamicRoute(routePath)) {
+      config.kit.prerender.entries.push(routePath);
+    }
+  });
 
   const { levelsFile, questionsFile } = moduleData[moduleName];
 
@@ -155,5 +181,6 @@ for (const moduleName in moduleData) {
 
 // Unificar y exportar
 config.kit.prerender.entries = [...new Set(config.kit.prerender.entries)];
-console.log('[i] Prerender entries:', config.kit.prerender.entries);
+console.dir(config.kit.prerender.entries, {maxArrayLength: null});
+//console.log('[i] Prerender entries:', config.kit.prerender.entries);
 export default config;
