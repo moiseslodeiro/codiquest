@@ -6,6 +6,14 @@
 
   // Partials
   import HeaderMessage from '$lib/partials/HeaderMessage.svelte';
+  import SearchBar from '$lib/components/Search.svelte';
+  import MenuList from '../lib/components/MenuList.svelte';
+
+  // Config
+  const menuItems = [
+    { href: `${base}/docs`, label: 'Documentación' },
+    { href: `${base}/about`, label: 'Acerca de' }
+  ];
 </script>
 
 <nav class="navbar bg-base-100" data-theme="synthwave">
@@ -17,17 +25,17 @@
         <div class="badge badge-secondary">Alpha</div>
       </a>
     </div>
-    <div class="flex-none z-10">
-      <ul class="menu menu-horizontal px-1">
-        <li><a href="{base}/docs">Documentación</a></li>
-        <li><a href="{base}/about">Acerca de</a></li>
-      </ul>
+
+    <div class="flex-1 justify-center">
+      <SearchBar />
     </div>
+
+    <MenuList items={menuItems} />
   </div>
 </nav>
 
 <main class="container md:mx-auto py-2 md:max-w-5xl sm:px-3">
-  <div></div>
+
 
   <HeaderMessage />
 

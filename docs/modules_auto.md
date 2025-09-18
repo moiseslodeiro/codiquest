@@ -201,6 +201,20 @@ Para hacer uso del elemento `Code`, podemos importarlo directamente desde la car
 (...)
 ````
 
+## Labels automáticas
+
+Cuando los títulos contienen `::` (al final), seguidos de etiquetas separadas por comas, como `:: a,b,c`, los niveles correspondientes de los módulos se generan automáticamente asignando esas palabras como **labels** o **etiquetas**.
+
+Esto permite crear niveles con etiquetas vinculadas directamente desde el título, facilitando la organización y búsqueda del contenido de forma automática a partir de esta sintaxis simple e intuitiva.
+
+```` File icon="markdown" route="src,raw,test" name="test.md" codeLang="markdown"
+# Componentes :: A,B,C
+
+En este bloque trataremos los temas A, B y C. No aparecen directamente en el título pero se puede usar el buscador para buscar por las labels A, B o C
+
+````
+
+
 # Recursos
 
 Los recursos son enlaces externos a Codiquest que pueden ser de utilidad en cada página para complementar lo que se trata de enseñar. En la versión manual, a la hora de crear módulos nuevos, veíamos que, añadiendo la variable (o constante) `resources` dentro de la plantilla de `Page`, se creaba una segunda pestaña con un listado de enlaces.

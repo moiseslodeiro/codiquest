@@ -67,7 +67,7 @@ console.log(sum(1, 2)));
 ---
 </File><blockquote>
 <Message type="NOTE">Aunque el uso de Markdown no es obligatorio, sí que es recomendable, ya que te ahorra mucho tiempo a la hora de estructurar, vincular y dar formato a las páginas. Además, tiene la ventaja de que es compatible con visores de Markdown como el integrado en GitHub, por lo que el formato que le des aquí, en su mayoría, será compatible con lo que puedas ver de forma remota en GitHub (entre otros).</Message></blockquote>
-<ModalImage src="img/install/compare.png" alignment="center" width="w-5/6" alt="Comparativa Markdown en Codiquest y Github" modal="true" />
+<ModalImage src="img/install/compare.png" alignment="center" width="w-5/6" alt="Comparativa Markdown en Codiquest y Github" modal="false" />
 </Page>
 <style>
 ul,

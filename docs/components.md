@@ -2,7 +2,7 @@
 
 Codiquest se concibió, desde sus inicios, como una herramienta para enseñar programación de forma dinámica y divertida. El primer módulo creado fue el de `Code` (código), diseñado para ilustrar ejemplos de código de manera sencilla y visual.
 
-# Componentes - Code
+# Componentes - Code :: Code,Prisma,X
 
 Para utilizar el elemento `Code`, puedes importarlo directamente desde la carpeta de componentes y emplearlo de diversas maneras, como se muestra a continuación:
 
@@ -41,7 +41,7 @@ Si ahora recargamos nuestra página, podremos ver el código que acabamos de pon
 > [!IMPORTANT]
 > Hasta la fecha, solo es necesario reemplazar `{` por `&#123;` o `&lbrace;`, `}` por `&#125;` o `&rbrace;`, `<` por `&#60;` o `&lt;` y `>` por `&#62;` o `&gt;`. Si algún otro carácter causa problemas, habría que encontrar una solución similar.
 
-De este modo, si quieres mostrar una función, el resultado **dentro** del bloque `Code` debería verse así:
+De este modo, si quieres mostrar una función, el resultado **dentro** del bloque `Code` debería verse así::
 
 ```js
 function suma(a, b) &lbrace; // <-- lbrace es {
@@ -139,7 +139,7 @@ if (suma(1, 2) < 4) {
 Por motivos de optimización, no todos los lenguajes o sintaxis se encuentran dentro de la lista de posibles lenguajes. Por defecto, el módulo que le da color al código, `prismjs`, viene cargado con los siguientes lenguajes (y sintaxis): `html`, `xml`, `bash`, `svg`, `css`, `c-like`, `javascript`, `docker`, `git`, `go`, `hcl`, `java`, `kotlin`, `markdown`, `php`, `psql`, `powershell`, `python`, `regex`, `ruby`, `rust`, `sql`, `typescript` y `yaml`. En resumen, aquellos pertenecientes al top 10 de 2025 y los que he considerado útiles para esta plataforma 😄.
 
 Lo bueno es que añadir o quitar un lenguaje es trivial. Primero, visita la página de [prismjs](https://prismjs.com/download#themes=prism-funky&languages=markup+css+clike+javascript+docker+git+go+go-module+hcl+java+kotlin+markdown+markup-templating+php+plsql+powershell+python+regex+ruby+rust+sql+typescript+yaml
-) con los lenguajes comentados con anterioridad premarcados.
+) con los lenguajes comentados con anterioridad pre-marcados.
 
 Una vez abierta la página, solo debes seleccionar aquellos lenguajes o sintaxis que quieras resaltar, copiar el bloque de `javascript` que aparece en la parte inferior y pegarlo en el fichero `prism.js`, que se encuentra dentro de `src/lib/third/prism/prism.js`. Salvo que se quiera cambiar el esquema de colores o añadir alguno de los plugins que ofrece prismjs, no es necesario modificar el fichero CSS, localizado también bajo `src/lib/third/prism/`.
 

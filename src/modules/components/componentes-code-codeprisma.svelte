@@ -37,7 +37,7 @@
 <p>⚠️ Debido a <strong>cómo Svelte interpreta algunos caracteres internos</strong> de los scripts, existen limitaciones con caracteres como las llaves <code>&#123;&#125;</code> o los símbolos de menor o mayor que <code>&lt;&gt;</code> (necesarios para funciones o bloques HTML, entre otras), teniéndose que reemplazar por sus equivalentes en HTML. Más adelante, cuando veamos cómo automatizar la creación de contenido, esto será un problema del cual <strong>no tendremos que preocuparnos</strong>.</p>
 <blockquote>
 <Message type="IMPORTANT">Hasta la fecha, solo es necesario reemplazar `&#123;` por `&amp;#123;` o `&amp;lbrace;`, `&#125;` por `&amp;#125;` o `&amp;rbrace;`, `&lt;` por `&amp;#60;` o `&amp;lt;` y `&gt;` por `&amp;#62;` o `&amp;gt;`. Si algún otro carácter causa problemas, habría que encontrar una solución similar.</Message></blockquote>
-<p>De este modo, si quieres mostrar una función, el resultado <strong>dentro</strong> del bloque <code>Code</code> debería verse así::</p>
+<p>De este modo, si quieres mostrar una función, el resultado <strong>dentro</strong> del bloque <code>Code</code> debería verse así:</p>
 <Code codeLang="js">
 function suma(a, b) &amp;lbrace; // &lt;-- lbrace es &#123;
   return a + b;

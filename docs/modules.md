@@ -248,6 +248,40 @@ Si bien se puede meter todo el contenido directamente en un fichero `.md` y util
 > [!TIP]
 > En el caso del ejemplo donde se enlaza al módulo `chuchu`, suelo configurar este como `public: false` para que no se muestre en el listado principal de módulos. Sigue siendo accesible, pero no es visible a simple vista.
 
+# Añadiendo etiquetas
+
+¿Has visto la barra superior junto a la sección **Documentación** (o si la ves en móvil, la lupa en la parte superior)? Eso es una **barra de búsqueda** que nos ayuda a **localizar el contenido** de manera rápida y sencilla. Su funcionamiento es sencillo: busca en los **títulos** de los niveles y páginas las palabras que introduzcas.
+
+**¿Y eso es todo?** No, todavía hay más. En cada nivel podemos incluir un campo llamado `labels`, que permite añadir **palabras clave o etiquetas** relacionadas con ese contenido. Esto facilita que la búsqueda sea más precisa y efectiva, ya que no solo busca en los títulos, sino también en estas etiquetas extras. De este modo, el contenido es mucho más **accesible** y **fácil de encontrar**. ¿No es fantástico? 🤗
+
+
+```` File icon="js" route="src,modules" name="dummy.js" codeLang="js"
+export const moduleInfo = {
+  title: 'Instalando Codiquest',
+  shortDescription: 'Este es mi módulo de ejemplo, de momento un poco vacío, ¿no?',
+  public: true,
+  linksTo: 'dummy'
+};
+
+export const levels = [
+  { page: 'index' },
+  {
+    page: 'basic/helloworld',
+    title: 'Bienvenid@s'
+  },
+  {
+    title: 'Enlace al módulo chuchu',
+    module: 'chuchu',
+    labels: [
+      'etiquetaA',
+      'etiquetaB'
+    ]
+  }
+];
+````
+
+De esta forma, además de poder encontrar la página por palabras sueltas como "enlace", "módulo" o "chuchu", también podremos localizarla mediante las etiquetas "etiquetaA" y "etiquetaB". Estas etiquetas aparecerán visibles en el listado general cuando se muestre el módulo, facilitando la búsqueda y haciendo el contenido más accesible y fácil de encontrar.
+
 # ¿Qué sigue?
 
 ![Codi Teacher](/static/img/codi/wink.webp?align=left&size=w-1/5)

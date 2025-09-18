@@ -35,6 +35,7 @@
           <tr>
             <th class="w-10">#</th>
             <th class="text-info-content">Título</th>
+            <th class="w-1/5 text-info-content">Labels</th>
           </tr>
         </thead>
         <tbody>
@@ -49,12 +50,21 @@
                     #{id}
                   </a>
                 </td>
-                <td>
+                <td class="align-top">
                   <p class="select-none link underline-offset-4">
                     <a href="{base}/{level.module || tech + '/' + (level.page || id)}/">
                       {level.title || `Nivel ` + id}
                     </a>
                   </p>
+                </td>
+                <td class="w-1/5">
+                  {#if level.labels}
+                    {#each level.labels as label}
+                      <span class="badge mr-1">{label}</span>
+                    {/each}
+                  {:else}
+                    <span class="text-sm italic text-gray-400"></span>
+                  {/if}
                 </td>
               </tr>
             {/if}

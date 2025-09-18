@@ -6,18 +6,27 @@ export const levels = [
   },
   {
     "page": "crear-un-nuevo-modulo",
-    "title": "Crear un nuevo módulo"
+    "title": "Crear un nuevo módulo",
+    "labels": []
   },
   {
     "page": "creando-nuestra-primera-pagina",
-    "title": "Creando nuestra primera página"
+    "title": "Creando nuestra primera página",
+    "labels": []
   },
   {
-    "page": "organizando-el-contenido-en-sub-carpetas-y-otro-ti",
-    "title": "Organizando el contenido en sub carpetas y otro tipo de enlaces internos"
+    "page": "organizando-el-contenido-en-sub-carpetas-y-otro-tipo-de-enlaces-internos",
+    "title": "Organizando el contenido en sub carpetas y otro tipo de enlaces internos",
+    "labels": []
+  },
+  {
+    "page": "anadiendo-etiquetas",
+    "title": "Añadiendo etiquetas",
+    "labels": []
   },
   {
     "page": "que-sigue",
-    "title": "¿Qué sigue?"
+    "title": "¿Qué sigue?",
+    "labels": []
   }
 ];
