@@ -8,6 +8,11 @@ import { glob } from 'glob';
 // Configuration
 console.log(`[i] NODE_ENV ${process.env.NODE_ENV}`);
 
+// Función para detectar rutas dinámicas
+function isDynamicRoute(route) {
+  return /\[.*?\]/.test(route);
+}
+
 // Do no touch :-)
 const config = {
   kit: {
@@ -26,7 +31,7 @@ dirs.forEach((dir) => {
   const appdir = path.dirname(path.relative('src/routes/', dir));
   if (
     appdir === '.' ||
-    appdir.includes('[') ||
+    isDynamicRoute(appdir) ||
     (process.env.NODE_ENV === 'production' && appdir === 'mocks')
   )
     return;
@@ -59,6 +64,8 @@ for (const file of autoFiles) {
 
 // Process each module
 for (const moduleName in moduleData) {
+  if (isDynamicRoute(moduleName)) continue;
+
   config.kit.prerender.entries.push('/' + moduleName);
   config.kit.prerender.entries.push('/' + moduleName + '/test');
   config.kit.prerender.entries.push('/' + moduleName + '/test/random');
@@ -87,7 +94,10 @@ for (const moduleName in moduleData) {
         }
 
         for (let i = 0; i < levelsArray.length; i++) {
-          config.kit.prerender.entries.push(`/${moduleName}/${i}`);
+          const route = `/${moduleName}/${i}`;
+          if (!isDynamicRoute(route)) {
+            config.kit.prerender.entries.push(route);
+          }
         }
 
         // Añadir subpages
@@ -96,16 +106,15 @@ for (const moduleName in moduleData) {
 
           if (page && subpage && externalModule) {
             const entry = `/${externalModule}/${page}/${subpage}`;
-            config.kit.prerender.entries.push(entry);
+            if (!isDynamicRoute(entry)) config.kit.prerender.entries.push(entry);
           } else if (page && subpage) {
             const entry = `/${moduleName}/${page}/${subpage}`;
-            config.kit.prerender.entries.push(entry);
+            if (!isDynamicRoute(entry)) config.kit.prerender.entries.push(entry);
           } else if (page) {
             const entry = `/${moduleName}/${page}`;
-            config.kit.prerender.entries.push(entry);
+            if (!isDynamicRoute(entry)) config.kit.prerender.entries.push(entry);
           }
         });
-
       } else {
         config.kit.prerender.entries.push('/' + moduleName + '/0');
       }
@@ -126,8 +135,10 @@ for (const moduleName in moduleData) {
         try {
           questionsArray = Function(`return ${fixedQuestions}`)();
           for (let i = 1; i <= questionsArray.length; i++) {
-            config.kit.prerender.entries.push(`/${moduleName}/test/random/${i}`);
-            config.kit.prerender.entries.push(`/${moduleName}/${i}`);
+            const routeTest = `/${moduleName}/test/random/${i}`;
+            const routeQuestion = `/${moduleName}/${i}`;
+            if (!isDynamicRoute(routeTest)) config.kit.prerender.entries.push(routeTest);
+            if (!isDynamicRoute(routeQuestion)) config.kit.prerender.entries.push(routeQuestion);
           }
         } catch (err) {
           console.error(`[!] Error parsing questions for ${moduleName}`, err);
