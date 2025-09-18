@@ -31,58 +31,79 @@ Una vez clonado el repositorio, vamos a proceder a la instalación de las depend
 
 ```bash
 cd codiquest
-npm install
+npm install -g pnpm
+pnpm install
 ```
 
 Si todo ha ido bien, deberías ver algo así:
 
 ```bash
-codi@local:~/Workspaces/codiquest$ npm install
-npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
-npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
-npm warn deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
-npm warn deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
-npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
-npm warn deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
-npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
-npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
-npm warn deprecated domexception@4.0.0: Use your platform's native DOMException instead
-npm warn deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+codi@local:~/Workspaces/codiquest$ pnpm install
+ WARN  deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+ WARN  8 deprecated subdependencies found: @humanwhocodes/config-array@0.13.0, @humanwhocodes/object-schema@2.0.3, abab@2.0.6, domexception@4.0.0, glob@7.2.3, inflight@1.0.6, rimraf@2.7.1, rimraf@3.0.2
+Packages: +473
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 536, reused 473, downloaded 0, added 473, done
 
-added 497 packages, and audited 498 packages in 17s
+dependencies:
++ @rollup/plugin-dynamic-import-vars 2.1.5
++ gh-pages 6.3.0
++ marked 12.0.2 (16.3.0 is available)
++ sanitize-html 2.17.0
 
-103 packages are looking for funding
-  run `npm fund` for details
+devDependencies:
++ @sveltejs/adapter-auto 2.1.1 (6.1.0 is available)
++ @sveltejs/adapter-static 2.0.3 (3.0.9 is available)
++ @sveltejs/kit 1.30.4 (2.42.1 is available)
++ @tailwindcss/typography 0.5.16
++ @testing-library/svelte 5.2.8
++ autoprefixer 10.4.21
++ chokidar-cli 3.0.0
++ concurrently 9.2.1
++ daisyui 4.12.24 (5.1.13 is available)
++ eslint 8.57.1 (9.35.0 is available) deprecated
++ eslint-config-prettier 9.1.2 (10.1.8 is available)
++ eslint-plugin-svelte 2.46.1 (3.12.3 is available)
++ glob 10.4.5 (11.0.3 is available)
++ jsdom 22.1.0 (27.0.0 is available)
++ postcss 8.5.6
++ preline 2.7.0 (3.2.3 is available)
++ prettier 3.6.2
++ prettier-plugin-svelte 3.4.0
++ svelte 4.2.20 (5.39.2 is available)
++ svelte-preprocess 5.1.4 (6.0.3 is available)
++ tailwindcss 3.4.17 (4.1.13 is available)
++ vite 4.5.14 (7.1.6 is available)
++ vitest 1.6.1 (3.2.4 is available)
 
-11 vulnerabilities (3 low, 8 moderate)
+╭ Warning ───────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                            │
+│   Ignored build scripts: @sveltejs/kit, esbuild, svelte-preprocess.                        │
+│   Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts.   │
+│                                                                                            │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯
 
-To address issues that do not require attention, run:
-  npm audit fix
-
-To address all issues (including breaking changes), run:
-  npm audit fix --force
-
-Run `npm audit` for details.
+Done in 3.9s using pnpm v10.17.0
 ```
 
 > [!IMPORTANT]
-> Sí, aparecen 11 vulnerabilidades (3 de bajo impacto y 8 moderadas), pero no afectan a los despliegues de producción, solo a los entornos de desarrollo, por lo que no deberías preocuparte. Más información en el apartado auditoría de seguridad del README.md.
+> Si hacemos un pnpm audit podremos ver que existen 8 vulnerabilidades. No obstante estas no afectan al entorno final de producción
 
 ## Ejecutando Codiquest en local
 
 Ya debería estar todo listo, ¿verdad? Solo nos queda ejecutar el siguiente comando dentro de nuestra carpeta `codiquest` para ver nuestra plataforma de aprendizaje y enseñanza favorita (a partir de ahora). 😍
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 Esto debería arrojar una salida de comando similar a esta:
 
 ```bash
-codi@local:~/Workspaces/codiquest$ npm run dev
+codi@local:~/Workspaces/codiquest$ pnpm run dev
 
 > codiquest@2.1.0 dev
-> concurrently 'npm run watch:md' 'vite dev'
+> concurrently 'pnpm run watch:md' 'vite dev'
 
 [0]
 [0] > codiquest@2.1.0 watch:md
@@ -115,24 +136,24 @@ Una de las características de Codiquest es que, realmente, todo se ejecuta en e
 Para convertir el contenido que tenemos (en formato de desarrollo) a un formato más compacto y óptimo, debemos ejecutar lo siguiente:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 Este comando compilará nuestro contenido y generará una carpeta llamada `build` con todo el contenido **estático**. Es decir, dentro de la carpeta `build` no veremos módulos ni nada del código que hemos agregado o que agregaremos en un futuro. No obstante, que no veamos ese código significa que todo ha ido a la perfección y que podremos publicar el contenido estático como si lo hubiéramos maquetado a mano 😊.
 
 ### Previsualización
 
-¡Oye! Pero, ¿y cómo sé si mi página se ve como debe? Lo único que debes hacer es ejecutar el siguiente comando, similar al que vimos de `npm run dev`, pero con la salvedad de que, esta vez, el servidor se va a montar sobre la carpeta `build` para mostrar tus archivos estáticos.
+¡Oye! Pero, ¿y cómo sé si mi página se ve como debe? Lo único que debes hacer es ejecutar el siguiente comando, similar al que vimos de `pnpm  run dev`, pero con la salvedad de que, esta vez, el servidor se va a montar sobre la carpeta `build` para mostrar tus archivos estáticos.
 
 ```bash
-npm run preview
+pnpm run preview
 ```
 
 > [!NOTE]
-> Por defecto, el servidor (a diferencia de `npm run dev`, que se ejecutaba en el puerto 5173) se ejecutará en el puerto **4173** y, posiblemente, en una ruta `/codiquest`.
+> Por defecto, el servidor (a diferencia de `pnpm  run dev`, que se ejecutaba en el puerto 5173) se ejecutará en el puerto **4173** y, posiblemente, en una ruta `/codiquest`.
 
 > [!IMPORTANT]
-> Cualquier cambio que ahora hagas a nivel de código NO se mostrará automáticamente en esta previsualización, ya que necesita volver a compilarse con `npm run build`.
+> Cualquier cambio que ahora hagas a nivel de código NO se mostrará automáticamente en esta previsualización, ya que necesita volver a compilarse con `pnpm  run build`.
 
 ## ¿Y Ahora?
 
@@ -405,19 +426,19 @@ Pero antes de meternos en faena, vamos a repasar lo que hacían los comandos `bu
 
 ## Build y preview
 
-¿Recuerdas cuando en el módulo de [instalación local](/docs/instalacion-en-local) vimos el comando `npm run build` y `npm run preview`? Pues era solo un adelanto de lo que vamos a ver a continuación.
+¿Recuerdas cuando en el módulo de [instalación local](/docs/instalacion-en-local) vimos el comando `pnpm  run build` y `pnpm  run preview`? Pues era solo un adelanto de lo que vamos a ver a continuación.
 
 ### Build
 
-El comando `npm run build` toma todo (módulos, componentes, plantillas, imágenes, etc.) que has utilizado para el desarrollo de tus módulos en Codiquest y lo compacta en una carpeta llamada `build`. Esta carpeta está aislada del resto del código; podrías moverla de directorio y, con tan solo ejecutar un servidor que sirva contenido HTML, podrías ver tu contenido estático. ¡Wow! 🤩
+El comando `pnpm  run build` toma todo (módulos, componentes, plantillas, imágenes, etc.) que has utilizado para el desarrollo de tus módulos en Codiquest y lo compacta en una carpeta llamada `build`. Esta carpeta está aislada del resto del código; podrías moverla de directorio y, con tan solo ejecutar un servidor que sirva contenido HTML, podrías ver tu contenido estático. ¡Wow! 🤩
 
 Esta carpeta será la responsable de mostrar tu contenido en lo que se denomina `GitHub Pages`, que no es más que un servidor de contenido estático alojado en el propio GitHub. De esta forma, podremos mostrar el contenido generado de una forma optimizada directamente desde GitHub, sin necesidad de recurrir a un *hosting* externo de pago.
 
 ### Preview
 
-Pero antes de subir ningún contenido, repasemos qué hace el comando `npm run preview`:
+Pero antes de subir ningún contenido, repasemos qué hace el comando `pnpm  run preview`:
 
-El comando `npm run preview` crea un servidor local que sirve la carpeta `build` generada anteriormente. Sería el equivalente a lo que podrás ver en GitHub Pages en breve, pero en tu entorno local, para que puedas verificar que todo esté bien antes de subir el contenido.
+El comando `pnpm  run preview` crea un servidor local que sirve la carpeta `build` generada anteriormente. Sería el equivalente a lo que podrás ver en GitHub Pages en breve, pero en tu entorno local, para que puedas verificar que todo esté bien antes de subir el contenido.
 
 ## Publicando en Gihub
 
@@ -430,7 +451,7 @@ Vamos a crear una rama `gh-pages` (el estándar de GitHub) con el contenido de l
 Para hacerlo más limpio, sin necesidad de crear directorios temporales, vamos a usar ramas sin historial para hacerlo de forma automática.
 
 > [!IMPORTANT]
-> A estas alturas, es necesario que ya hayas ejecutado `npm run build` y que tengas la carpeta `build` en tu directorio. 😊
+> A estas alturas, es necesario que ya hayas ejecutado `pnpm  run build` y que tengas la carpeta `build` en tu directorio. 😊
 
 > [!NOTE]
 > Se asume que tu remoto se llama, por convención, `origin` y que tu rama actual es `main`. Cámbialo según tus necesidades.
@@ -453,15 +474,15 @@ De esta forma, tendremos una rama llamada `gh-pages` en nuestro repositorio, con
 
 ### De forma automática
 
-Dentro de los comandos que pueden ejecutarse en el entorno local, se encuentra `npm run publish:gh`, que, automáticamente, hará lo siguiente:
+Dentro de los comandos que pueden ejecutarse en el entorno local, se encuentra `pnpm  run publish:gh`, que, automáticamente, hará lo siguiente:
 
-1. Ejecutará un `npm run build` para crear la carpeta local `build`.
+1. Ejecutará un `pnpm  run build` para crear la carpeta local `build`.
 2. Creará una rama llamada `gh-pages` en tu repositorio y subirá **solo** el contenido de la carpeta `build`, sin nada del contenido dinámico de tu página.
 
 Vale, es más cómodo... pero, ¿y lo bien que sienta saber lo que hace algo por dentro? 🙃
 
 > [!IMPORTANT]
-> Si la rama remota ya existe, puede que este comando dé problemas. Para asegurarte, borra la rama remota ejecutando `git push origin --delete gh-pages` antes de lanzar `npm run publish:gh`.
+> Si la rama remota ya existe, puede que este comando dé problemas. Para asegurarte, borra la rama remota ejecutando `git push origin --delete gh-pages` antes de lanzar `pnpm  run publish:gh`.
 
 # Compilado y publicación - Workflows
 
@@ -708,13 +729,13 @@ jobs:
         working-directory: './codiquest'
 
       - name: Parsing modules
-        run: npm run module:all
+        run: pnpm run module:all
         working-directory: './codiquest'
         env:
           PUBLIC: 'true'
 
       - name: Parsing tests
-        run: npm run convert:all
+        run: pnpm run convert:all
         working-directory: './codiquest'
 
       - name: Check modules before build
@@ -725,12 +746,12 @@ jobs:
       - name: Clean docs module
         if: ${{ github.event.inputs.delete_docs == 'true' }}
         run: |
-          npm run clean:doc
+          pnpm run clean:doc
           rm -rf src/modules/docs.js
         working-directory: './codiquest'
 
       - name: Create build folder
-        run: npm run build
+        run: pnpm run build
         working-directory: './codiquest'
 
       - name: Deploy to gh-pages branch

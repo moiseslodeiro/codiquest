@@ -44,7 +44,7 @@ export const questions = []
 > [!TIP]
 > Puedes cambiar la descripción y el título si quieres. Para el ejemplo, hemos quitado el módulo de Documentación.
 
-Aunque sea básico, si ya tenías en ejecución tu entorno de desarrollo y pruebas con `npm run dev`, deberías ver tu nuevo módulo en la pantalla principal, e incluso podrás entrar en él, aunque lo encontrarás vacío. ¿No es maravilloso?
+Aunque sea básico, si ya tenías en ejecución tu entorno de desarrollo y pruebas con `pnpm  run dev`, deberías ver tu nuevo módulo en la pantalla principal, e incluso podrás entrar en él, aunque lo encontrarás vacío. ¿No es maravilloso?
 
 ![Visualización de nuestro módulo dummy en Codiquest](/static/img/install/01.png?align=center&size=w-2/3)
 
@@ -204,7 +204,7 @@ export const levels = [
 Mucho mejor, ¿no? Ahora podemos crear páginas de una manera jerárquica con nuestros módulos e incluso añadirle un título que nos sirva como referencia dentro del propio módulo.
 
 > [!TIP]
-> Hay un comando dentro del proyecto que es `npm run newmodule <nombre>` para crear módulos con mayor facilidad 😇 (igual debí haber puesto esto antes...).
+> Hay un comando dentro del proyecto que es `pnpm  run newmodule <nombre>` para crear módulos con mayor facilidad 😇 (igual debí haber puesto esto antes...).
 
 > [!IMPORTANT]
 > Por limitaciones de la propia app y de cómo se hace el prerrenderizado estático, solo sería posible establecer un nivel de jerarquía. Es decir, `src/modules/dummy/basic/helloworld` sí es posible, mientras que `src/modules/dummy/basic/otronivel/helloworld` no.

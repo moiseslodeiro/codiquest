@@ -7,7 +7,7 @@ const dn = path.dirname(fn);
 const name = process.argv[2];
 
 if (!name) {
-  console.error('[Error] Insert a module name: npm run newmodule your_new_module');
+  console.error('[Error] Insert a module name: pnpm run newmodule your_new_module');
   process.exit(1);
 }
 

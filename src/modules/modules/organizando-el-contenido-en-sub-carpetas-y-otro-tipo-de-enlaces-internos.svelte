@@ -35,7 +35,7 @@ export const levels = [
 ];
 </Code><p>Mucho mejor, ¿no? Ahora podemos crear páginas de una manera jerárquica con nuestros módulos e incluso añadirle un título que nos sirva como referencia dentro del propio módulo.</p>
 <blockquote>
-<Message type="TIP">Hay un comando dentro del proyecto que es `npm run newmodule &lt;nombre&gt;` para crear módulos con mayor facilidad 😇 (igual debí haber puesto esto antes...).</Message></blockquote>
+<Message type="TIP">Hay un comando dentro del proyecto que es `pnpm  run newmodule &lt;nombre&gt;` para crear módulos con mayor facilidad 😇 (igual debí haber puesto esto antes...).</Message></blockquote>
 <blockquote>
 <Message type="IMPORTANT">Por limitaciones de la propia app y de cómo se hace el prerrenderizado estático, solo sería posible establecer un nivel de jerarquía. Es decir, `src/modules/dummy/basic/helloworld` sí es posible, mientras que `src/modules/dummy/basic/otronivel/helloworld` no.</Message></blockquote>
 <h2>Otros tipos de enlaces</h2>

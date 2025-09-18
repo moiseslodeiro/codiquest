@@ -9,8 +9,8 @@
 ## 🔧 Instalación rápida en local
 
 1. Clona este repositorio con `git clone git@github.com:moiseslodeiro/codiquest.git`
-2. Instala las dependencias con `npm install` (se recomienda Node 22 o superior)
-3. Ejecuta `npm run dev` para lanzar el entorno de desarrollo y abre la web que por defecto estará en `http://localhost:5173/`
+2. Instala las dependencias con `pnpm  install` (se recomienda Node 22 o superior)
+3. Ejecuta `pnpm  run dev` para lanzar el entorno de desarrollo y abre la web que por defecto estará en `http://localhost:5173/`
 
 Consulta la guía de [instalación en local](https://demo.codiquest.com/docs/instalacion-en-local) para más detalles y el apartado `Guías de uso` de esta misma página
 
@@ -43,7 +43,7 @@ Este proyecto se distribuye bajo los términos de la licencia MIT. Puedes consul
 
 ## 🛡️ Auditoría de seguridad
 
-Se han revisado todas las vulnerabilidades reportadas por `npm audit` a fecha de **julio de 2025**
+Se han revisado todas las vulnerabilidades reportadas por `pnpm  audit` a fecha de **septiembre de 2025**
 
 - Todas las vulnerabilidades de nivel **high** o **critical** han sido mitigadas
 - Las advertencias restantes son de nivel **moderate o low**, y afectan únicamente a herramientas de desarrollo como:
