@@ -29,7 +29,9 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install -g pnpm
+          pnpm install
 
       - name: Get changed files
         id: changed-files
@@ -84,7 +86,7 @@ jobs:
           fi
 
       - name: Build project
-        run: npm run build
+        run: pnpm run build
         env:
           BASE_PATH: ${{ env.BASE_PATH }}
 
