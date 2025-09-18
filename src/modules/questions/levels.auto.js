@@ -6,26 +6,32 @@ export const levels = [
   },
   {
     "page": "la-constante-questions",
-    "title": "La constante questions"
+    "title": "La constante questions",
+    "labels": []
   },
   {
     "page": "configurador",
-    "title": "Configurador"
+    "title": "Configurador",
+    "labels": []
   },
   {
     "page": "anadiendo-todas-las-preguntas-a-los-niveles",
-    "title": "Añadiendo todas las preguntas a los niveles"
+    "title": "Añadiendo todas las preguntas a los niveles",
+    "labels": []
   },
   {
     "page": "anadiendo-preguntas-manualmente",
-    "title": "Añadiendo preguntas manualmente"
+    "title": "Añadiendo preguntas manualmente",
+    "labels": []
   },
   {
     "page": "anadiendo-todas-las-preguntas",
-    "title": "Añadiendo todas las preguntas"
+    "title": "Añadiendo todas las preguntas",
+    "labels": []
   },
   {
     "page": "que-sigue",
-    "title": "¿Qué sigue?"
+    "title": "¿Qué sigue?",
+    "labels": []
   }
 ];

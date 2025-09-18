@@ -101,13 +101,13 @@ jobs:
         working-directory: './codiquest'
 
       - name: Parsing modules
-        run: npm run module:all
+        run: pnpm run module:all
         working-directory: './codiquest'
         env:
           PUBLIC: 'true'
 
       - name: Parsing tests
-        run: npm run convert:all
+        run: pnpm run convert:all
         working-directory: './codiquest'
 
       - name: Check modules before build
@@ -118,12 +118,12 @@ jobs:
       - name: Clean docs module
         if: $&#123;&#123; github.event.inputs.delete_docs == 'true' &#125;&#125;
         run: |
-          npm run clean:doc
+          pnpm run clean:doc
           rm -rf src/modules/docs.js
         working-directory: './codiquest'
 
       - name: Create build folder
-        run: npm run build
+        run: pnpm run build
         working-directory: './codiquest'
 
       - name: Deploy to gh-pages branch

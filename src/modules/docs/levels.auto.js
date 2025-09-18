@@ -6,34 +6,42 @@ export const levels = [
   },
   {
     "page": "instalacion-en-local",
-    "title": "Instalación en local"
+    "title": "Instalación en local",
+    "labels": []
   },
   {
     "page": "personalizando-codiquest",
-    "title": "Personalizando Codiquest"
+    "title": "Personalizando Codiquest",
+    "labels": []
   },
   {
     "page": "publicando-la-build-en-github",
-    "title": "Publicando la build en Github"
+    "title": "Publicando la build en Github",
+    "labels": []
   },
   {
     "page": "compilado-y-publicacion-workflows",
-    "title": "Compilado y publicación - Workflows"
+    "title": "Compilado y publicación - Workflows",
+    "labels": []
   },
   {
     "page": "configurando-github-pages",
-    "title": "Configurando Github pages"
+    "title": "Configurando Github pages",
+    "labels": []
   },
   {
     "page": "instalacion-remota-completa",
-    "title": "Instalación remota completa"
+    "title": "Instalación remota completa",
+    "labels": []
   },
   {
     "page": "instalacion-remota-parcial",
-    "title": "Instalación remota parcial"
+    "title": "Instalación remota parcial",
+    "labels": []
   },
   {
     "page": "algo-mas",
-    "title": "¿Algo más?"
+    "title": "¿Algo más?",
+    "labels": []
   }
 ];

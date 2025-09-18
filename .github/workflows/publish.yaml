@@ -26,10 +26,21 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm'
+
+      - name: Install pnpm dependencies
+        run: |
+          npm install -g pnpm
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Get changed files
         id: changed-files
@@ -84,7 +95,7 @@ jobs:
           fi
 
       - name: Build project
-        run: npm run build
+        run: pnpm run build
         env:
           BASE_PATH: ${{ env.BASE_PATH }}
 

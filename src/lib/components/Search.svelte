@@ -31,31 +31,37 @@
     try {
       const moduleFiles = import.meta.glob('../../modules/*.js');
       const levelsFiles = import.meta.glob('../../modules/**/levels.auto.js');
+
       const modulePromises = Object.keys(moduleFiles).map(async (path) => {
-        const { moduleInfo } = await moduleFiles[path]();
+        const mod = await moduleFiles[path]();
+        if (!mod.moduleInfo) return null;
         const moduleName = path.match(/\/(\w+)\.js$/)[1];
-        return { moduleName, moduleInfo };
+        return { moduleName, moduleInfo: mod.moduleInfo, levelsData: mod.levels || [] };
       });
-      const modules = await Promise.all(modulePromises);
+      const modules = (await Promise.all(modulePromises)).filter(Boolean);
+
       const levelsPromises = Object.keys(levelsFiles).map(async (path) => {
-        const { levels } = await levelsFiles[path]();
-        const moduleName = path.split('/').slice(-2, -1)[0];
-        return { moduleName, levels };
+        const mod = await levelsFiles[path]();
+        const relativePath = path.replace('../../modules/', '');
+        const moduleName = relativePath.split('/')[0];
+        return { moduleName, levels: mod.levels };
       });
-      const levels = await Promise.all(levelsPromises);
-      const combinedData = modules.map((m) => {
-        const levelsData = levels.find((l) => l.moduleName === m.moduleName)?.levels;
-        return { ...m, levelsData };
+      const levelsFromAuto = await Promise.all(levelsPromises);
+
+      levelsFromAuto.forEach(({ moduleName, levels }) => {
+        const module = modules.find((m) => m.moduleName === moduleName);
+        if (module) {
+          module.levelsData = [...module.levelsData, ...levels];
+        }
       });
-      allModulesData = combinedData.flatMap((m) =>
-        m.levelsData
-          ? m.levelsData.map((level) => ({
-              module: { name: m.moduleInfo.title, path: m.moduleName },
-              page: level.page,
-              title: level.title || '',
-              labels: level.labels || []
-            }))
-          : []
+
+      allModulesData = modules.flatMap((m) =>
+        m.levelsData.map((level) => ({
+          module: { name: m.moduleInfo.title, path: m.moduleName },
+          page: level.page,
+          title: level.title || '',
+          labels: level.labels || []
+        }))
       );
     } catch (error) {
       console.error('Error al cargar los módulos:', error);

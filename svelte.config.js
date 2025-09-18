@@ -8,6 +8,11 @@ import { glob } from 'glob';
 // Configuration
 console.log(`[i] NODE_ENV ${process.env.NODE_ENV}`);
 
+// Función para detectar rutas dinámicas
+function isDynamicRoute(route) {
+  return /\[.*?\]/.test(route);
+}
+
 // Do no touch :-)
 const config = {
   kit: {
@@ -26,8 +31,8 @@ dirs.forEach((dir) => {
   const appdir = path.dirname(path.relative('src/routes/', dir));
   if (
     appdir === '.' ||
-    appdir.includes('[') ||
-    (process.env.NODE_ENV === 'production' && appdir === 'mocks')
+    isDynamicRoute(appdir) ||
+    (process.env.NODE_ENV === 'production')
   )
     return;
 
@@ -46,6 +51,8 @@ for (const file of autoFiles) {
   const relativePath = path.relative('src/modules', file);
   const moduleName = relativePath.split(path.sep)[0];
 
+  console.log(`[i] Found file for module ${moduleName}: ${file}`);
+
   if (!moduleData[moduleName]) {
     moduleData[moduleName] = {};
   }
@@ -57,11 +64,37 @@ for (const file of autoFiles) {
   }
 }
 
+// Find all manual modules (without .auto.js files)
+const moduleDirs = await glob('src/modules/*', { onlyDirectories: true });
+for (const dir of moduleDirs) {
+  const name = path.basename(dir);
+  // Si el módulo ya está en moduleData, está contemplado, sino es manual
+  if (!moduleData[name]) {
+    moduleData[name] = {}; // Añadir módulo manual
+  }
+}
+
 // Process each module
 for (const moduleName in moduleData) {
+  if (isDynamicRoute(moduleName)) continue;
+
   config.kit.prerender.entries.push('/' + moduleName);
   config.kit.prerender.entries.push('/' + moduleName + '/test');
   config.kit.prerender.entries.push('/' + moduleName + '/test/random');
+
+  const subRoutes = await glob(`src/modules/${moduleName}/**/*.{svelte,+page.js}`, { nodir: true });
+  subRoutes.forEach(file => {
+    const routePath = file
+      .replace('src/modules', '')    // Quitar prefijo base
+      .replace(/\/index\.svelte$/, '') // Omitir index.svelte al final
+      .replace(/\.svelte$/, '')
+      .replace(/\/\+page\.js$/, '')
+      .replace(/\\/g, '/'); // Normalizar slashes para Windows
+
+    if (!isDynamicRoute(routePath)) {
+      config.kit.prerender.entries.push(routePath);
+    }
+  });
 
   const { levelsFile, questionsFile } = moduleData[moduleName];
 
@@ -87,7 +120,10 @@ for (const moduleName in moduleData) {
         }
 
         for (let i = 0; i < levelsArray.length; i++) {
-          config.kit.prerender.entries.push(`/${moduleName}/${i}`);
+          const route = `/${moduleName}/${i}`;
+          if (!isDynamicRoute(route)) {
+            config.kit.prerender.entries.push(route);
+          }
         }
 
         // Añadir subpages
@@ -96,16 +132,15 @@ for (const moduleName in moduleData) {
 
           if (page && subpage && externalModule) {
             const entry = `/${externalModule}/${page}/${subpage}`;
-            config.kit.prerender.entries.push(entry);
+            if (!isDynamicRoute(entry)) config.kit.prerender.entries.push(entry);
           } else if (page && subpage) {
             const entry = `/${moduleName}/${page}/${subpage}`;
-            config.kit.prerender.entries.push(entry);
+            if (!isDynamicRoute(entry)) config.kit.prerender.entries.push(entry);
           } else if (page) {
             const entry = `/${moduleName}/${page}`;
-            config.kit.prerender.entries.push(entry);
+            if (!isDynamicRoute(entry)) config.kit.prerender.entries.push(entry);
           }
         });
-
       } else {
         config.kit.prerender.entries.push('/' + moduleName + '/0');
       }
@@ -126,8 +161,10 @@ for (const moduleName in moduleData) {
         try {
           questionsArray = Function(`return ${fixedQuestions}`)();
           for (let i = 1; i <= questionsArray.length; i++) {
-            config.kit.prerender.entries.push(`/${moduleName}/test/random/${i}`);
-            config.kit.prerender.entries.push(`/${moduleName}/${i}`);
+            const routeTest = `/${moduleName}/test/random/${i}`;
+            const routeQuestion = `/${moduleName}/${i}`;
+            if (!isDynamicRoute(routeTest)) config.kit.prerender.entries.push(routeTest);
+            if (!isDynamicRoute(routeQuestion)) config.kit.prerender.entries.push(routeQuestion);
           }
         } catch (err) {
           console.error(`[!] Error parsing questions for ${moduleName}`, err);
@@ -144,5 +181,6 @@ for (const moduleName in moduleData) {
 
 // Unificar y exportar
 config.kit.prerender.entries = [...new Set(config.kit.prerender.entries)];
-console.log('[i] Prerender entries:', config.kit.prerender.entries);
+console.dir(config.kit.prerender.entries, {maxArrayLength: null});
+//console.log('[i] Prerender entries:', config.kit.prerender.entries);
 export default config;

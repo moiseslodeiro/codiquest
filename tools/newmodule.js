@@ -7,7 +7,7 @@ const dn = path.dirname(fn);
 const name = process.argv[2];
 
 if (!name) {
-  console.error('[Error] Insert a module name: npm run newmodule your_new_module');
+  console.error('[Error] Insert a module name: pnpm run newmodule your_new_module');
   process.exit(1);
 }
 
@@ -16,6 +16,7 @@ const moduleFilePath = path.join(baseDir, `${name}.js`);
 const moduleFolder = path.join(baseDir, name);
 const pageJsPath = path.join(moduleFolder, '+page.js');
 const sveltePath = path.join(moduleFolder, 'index.svelte');
+const keepPath = path.join(moduleFolder, 'keepme.svelte');
 const testFolder = path.join(moduleFolder, 'basic');
 const testPagePath = path.join(testFolder, '+page.js');
 const testSveltePath = path.join(testFolder, 'helloworld.svelte');
@@ -46,6 +47,8 @@ const svelteContent = `Edit me, ${name}!`;
 const testPageContent = `export const prerender = true;`;
 const testSvelteContent = `<h1>Hello world! 👋🌍</h1>`;
 
+const keepPageContent = `| •⩊• | Keep me to avoid rendering issues unless you have another not index.svelte file on this folder!`;
+
 fs.mkdirSync(moduleFolder, { recursive: true });
 fs.mkdirSync(testFolder, { recursive: true });
 
@@ -54,5 +57,7 @@ fs.writeFileSync(pageJsPath, pageJsContent);
 fs.writeFileSync(sveltePath, svelteContent);
 fs.writeFileSync(testPagePath, testPageContent);
 fs.writeFileSync(testSveltePath, testSvelteContent);
+fs.writeFileSync(keepPath, keepPageContent);
+
 
 console.log(`Module '${name}' created with test/basic/helloworld.svelte!`);
